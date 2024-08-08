@@ -1,5 +1,7 @@
+import Hero from "@/components/layouts/Hero";
+
 const Home = () => {
-    return null;
+    return <Hero />;
 };
 
 export default Home;
