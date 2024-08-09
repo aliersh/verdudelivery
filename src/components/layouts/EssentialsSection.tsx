@@ -1,7 +1,7 @@
 import { CalendarClock, MapPinCheck, UserRoundCheck } from "lucide-react";
 import CardContent from "../ui/CardContent";
 
-const Essentials = () => {
+const EssentialsSection = () => {
     return (
         <section className="container py-12 md:py-24 lg:py-12">
             <div className="container px-4 space-y-8 md:px-6">
@@ -39,4 +39,4 @@ const Essentials = () => {
     );
 };
 
-export default Essentials;
+export default EssentialsSection;

@@ -1,11 +1,11 @@
 import Hero from "@/components/layouts/Hero";
-import Essentials from "@/components/layouts/Essentials";
+import EssentialsSection from "@/components/layouts/EssentialsSection";
 
 const Home = () => {
     return (
         <>
             <Hero />
-            <Essentials />
+            <EssentialsSection />
         </>
     );
 };
