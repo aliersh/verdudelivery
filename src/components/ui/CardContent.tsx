@@ -1,4 +1,4 @@
-import { Card } from './card';
+import { Card } from '../shadcnui/card';
 import CardIcon from './CardIcon';
 
 const CardContent = ({

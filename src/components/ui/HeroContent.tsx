@@ -1,4 +1,4 @@
-import { Button } from './button';
+import { Button } from '../shadcnui/button';
 
 const HeroContent = () => (
     <div className="relative z-10 max-w-2xl px-4 text-center">
