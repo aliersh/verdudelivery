@@ -1,31 +1,16 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { CircleUserRound, ShoppingCart } from "lucide-react";
+import CartIcon from '../ui/CartIcon';
+import LoginButton from '../ui/LoginButton';
+import Logo from '../ui/Logo';
+import UserIcon from '../ui/UserIcon';
 
 const Navbar = () => {
     return (
         <header className="container flex items-center justify-between px-4 py-3 bg-background">
-            <Link
-                href="#"
-                className="text-2xl font-bold text-primary"
-                prefetch={false}
-            >
-                verdudelivery
-            </Link>
+            <Logo />
             <div className="flex items-center gap-4">
-                <Link
-                    href="#"
-                    className="p-2 text-muted-foreground hover:text-primary"
-                >
-                    <CircleUserRound size={30} />
-                </Link>
-                <Link
-                    href="#"
-                    className="p-2 text-muted-foreground hover:text-primary"
-                >
-                    <ShoppingCart size={30} />
-                </Link>
-                <Button variant="destructive">Iniciar Sesión</Button>
+                <UserIcon />
+                <CartIcon />
+                <LoginButton />
             </div>
         </header>
     );
