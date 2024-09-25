@@ -1,24 +1,19 @@
 import { useProducts } from "medusa-react";
-import Image from "next/image";
+import ProductItem from "../components/ui/ProductItem";
+
+import LoadingIndicator from "../components/ui/LoadingIndicator";
+import NoProductMessage from "../components/ui/NoProductMessage";
+
 const Products = () => {
     const { products, isLoading } = useProducts();
 
     return (
         <div>
-            {isLoading && <div>Loading...</div>}
-            {products && !products.length && <div>No products found</div>}
+            {isLoading && <LoadingIndicator />}
+            {products && !products.length && <NoProductMessage />}
             <ul>
                 {products?.map((product) => (
-                    <li key={product.id}>
-                        <Image
-                            src={product.thumbnail ?? "/default-thumbnail.jpg"}
-                            alt={product.title ?? "No title"}
-                            width={100}
-                            height={100}
-                        />
-                        {product.title ?? "No title"}
-                        ${product.variants[0].prices[0].amount}
-                    </li>
+                    <ProductItem key={product.id} product={product} />
                 ))}
             </ul>
         </div>
