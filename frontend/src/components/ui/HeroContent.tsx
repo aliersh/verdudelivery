@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { Button } from '../shadcnui/button';
 
 const HeroContent = () => (
@@ -13,7 +15,9 @@ const HeroContent = () => (
             <Button className="h-10 px-6" variant="destructive">
                 Registrate
             </Button>
-            <Button className="h-10 px-6">Ver Productos</Button>
+            <Link href="/products">
+                <Button className="h-10 px-6">Ver Productos</Button>
+            </Link>
         </div>
     </div>
 );
