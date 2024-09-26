@@ -1,12 +1,15 @@
-import { Minus, Plus } from 'lucide-react';
 import Image from 'next/image';
+import { useState } from 'react';
 
 import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
 
 import { Button } from '../shadcnui/button';
 import ProductPrice from './ProductPrice';
 import QuantityControl from './QuantityControl';
+
 const ProductItem = ({ product }: { product: PricedProduct }) => {
+    const tag = product.tags?.[0]?.value ?? "";
+    const [quantity, setQuantity] = useState(1);
     return (
         <li
             key={product.id}
@@ -21,9 +24,13 @@ const ProductItem = ({ product }: { product: PricedProduct }) => {
             />
             <div className="flex-grow">
                 <h3 className="text-lg font-semibold">{product.title}</h3>
-                <QuantityControl />
+                <QuantityControl
+                    tag={tag}
+                    quantity={quantity}
+                    setQuantity={setQuantity}
+                />
             </div>
-            <ProductPrice product={product} />
+            <ProductPrice product={product} tag={tag} quantity={quantity} />
             <Button>Añadir al carrito</Button>
         </li>
     );
