@@ -1,40 +1,29 @@
-import Image from "next/image";
-import { Button } from "../shadcnui/button";
-import { Minus, Plus } from "lucide-react";
+import { Minus, Plus } from 'lucide-react';
+import Image from 'next/image';
 
-import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
+import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
 
+import { Button } from '../shadcnui/button';
+import ProductPrice from './ProductPrice';
+import QuantityControl from './QuantityControl';
 const ProductItem = ({ product }: { product: PricedProduct }) => {
     return (
         <li
             key={product.id}
-            className="container flex items-center space-x-4 py-4 px-4 border-b"
+            className="container flex items-center px-4 py-4 space-x-4 border-b"
         >
             <Image
                 src={product.thumbnail ?? "/default-thumbnail.jpg"}
                 alt={product.title ?? "No title"}
                 width={80}
                 height={80}
-                className="rounded-md object-cover"
+                className="object-cover rounded-md"
             />
             <div className="flex-grow">
-                <h3 className="font-semibold text-lg">{product.title}</h3>
-                <div className="flex items-center space-x-2 mt-2">
-                    <Button variant="destructive" size="icon">
-                        <Minus className="w-4 h-4" />
-                    </Button>
-                    <span className="w-8 text-center">1</span>
-                    <Button variant="destructive" size="icon">
-                        <Plus className="w-4 h-4" />
-                    </Button>
-                </div>
+                <h3 className="text-lg font-semibold">{product.title}</h3>
+                <QuantityControl />
             </div>
-            <div className="text-right">
-                <p className="text-sm text-muted-foreground">
-                    ${product.variants[0]?.prices[0]?.amount} / kg
-                </p>
-                <p className="font-semibold">$2400</p>
-            </div>
+            <ProductPrice product={product} />
             <Button>Añadir al carrito</Button>
         </li>
     );
