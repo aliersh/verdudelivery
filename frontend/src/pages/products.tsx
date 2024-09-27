@@ -11,7 +11,7 @@ const Products = () => {
         <div>
             {isLoading && <LoadingIndicator />}
             {products && !products.length && <NoProductMessage />}
-            <ul>
+            <ul className="max-w-2xl mx-auto">
                 {products?.map((product) => (
                     <ProductItem key={product.id} product={product} />
                 ))}
