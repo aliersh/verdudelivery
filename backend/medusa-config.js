@@ -37,12 +37,12 @@ const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
 const plugins = [
     `medusa-fulfillment-manual`,
     `medusa-payment-manual`,
-    {
-        resolve: `@medusajs/file-local`,
-        options: {
-            upload_dir: "uploads",
-        },
-    },
+    // {
+    //     resolve: `@medusajs/file-local`,
+    //     options: {
+    //         upload_dir: "uploads",
+    //     },
+    // },
     {
         resolve: "@medusajs/admin",
         /** @type {import('@medusajs/admin').PluginOptions} */
@@ -51,6 +51,14 @@ const plugins = [
             develop: {
                 open: process.env.OPEN_BROWSER !== "false",
             },
+        },
+    },
+    {
+        resolve: `medusa-storage-supabase`,
+        options: {
+            referenceID: process.env.STORAGE_BUCKET_REF,
+            serviceKey: process.env.STORAGE_SERVICE_KEY,
+            bucketName: process.env.BUCKET_NAME,
         },
     },
 ];
