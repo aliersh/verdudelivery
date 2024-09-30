@@ -13,7 +13,7 @@ const ProductItem = ({ product }: { product: PricedProduct }) => {
     return (
         <li
             key={product.id}
-            className="container flex items-center px-4 py-4 space-x-4 border-b"
+            className="container flex items-center justify-between px-4 py-4 space-x-4 border-b"
         >
             <Image
                 src={product.thumbnail ?? "/default-thumbnail.jpg"}
@@ -22,7 +22,7 @@ const ProductItem = ({ product }: { product: PricedProduct }) => {
                 height={80}
                 className="object-cover rounded-md"
             />
-            <div className="flex-grow">
+            <div className="flex-grow flex flex-col justify-center">
                 <h3 className="text-lg font-semibold">{product.title}</h3>
                 <QuantityControl
                     tag={tag}
