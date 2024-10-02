@@ -1,6 +1,6 @@
 import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
 
-const groupProductsByCollection = (products: PricedProduct[]) => {
+export const groupProductsByCollection = (products: PricedProduct[]) => {
     return products.reduce((acc, product) => {
         const collectionTitle = product.collection?.title || "Uncategorized";
         if (!acc[collectionTitle]) {
@@ -11,4 +11,4 @@ const groupProductsByCollection = (products: PricedProduct[]) => {
     }, {} as Record<string, PricedProduct[]>);
 };
 
-export default groupProductsByCollection;
+export const collectionOrder = ["Verduras", "Frutas", "Legumbres", "Otros"];
