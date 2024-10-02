@@ -26,7 +26,7 @@ const QuantityControl = ({
             <Button variant="destructive" size="icon" onClick={handleDecrement}>
                 <Minus className="w-4 h-4" />
             </Button>
-            <span className="w-8 text-center">
+            <span className="w-11 text-center">
                 {quantity} {tag}
             </span>
             <Button variant="destructive" size="icon" onClick={handleIncrement}>
