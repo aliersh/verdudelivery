@@ -1,5 +1,7 @@
-import Hero from "@/components/layouts/Hero";
+import React from "react";
+
 import EssentialsSection from "@/components/layouts/EssentialsSection";
+import Hero from "@/components/layouts/Hero";
 
 const Home = () => {
     return (
