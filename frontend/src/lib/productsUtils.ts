@@ -1,4 +1,4 @@
-import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
+import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
 
 export const groupProductsByCollection = (products: PricedProduct[]) => {
     return products.reduce((acc, product) => {
@@ -12,3 +12,7 @@ export const groupProductsByCollection = (products: PricedProduct[]) => {
 };
 
 export const collectionOrder = ["Verduras", "Frutas", "Legumbres", "Otros"];
+
+export const sortByTitle = (a: PricedProduct, b: PricedProduct) => {
+    return (a.title ?? "").localeCompare(b.title ?? "");
+};

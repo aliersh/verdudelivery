@@ -1,3 +1,4 @@
+import { sortByTitle } from '@/lib/productsUtils';
 import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
 
 import ProductItem from './ProductItem';
@@ -5,15 +6,19 @@ import ProductItem from './ProductItem';
 const ProductsCollection = ({
     collectionTitle,
     collectionProducts,
+    sortFunction = sortByTitle,
 }: {
     collectionTitle: string;
     collectionProducts: PricedProduct[];
+    sortFunction?: (a: PricedProduct, b: PricedProduct) => number;
 }) => {
+    const sortedProducts = [...collectionProducts].sort(sortFunction);
+
     return (
         <div key={collectionTitle} className="mb-8">
             <h1 className="mb-8 text-2xl font-bold">{collectionTitle}</h1>
             <ul className="space-y-4">
-                {collectionProducts.map((product) => (
+                {sortedProducts.map((product) => (
                     <ProductItem key={product.id} product={product} />
                 ))}
             </ul>
