@@ -13,7 +13,7 @@ const ProductsList = () => {
     const groupedProducts = products ? groupProductsByCollection(products) : {};
 
     return (
-        <div className="max-w-6xl px-4 mx-auto">
+        <div className="max-w-4xl px-4 mx-auto">
             {isLoading && <LoadingIndicator />}
             {products && !products.length && <NoProductMessage />}
             {collectionOrder.map((collectionTitle) => {
