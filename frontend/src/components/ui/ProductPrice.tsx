@@ -2,11 +2,11 @@ import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
 
 const ProductPrice = ({
     product,
-    tag,
+    unit,
     quantity,
 }: {
     product: PricedProduct;
-    tag: string;
+    unit: string;
     quantity: number;
 }) => {
     const pricePerTag = product.variants[0]?.prices[0]?.amount;
@@ -14,7 +14,7 @@ const ProductPrice = ({
     return (
         <div className="text-right">
             <p className="text-sm text-muted-foreground">
-                ${pricePerTag} / {tag}
+                ${pricePerTag} / {unit}
             </p>
             <p className="font-semibold">${pricePerTag * quantity}</p>
         </div>

@@ -3,11 +3,11 @@ import { Minus, Plus } from "lucide-react";
 import { Button } from "../shadcnui/button";
 
 const QuantityControl = ({
-    tag,
+    unit,
     quantity,
     setQuantity,
 }: {
-    tag: string;
+    unit: string;
     quantity: number;
     setQuantity: (quantity: number) => void;
 }) => {
@@ -26,8 +26,8 @@ const QuantityControl = ({
             <Button variant="destructive" size="icon" onClick={handleDecrement}>
                 <Minus className="w-4 h-4" />
             </Button>
-            <span className="w-11 text-center">
-                {quantity} {tag}
+            <span className="text-center w-11">
+                {quantity} {unit}
             </span>
             <Button variant="destructive" size="icon" onClick={handleIncrement}>
                 <Plus className="w-4 h-4" />
