@@ -1,11 +1,11 @@
-import Image from "next/image";
-import { useState } from "react";
+import Image from 'next/image';
+import { useState } from 'react';
 
-import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
+import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
 
-import { Button } from "../shadcnui/button";
-import ProductPrice from "./ProductPrice";
-import QuantityControl from "./QuantityControl";
+import { Button } from '../shadcnui/button';
+import ProductPrice from './ProductPrice';
+import QuantityControl from './QuantityControl';
 
 const ProductItem = ({ product }: { product: PricedProduct }) => {
     const unit = product.metadata?.unit ?? "";
@@ -22,7 +22,14 @@ const ProductItem = ({ product }: { product: PricedProduct }) => {
                 />
             </div>
             <div className="flex-1">
-                <h3 className="text-lg font-semibold">{product.title}</h3>
+                <h3 className="text-lg font-semibold">
+                    {product.title}{" "}
+                    {product.subtitle && (
+                        <span className="text-sm font-normal text-gray-500">
+                            {product.subtitle}
+                        </span>
+                    )}
+                </h3>
                 <QuantityControl
                     unit={unit as string}
                     quantity={quantity}
@@ -30,11 +37,7 @@ const ProductItem = ({ product }: { product: PricedProduct }) => {
                 />
             </div>
             <div className="text-right">
-                <ProductPrice
-                    product={product}
-                    unit={unit as string}
-                    quantity={quantity}
-                />
+                <ProductPrice product={product} unit={unit as string} quantity={quantity} />
             </div>
             <div>
                 <Button>Añadir al carrito</Button>
