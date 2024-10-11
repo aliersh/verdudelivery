@@ -1,11 +1,13 @@
-import { useProducts } from 'medusa-react';
+import { useProducts } from "medusa-react";
 
-import ProductsCollection from '@/components/ui/ProductsCollections';
+import ProductsCollection from "@/components/ui/ProductsCollections";
 
-import { groupProductsByCollection } from '../../lib/productsUtils';
-import { collectionOrder } from '../../lib/productsUtils';
-import LoadingIndicator from '../ui/LoadingIndicator';
-import NoProductMessage from '../ui/NoProductMessage';
+import {
+    collectionOrder,
+    groupProductsByCollection,
+} from "../../lib/productsUtils";
+import LoadingIndicator from "../ui/LoadingIndicator";
+import NoProductMessage from "../ui/NoProductMessage";
 
 const ProductsList = () => {
     const { products, isLoading } = useProducts();

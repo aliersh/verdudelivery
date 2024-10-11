@@ -10,9 +10,9 @@ const ProductsCollection = ({
 }: {
     collectionTitle: string;
     collectionProducts: PricedProduct[];
-    sortFunction?: (a: PricedProduct, b: PricedProduct) => number;
+    sortFunction?: (products: PricedProduct[]) => PricedProduct[];
 }) => {
-    const sortedProducts = [...collectionProducts].sort(sortFunction);
+    const sortedProducts = sortFunction(collectionProducts);
 
     return (
         <div key={collectionTitle} className="mb-8">

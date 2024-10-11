@@ -1,18 +1,19 @@
-import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
+import collect from "collect.js";
 
-export const groupProductsByCollection = (products: PricedProduct[]) => {
-    return products.reduce((acc, product) => {
-        const collectionTitle = product.collection?.title || "Uncategorized";
-        if (!acc[collectionTitle]) {
-            acc[collectionTitle] = [];
-        }
-        acc[collectionTitle].push(product);
-        return acc;
-    }, {} as Record<string, PricedProduct[]>);
+import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
+
+export const groupProductsByCollection = (
+    products: PricedProduct[]
+): Record<string, PricedProduct[]> => {
+    return collect(products)
+        .groupBy((product) => product.collection?.title ?? "Sin categoría")
+        .all() as unknown as Record<string, PricedProduct[]>;
 };
 
 export const collectionOrder = ["Verduras", "Frutas", "Legumbres", "Otros"];
 
-export const sortByTitle = (a: PricedProduct, b: PricedProduct) => {
-    return (a.title ?? "").localeCompare(b.title ?? "");
+export const sortByTitle = (products: PricedProduct[]) => {
+    return collect(products)
+        .sortBy((product: PricedProduct) => product.title ?? "")
+        .all();
 };
