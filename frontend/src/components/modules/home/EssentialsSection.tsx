@@ -1,5 +1,5 @@
 import { CalendarClock, MapPinCheck, UserRoundCheck } from "lucide-react";
-import CardContent from "../ui/CardContent";
+import CardContent from "../../ui/CardContent";
 
 const EssentialsSection = () => {
     return (

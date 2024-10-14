@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import Logo from "./Logo";
+import Logo from "../../ui/Logo";
 
 const ContactInfo = () => (
     <div className="flex flex-col items-start gap-4">

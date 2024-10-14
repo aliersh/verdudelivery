@@ -1,6 +1,6 @@
-import HeroContent from "../ui/HeroContent";
-import Overlay from "../ui/Overlay";
-import VideoBackground from "../ui/VideoBackground";
+import HeroContent from "../home/HeroContent";
+import Overlay from "../../ui/Overlay";
+import VideoBackground from "./VideoBackground";
 
 const Hero = () => {
     return (

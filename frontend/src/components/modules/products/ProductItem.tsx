@@ -3,9 +3,9 @@ import { useState } from 'react';
 
 import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
 
-import { Button } from '../shadcnui/button';
+import { Button } from '../../shadcnui/button';
 import ProductPrice from './ProductPrice';
-import QuantityControl from './QuantityControl';
+import QuantityControl from '../../ui/QuantityControl';
 
 const ProductItem = ({ product }: { product: PricedProduct }) => {
     const unit = product.metadata?.unit ?? "";

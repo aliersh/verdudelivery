@@ -2,8 +2,8 @@ import "@/styles/globals.css";
 
 import { MedusaProvider } from "medusa-react";
 
-import Footer from "@/components/layouts/Footer";
-import Navbar from "@/components/layouts/Navbar";
+import Footer from "../components/layout/footer/Footer";
+import Navbar from "@/components/layout/Navbar";
 import { QueryClient } from "@tanstack/react-query";
 
 import type { AppProps } from "next/app";

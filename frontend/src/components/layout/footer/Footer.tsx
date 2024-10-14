@@ -1,8 +1,8 @@
 import { Instagram } from 'lucide-react';
 
-import ContactInfo from '../ui/ContactInfo';
-import FooterCopyright from '../ui/FooterCopyright';
-import SocialLinks from '../ui/SocialLinks';
+import ContactInfo from "./ContactInfo";
+import FooterCopyright from "./FooterCopyright";
+import SocialLinks from "./SocialLinks";
 
 const Footer = () => {
     return (
