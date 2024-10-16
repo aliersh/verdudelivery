@@ -1,15 +1,25 @@
-import Image from 'next/image';
-import { useState } from 'react';
+import Image from "next/image";
+import { useState, useEffect } from "react";
+import { useCart } from "medusa-react";
 
-import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
+import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
 
-import { Button } from '../../shadcnui/button';
-import ProductPrice from './ProductPrice';
-import QuantityControl from '../../ui/QuantityControl';
+import ProductPrice from "./ProductPrice";
+import QuantityControl from "../../ui/QuantityControl";
+import AddToCartButton from "../cart/AddToCartButton";
 
 const ProductItem = ({ product }: { product: PricedProduct }) => {
     const unit = product.metadata?.unit ?? "";
     const [quantity, setQuantity] = useState(1);
+    const variant_id = product.variants[0].id ?? "";
+    const { cart } = useCart();
+    
+    useEffect(() => {
+        if (cart?.id) {
+            localStorage.setItem("cart_id", cart.id);
+        }
+    }, [cart?.id]);
+
     return (
         <li key={product.id} className="flex items-center space-x-4">
             <div className="w-20 h-20">
@@ -37,10 +47,14 @@ const ProductItem = ({ product }: { product: PricedProduct }) => {
                 />
             </div>
             <div className="text-right">
-                <ProductPrice product={product} unit={unit as string} quantity={quantity} />
+                <ProductPrice
+                    product={product}
+                    unit={unit as string}
+                    quantity={quantity}
+                />
             </div>
             <div>
-                <Button>Añadir al carrito</Button>
+                <AddToCartButton variantId={variant_id} quantity={quantity} />
             </div>
         </li>
     );
