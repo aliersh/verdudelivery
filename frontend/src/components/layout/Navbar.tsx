@@ -6,7 +6,7 @@ import Logo from '@/components/ui/Logo';
 
 const Navbar = () => {
     return (
-        <Card className="container flex items-center justify-between max-w-4xl gap-6 px-4 py-3 mx-auto mt-5 border-0 bg-card rounded-2xl">
+        <Card className="container flex items-center justify-between max-w-4xl gap-6 px-4 py-3 mx-auto mt-5 border-0 bg-primary-foreground rounded-2xl">
             <Logo />
 
             {/* <ul className="items-center hidden gap-10 md:flex text-card-foreground">
