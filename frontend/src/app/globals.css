@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  :root {
+    --background: 150 33.3% 98.8%;
+    --foreground: 154.3 11.9% 11.6%;
+    --card: 150 14.3% 97.3%;
+    --card-foreground: 154.3 11.9% 11.6%;
+    --popover: 150 33.3% 98.8%;
+    --popover-foreground: 154.3 11.9% 11.6%;
+    --primary: 131 42.9% 42.6%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 150 14.3% 97.3%;
+    --secondary-foreground: 160 3.1% 38.4%;
+    --muted: 150 14.3% 97.3%;
+    --muted-foreground: 160 3.1% 38.4%;
+    --accent: 23.9 100% 46.9%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 358.5 69.3% 55.3%;
+    --destructive-foreground: 350.7 62.6% 24.1%;
+    --border: 160 3.9% 84.9%;
+    --input: 160 3.9% 84.9%;
+    --ring: 160 3.9% 84.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    --base-1: 150 33.3% 98.8%;
+    --base-2: 150 14.3% 97.3%;
+    --base-3: 160 9.7% 93.9%;
+    --base-4: 160 6.4% 90.8%;
+    --base-5: 140 4.9% 88.0%;
+    --base-6: 160 3.9% 84.9%;
+    --base-7: 150 4.0% 80.4%;
+    --base-8: 150 2.9% 72.9%;
+    --base-9: 157.5 3.4% 54.1%;
+    --base-10: 157.5 3.2% 50.2%;
+    --base-11: 160 3.1% 38.4%;
+    --base-12: 154.3 11.9% 11.6%;
+    --accent-1: 20 60.0% 99.0%;
+    --accent-2: 33.3 100% 96.5%;
+    --accent-3: 36.6 100% 92.0%;
+    --accent-4: 34.1 100% 85.5%;
+    --accent-5: 32.7 100% 80.2%;
+    --accent-6: 30.2 100% 75.5%;
+    --accent-7: 27.2 86.7% 70.6%;
+    --accent-8: 25.0 79.9% 62.9%;
+    --accent-9: 22.8 93.4% 52.6%;
+    --accent-10: 23.9 100% 46.9%;
+    --accent-11: 22.9 100% 40.0%;
+    --accent-12: 16.3 50.4% 22.9%;
+  }
+  .dark {
+    --background: 150 5.9% 6.7%;
+    --foreground: 150 5.6% 92.9%;
+    --card: 150 4.2% 9.4%;
+    --card-foreground: 150 5.6% 92.9%;
+    --popover: 150 5.9% 6.7%;
+    --popover-foreground: 150 5.6% 92.9%;
+    --primary: 131.3 38.7% 51.4%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 150 4.2% 9.4%;
+    --secondary-foreground: 157.5 5.1% 69.4%;
+    --muted: 150 4.2% 9.4%;
+    --muted-foreground: 157.5 5.1% 69.4%;
+    --accent: 26.0 100% 56.1%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 359.6 79.0% 64.5%;
+    --destructive-foreground: 349.6 100% 91.0%;
+    --border: 150 3.5% 22.4%;
+    --input: 150 3.5% 22.4%;
+    --ring: 150 3.5% 22.4%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --base-1: 150 5.9% 6.7%;
+    --base-2: 150 4.2% 9.4%;
+    --base-3: 150 3.0% 12.9%;
+    --base-4: 160 3.7% 15.9%;
+    --base-5: 160 3.2% 18.6%;
+    --base-6: 150 3.5% 22.4%;
+    --base-7: 156 3.6% 27.7%;
+    --base-8: 154.3 3.7% 37.1%;
+    --base-9: 156.9 6.2% 41.4%;
+    --base-10: 160 5.0% 46.7%;
+    --base-11: 157.5 5.1% 69.4%;
+    --base-12: 150 5.6% 92.9%;
+    --accent-1: 26.7 24.3% 7.3%;
+    --accent-2: 28.0 33.3% 8.8%;
+    --accent-3: 28.5 64.5% 12.2%;
+    --accent-4: 28.3 100% 13.7%;
+    --accent-5: 27.9 100% 16.9%;
+    --accent-6: 27.3 79.0% 22.4%;
+    --accent-7: 24.7 62.6% 30.4%;
+    --accent-8: 23.1 59.8% 40.0%;
+    --accent-9: 22.8 93.4% 52.6%;
+    --accent-10: 26.0 100% 56.1%;
+    --accent-11: 26.1 100% 67.1%;
+    --accent-12: 29.5 100% 88.0%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
