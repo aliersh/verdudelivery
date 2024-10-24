@@ -1,15 +1,16 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import Logo from "@/components/ui/Logo";
 import { ShoppingCart } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import Logo from '@/components/ui/Logo';
 
 const Navbar = () => {
     return (
-        <Card className="container bg-card py-3 px-4 border-0 flex items-center justify-between gap-6 rounded-2xl mt-5">
+        <Card className="container flex items-center justify-between max-w-4xl gap-6 px-4 py-3 mx-auto mt-5 border-0 bg-card rounded-2xl">
             <Logo />
 
-            {/* <ul className="hidden md:flex items-center gap-10 text-card-foreground">
-                <li className="text-primary font-medium">
+            {/* <ul className="items-center hidden gap-10 md:flex text-card-foreground">
+                <li className="font-medium text-primary">
                     <a href="#home">Home</a>
                 </li>
                 <li>
@@ -25,7 +26,7 @@ const Navbar = () => {
 
             <div className="flex items-center space-x-4">
                 <ShoppingCart />
-                <Button variant="default" className="hidden md:block px-2">
+                <Button variant="default" className="hidden px-2 md:block">
                     Iniciar sesión
                 </Button>
             </div>
