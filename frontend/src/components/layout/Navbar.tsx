@@ -1,8 +1,7 @@
-import { ShoppingCart } from 'lucide-react';
-
-import { Button } from '@/components/ui/button';
+import LoginButton from '@/components/features/auth/LoginButton';
+import CartIcon from '@/components/features/cart/CartIcon';
+import Logo from '@/components/shared/Logo';
 import { Card } from '@/components/ui/card';
-import Logo from '@/components/ui/Logo';
 
 const Navbar = () => {
     return (
@@ -25,10 +24,8 @@ const Navbar = () => {
             </ul> */}
 
             <div className="flex items-center space-x-4">
-                <ShoppingCart />
-                <Button variant="default" className="hidden px-2 md:block">
-                    Iniciar sesión
-                </Button>
+                <CartIcon />
+                <LoginButton />
             </div>
         </Card>
     );
