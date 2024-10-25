@@ -12,9 +12,9 @@ interface TypewriterOptions {
 const TypewriterText: FC = () => {
     const options: TypewriterOptions = {
         strings: [
-            " en Viña del Mar",
-            " en Valparaíso",
-            " en Quilpué",
+            "Viña del Mar",
+            "Valparaíso",
+            "Quilpué",
         ],
         autoStart: true,
         loop: true,
@@ -22,7 +22,7 @@ const TypewriterText: FC = () => {
 
     return (
         <h1 className="text-4xl font-extrabold tracking-tight scroll-m-20 lg:text-5xl">
-            Verdudelivery{" "}
+            Verdudelivery en {" "}
             <Typewriter options={options} />
         </h1>
     );
