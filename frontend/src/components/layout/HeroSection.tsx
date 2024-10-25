@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import Typewriter from "typewriter-effect";
+import HeroButtons from '@/components/ui/HeroButton';
+import TypewriterText from '@/components/ui/TypewriterText';
 
 const HeroSection = () => {
     return (
@@ -12,20 +12,7 @@ const HeroSection = () => {
                         <div className="max-w-2xl mx-auto text-center">
                             {/* Title */}
                             <div className="max-w-2xl mt-5">
-                                <h1 className="text-4xl font-extrabold tracking-tight scroll-m-20 lg:text-5xl">
-                                    Verdudelivery{" "}
-                                    <Typewriter
-                                        options={{
-                                            strings: [
-                                                " en Viña del Mar",
-                                                " en Valparaíso",
-                                                " en Quilpué",
-                                            ],
-                                            autoStart: true,
-                                            loop: true,
-                                        }}
-                                    />
-                                </h1>
+                                <TypewriterText />
                             </div>
                             {/* End Title */}
                             <div className="max-w-3xl mt-5">
@@ -36,12 +23,7 @@ const HeroSection = () => {
                                 </p>
                             </div>
                             {/* Buttons */}
-                            <div className="flex justify-center gap-3 mt-8">
-                                <Button size={"lg"}>Registrate</Button>
-                                <Button size={"lg"} variant={"accent"}>
-                                    Ver productos
-                                </Button>
-                            </div>
+                            <HeroButtons />
                             {/* End Buttons */}
                         </div>
                     </div>
