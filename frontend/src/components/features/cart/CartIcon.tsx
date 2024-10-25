@@ -1,7 +1,8 @@
 // components/features/cart/CartIcon.js
-import { ShoppingCart } from 'lucide-react';
+import { FC } from "react";
+import { ShoppingCart } from "lucide-react";
 
-const CartIcon = () => {
+const CartIcon: FC = () => {
     return <ShoppingCart />;
 };
 

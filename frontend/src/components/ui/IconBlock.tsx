@@ -1,7 +1,15 @@
 // components/section/IconBlock.js
 "use client";
 
-const IconBlock = ({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) => {
+import { FC } from "react";
+
+interface IconBlockProps {
+    icon: React.ReactNode;
+    title: string;
+    description: string;
+}
+
+const IconBlock: FC<IconBlockProps> = ({ icon, title, description }) => {
     return (
         <div className="flex">
             {icon}

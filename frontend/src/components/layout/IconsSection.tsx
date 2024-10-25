@@ -1,9 +1,10 @@
 "use client";
 
+import { FC } from "react";
 import { CalendarClock, MapPinCheck, UserRoundCheck } from "lucide-react";
 import IconBlock from "@/components/ui/IconBlock";
 
-const IconsSection = () => {
+const IconsSection: FC = () => {
     return (
         <>
             {/* Icon Blocks */}
