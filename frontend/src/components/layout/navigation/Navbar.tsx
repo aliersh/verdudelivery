@@ -1,6 +1,6 @@
 import { FC } from "react";
 import LoginButton from '@/components/ui/buttons/LoginButton';
-import CartIcon from '@/components/features/cart/CartIcon';
+import CartIcon from '@/components/ui/icons/CartIcon';
 import Logo from '@/components/shared/Logo';
 import { Card } from '@/components/ui/cards/card';
 

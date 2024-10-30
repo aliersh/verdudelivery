@@ -10,11 +10,9 @@ const HeroSection = () => {
                 <div className="relative z-10">
                     <div className="container py-10 lg:py-16">
                         <div className="max-w-2xl mx-auto text-center">
-                            {/* Title */}
                             <div className="max-w-2xl mt-5">
                                 <TypewriterText />
                             </div>
-                            {/* End Title */}
                             <div className="max-w-3xl mt-5">
                                 <p className="text-xl text-muted-foreground">
                                     Accede a una selección exclusiva de frutas y
@@ -22,14 +20,11 @@ const HeroSection = () => {
                                     compra online.
                                 </p>
                             </div>
-                            {/* Buttons */}
                             <HeroButtons />
-                            {/* End Buttons */}
                         </div>
                     </div>
                 </div>
             </main>
-            {/* End Hero */}
         </>
     );
 };
