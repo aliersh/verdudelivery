@@ -1,5 +1,5 @@
 // components/features/auth/LoginButton.js
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/buttons/button";
 
 const LoginButton = () => {
     return (

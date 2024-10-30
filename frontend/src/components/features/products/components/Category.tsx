@@ -1,6 +1,6 @@
 "use client";
 
-import { useCategory } from "@/hooks/useCategory";
+import { useCategory } from "@/components/features/products/hooks/useCategory";
 import CategoryProducts from "./CategoryProducts";
 
 type Params = {

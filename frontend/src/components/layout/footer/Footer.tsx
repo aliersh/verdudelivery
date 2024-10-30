@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { Instagram } from "lucide-react";
 
-import ContactInfo from "@/components/shared/ContactInfo";
-import FooterCopyright from "@/components/shared/FooterCopyright";
-import SocialLinks from "@/components/shared/SocialLinks";
+import ContactInfo from "@/components/layout/footer/ContactInfo";
+import FooterCopyright from "@/components/layout/footer/FooterCopyright";
+import SocialLinks from "@/components/layout/footer/SocialLinks";
 
 const Footer: FC = () => {
     return (

@@ -1,7 +1,7 @@
 "use client";
 
-import HeroButtons from '@/components/ui/HeroButton';
-import TypewriterText from '@/components/ui/TypewriterText';
+import HeroButtons from '@/components/ui/buttons/HeroButton';
+import TypewriterText from '@/components/ui/typography/TypewriterText';
 
 const HeroSection = () => {
     return (

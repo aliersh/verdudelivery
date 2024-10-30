@@ -1,8 +1,8 @@
 import { Minus, Plus } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/buttons/button";
 import Image from "next/image";
 import { HttpTypes } from "@medusajs/types";
-import { useQuantity } from "@/hooks/useQuantity";
+import { useQuantity } from "@/components/features/products/hooks/useQuantity";
 
 type ProductItemProps = {
     product: HttpTypes.StoreProduct;

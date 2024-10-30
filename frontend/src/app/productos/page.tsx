@@ -1,4 +1,4 @@
-import Category from "@/components/features/products/Category";
+import Category from "@/components/features/products/components/Category";
 
 const Productos = () => {
     return (
