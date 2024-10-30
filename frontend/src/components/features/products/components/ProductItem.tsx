@@ -14,6 +14,15 @@ const ProductItem = ({ product }: ProductItemProps) => {
     const unitPrice =
         product?.variants?.[0]?.calculated_price?.calculated_amount ?? 0;
 
+    const formatPrice = (amount: number) => 
+        new Intl.NumberFormat('es-CL', {
+            style: 'currency',
+            currency: 'CLP',
+        }).format(amount);
+
+    const formattedUnitPrice = formatPrice(unitPrice);
+    const formattedTotalPrice = formatPrice(unitPrice * quantity);
+
     return (
         <li key={product.id} className="flex items-center space-x-4">
             <div className="w-20 h-20">
@@ -29,7 +38,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
                 <h3 className="text-lg font-semibold">
                     {product.title}
                     {product.subtitle && (
-                        <span className="text-sm font-normal text-gray-500">
+                        <span className="ml-2 text-sm font-normal text-gray-500">
                             {product.subtitle}
                         </span>
                     )}
@@ -56,9 +65,9 @@ const ProductItem = ({ product }: ProductItemProps) => {
             </div>
             <div className="text-right">
                 <p className="text-sm text-muted-foreground">
-                    ${unitPrice} / {unit}
+                    {formattedUnitPrice} / {unit}
                 </p>
-                <p className="font-semibold">${unitPrice * quantity}</p>
+                <p className="font-semibold">{formattedTotalPrice}</p>
             </div>
             <div>
                 <Button>Añadir al carrito</Button>
