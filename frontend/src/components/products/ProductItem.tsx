@@ -1,8 +1,10 @@
+"use client";
+
 import { Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/buttons/button";
 import Image from "next/image";
 import { HttpTypes } from "@medusajs/types";
-import { useQuantity } from "@/components/features/products/hooks/useQuantity";
+import { useQuantity } from "@/hooks/useQuantity";
 
 type ProductItemProps = {
     product: HttpTypes.StoreProduct;

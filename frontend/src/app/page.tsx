@@ -1,5 +1,5 @@
-import HeroSection from '@/components/layout/hero/HeroSection';
-import IconsSection from '@/components/layout/hero/IconsSection';
+import HeroSection from '@/components/home/HeroSection';
+import IconsSection from '@/components/home/IconsSection';
 
 const Home = () => {
     return (

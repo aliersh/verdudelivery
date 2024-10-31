@@ -1,7 +1,7 @@
 "use client";
 
-import ProductItem from "@/components/features/products/components/ProductItem";
-import { useProductsByCategory } from "@/components/features/products/hooks/useProductsByCategory";
+import ProductItem from "@/components/products/ProductItem";
+import { useProductsByCategory } from "@/hooks/useProductsByCategory";
 
 interface CategoryProductsProps {
     params: {

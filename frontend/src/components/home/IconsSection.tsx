@@ -3,7 +3,7 @@
 import { CalendarClock, MapPinCheck, UserRoundCheck } from 'lucide-react';
 import { FC } from 'react';
 
-import IconBlock from '@/components/layout/hero/IconBlock';
+import IconBlock from '@/components/home/IconBlock';
 
 const IconsSection: FC = () => {
     return (
