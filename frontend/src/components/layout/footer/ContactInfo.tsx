@@ -1,3 +1,5 @@
+"use client"
+
 import { FC } from "react";
 import Logo from "@/components/shared/Logo";
 

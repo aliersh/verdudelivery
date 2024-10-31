@@ -1,3 +1,5 @@
+"use client"
+
 import { FC } from "react";
 import LoginButton from '@/components/ui/buttons/LoginButton';
 import CartIcon from '@/components/ui/icons/CartIcon';

@@ -1,4 +1,5 @@
-// components/features/auth/LoginButton.js
+"use client"
+
 import { Button } from "@/components/ui/buttons/button";
 
 const LoginButton = () => {
