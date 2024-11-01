@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/buttons/button";
 import Image from "next/image";
 import { HttpTypes } from "@medusajs/types";
 import { useQuantity } from "@/hooks/useQuantity";
-
+import AddToCartButton from "@/components/cart/AddToCartButton";
 type ProductItemProps = {
     product: HttpTypes.StoreProduct;
 };
@@ -15,11 +15,12 @@ const ProductItem = ({ product }: ProductItemProps) => {
     const unit = product.metadata?.unit as string;
     const unitPrice =
         product?.variants?.[0]?.calculated_price?.calculated_amount ?? 0;
+    const variantId = product.variants?.[0]?.id ?? "";
 
-    const formatPrice = (amount: number) => 
-        new Intl.NumberFormat('es-CL', {
-            style: 'currency',
-            currency: 'CLP',
+    const formatPrice = (amount: number) =>
+        new Intl.NumberFormat("es-CL", {
+            style: "currency",
+            currency: "CLP",
         }).format(amount);
 
     const formattedUnitPrice = formatPrice(unitPrice);
@@ -72,7 +73,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
                 <p className="font-semibold">{formattedTotalPrice}</p>
             </div>
             <div>
-                <Button>Añadir al carrito</Button>
+                <AddToCartButton variantId={variantId} />
             </div>
         </li>
     );
