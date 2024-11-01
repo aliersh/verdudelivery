@@ -6,38 +6,18 @@ type AddToCartButtonProps = {
 };
 
 const AddToCartButton = ({ variantId }: AddToCartButtonProps) => {
-    const { cart } = useCart();
+    const { cart, addItem } = useCart();
 
     if (!cart) {
         return null;
     }
 
-    const handleAddToCart = () => {
-        fetch(
-            `${process.env.NEXT_PUBLIC_MEDUSA_API_URL}/store/carts/${cart.id}/line-items`,
-            {
-                credentials: "include",
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "x-publishable-api-key": process.env
-                        .NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string,
-                },
-                body: JSON.stringify({
-                    variant_id: variantId,
-                    quantity: 1,
-                }),
-            }
-        )
-            .then((res) => res.json())
-            .then(({ cart }) => {
-                console.log(cart);
-                alert("Added to cart");
-            });
+    const handleAddToCart = async () => {
+        await addItem(variantId);
+        alert("Added to cart");
     };
 
     return <Button onClick={handleAddToCart}>Añadir al carrito</Button>;
-    // TODO: Add toast
 };
 
 export default AddToCartButton;
