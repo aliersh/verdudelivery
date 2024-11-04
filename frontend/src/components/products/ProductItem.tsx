@@ -73,7 +73,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
                 <p className="font-semibold">{formattedTotalPrice}</p>
             </div>
             <div>
-                <AddToCartButton variantId={variantId} />
+                <AddToCartButton variantId={variantId} quantity={quantity} unit={unit} />
             </div>
         </li>
     );

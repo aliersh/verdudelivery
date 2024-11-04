@@ -7,6 +7,7 @@ import { ReactNode } from 'react';
 import { CartProvider } from '@/contexts/CartContext';
 import Footer from '@/components/layout/footer/Footer';
 import Navbar from '@/components/layout/navigation/Navbar';
+import CartDrawer from '@/components/cart/CartDrawer';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <CartProvider>
                     <Navbar />
                     {children}
+                    <CartDrawer />
                     <Footer />
                 </CartProvider>
             </body>
