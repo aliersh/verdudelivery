@@ -1,7 +1,7 @@
 "use client"
 
 import { FC } from "react";
-import { Instagram } from "lucide-react";
+import { SiInstagram } from "@icons-pack/react-simple-icons";
 
 import ContactInfo from "@/components/layout/footer/ContactInfo";
 import FooterCopyright from "@/components/layout/footer/FooterCopyright";
@@ -15,7 +15,7 @@ const Footer: FC = () => {
                 <div className="flex items-center justify-center">
                     <SocialLinks
                         href="#"
-                        icon={Instagram}
+                        icon={SiInstagram}
                         label="Verdudelivery Instagram"
                     />
                 </div>
