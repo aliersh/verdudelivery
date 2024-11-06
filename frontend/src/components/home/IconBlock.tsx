@@ -8,13 +8,13 @@ interface IconBlockProps {
 
 const IconBlock: FC<IconBlockProps> = ({ icon, title, description }) => {
     return (
-        <div className="flex">
+        <article className="flex" aria-label={title} role="article">
             {icon}
-            <div className="ms-5 sm:ms-8">
-                <h3 className="text-base font-semibold sm:text-lg">{title}</h3>
+            <div className="ms-5">
+                <h3 className="text-base font-semibold">{title}</h3>
                 <p className="mt-1 text-muted-foreground">{description}</p>
             </div>
-        </div>
+        </article>
     );
 };
 
