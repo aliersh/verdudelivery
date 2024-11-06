@@ -1,10 +1,10 @@
-import { FC } from "react";
 import Link from 'next/link';
+import { FC } from 'react';
 
 const Logo: FC = () => (
     <Link
         href="/"
-        className="text-2xl font-bold text-primary"
+        className="text-2xl not-italic font-bold text-primary"
         prefetch={false}
         aria-label="Ir al inicio"
         role="link"
@@ -12,7 +12,5 @@ const Logo: FC = () => (
         verdu<span className="text-accent">delivery</span>
     </Link>
 );
-
-Logo.displayName = "Logo";
 
 export default Logo;
