@@ -1,5 +1,3 @@
-"use client";
-
 import HeroButtons from '@/components/home/HeroButton';
 import TypewriterText from '@/components/ui/typography/TypewriterText';
 

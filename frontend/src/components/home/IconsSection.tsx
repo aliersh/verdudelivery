@@ -1,5 +1,3 @@
-"use client";
-
 import { CalendarClock, MapPinCheck, UserRoundCheck } from 'lucide-react';
 import { FC } from 'react';
 

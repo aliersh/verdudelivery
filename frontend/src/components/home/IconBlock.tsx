@@ -1,6 +1,3 @@
-// components/section/IconBlock.js
-"use client";
-
 import { FC } from 'react';
 
 interface IconBlockProps {
