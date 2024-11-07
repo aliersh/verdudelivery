@@ -12,9 +12,11 @@ const HeroButtons: FC = () => {
             <Button size="lg" aria-label="Regístrate">
                 Regístrate
             </Button>
-            <Button size="lg" variant="accent" aria-label="Ver productos">
-                <Link href="/productos">Ver productos</Link>
-            </Button>
+            <Link href="/productos" aria-label="Ver productos">
+                <Button size="lg" variant="accent">
+                    Ver productos
+                </Button>
+            </Link>
         </div>
     );
 };
