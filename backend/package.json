@@ -31,13 +31,13 @@
     "@mikro-orm/migrations": "5.9.7",
     "@mikro-orm/postgresql": "5.9.7",
     "awilix": "^8.0.1",
-    "pg": "^8.13.0"
+    "pg": "^8.13.1"
   },
   "devDependencies": {
     "@medusajs/test-utils": "latest",
     "@mikro-orm/cli": "5.9.7",
-    "@swc/core": "1.5.7",
-    "@swc/jest": "^0.2.36",
+    "@swc/core": "^1.9.1",
+    "@swc/jest": "^0.2.37",
     "@types/jest": "^29.5.13",
     "@types/node": "^20.0.0",
     "@types/react": "^18.3.2",
