@@ -1,33 +1,30 @@
-"use client";
-
 import { Minus, Plus } from "lucide-react";
-import { Button } from "@/components/ui/buttons/button";
 import Image from "next/image";
+import { Button } from "@/components/ui/buttons/button";
 import { HttpTypes } from "@medusajs/types";
-import { useQuantity } from "@/hooks/useQuantity";
+
 import AddToCartButton from "@/components/cart/AddToCartButton";
 type ProductItemProps = {
     product: HttpTypes.StoreProduct;
+    quantity: number;
+    onIncrement: () => void;
+    onDecrement: () => void;
+    formatPrice: (amount: number) => string;
 };
 
-const ProductItem = ({ product }: ProductItemProps) => {
-    const { quantity, handleDecrement, handleIncrement } = useQuantity(1);
+const ProductItem = ({
+    product,
+    quantity,
+    onIncrement,
+    onDecrement,
+    formatPrice,
+}: ProductItemProps) => {
     const unit = product.metadata?.unit as string;
     const unitPrice =
         product?.variants?.[0]?.calculated_price?.calculated_amount ?? 0;
-    const variantId = product.variants?.[0]?.id ?? "";
-
-    const formatPrice = (amount: number) =>
-        new Intl.NumberFormat("es-CL", {
-            style: "currency",
-            currency: "CLP",
-        }).format(amount);
-
-    const formattedUnitPrice = formatPrice(unitPrice);
-    const formattedTotalPrice = formatPrice(unitPrice * quantity);
 
     return (
-        <li key={product.id} className="flex items-center space-x-4">
+        <li className="flex items-center space-x-4">
             <div className="w-20 h-20">
                 <Image
                     src={product.thumbnail ?? "/default-thumbnail.jpg"}
@@ -48,9 +45,10 @@ const ProductItem = ({ product }: ProductItemProps) => {
                 </h3>
                 <div className="flex items-center mt-2 space-x-2">
                     <Button
-                        onClick={handleDecrement}
+                        onClick={onDecrement}
                         variant="accent"
                         size="icon"
+                        aria-label={`Decrease quantity of ${product.title}`}
                     >
                         <Minus className="w-4 h-4" />
                     </Button>
@@ -58,9 +56,10 @@ const ProductItem = ({ product }: ProductItemProps) => {
                         {quantity} {unit}
                     </span>
                     <Button
-                        onClick={handleIncrement}
+                        onClick={onIncrement}
                         variant="accent"
                         size="icon"
+                        aria-label={`Increase quantity of ${product.title}`}
                     >
                         <Plus className="w-4 h-4" />
                     </Button>
@@ -68,12 +67,18 @@ const ProductItem = ({ product }: ProductItemProps) => {
             </div>
             <div className="text-right">
                 <p className="text-sm text-muted-foreground">
-                    {formattedUnitPrice} / {unit}
+                    {formatPrice(unitPrice)} / {unit}
                 </p>
-                <p className="font-semibold">{formattedTotalPrice}</p>
+                <p className="font-semibold">
+                    {formatPrice(unitPrice * quantity)}
+                </p>
             </div>
             <div>
-                <AddToCartButton variantId={variantId} quantity={quantity} unit={unit} />
+                <AddToCartButton
+                    variantId={product.variants?.[0]?.id ?? ""}
+                    quantity={quantity}
+                    unit={unit}
+                />
             </div>
         </li>
     );
