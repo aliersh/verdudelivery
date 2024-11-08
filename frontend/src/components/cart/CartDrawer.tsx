@@ -1,18 +1,15 @@
 "use client";
 
-import { Minus, Plus, Trash } from 'lucide-react';
-import Image from 'next/image';
-
 import { Button } from '@/components/ui/buttons/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { useCart } from '@/contexts/CartContext';
 import { LineItem } from '@/types/cart';
 
-import { Separator } from '../ui/separator';
+import CartItem from './CartItem';
 
 const CartDrawer = () => {
-    const { cart, isOpen, closeCart, removeItem, updateItem } = useCart();
+    const { cart, isOpen, closeCart } = useCart();
 
     return (
         <Sheet open={isOpen} onOpenChange={closeCart}>
@@ -25,7 +22,9 @@ const CartDrawer = () => {
                 <div className="flex flex-col h-full">
                     {!cart?.items?.length ? (
                         <div className="flex flex-col items-center justify-center flex-1 gap-4">
-                            <p className="text-lg text-gray-500">Tu carrito está vacío</p>
+                            <p className="text-lg text-gray-500">
+                                Tu carrito está vacío
+                            </p>
                             <Button
                                 onClick={closeCart}
                                 className="text-white bg-primary hover:bg-primary/80"
@@ -37,77 +36,7 @@ const CartDrawer = () => {
                         <>
                             <ScrollArea className="flex-1 px-6 -mx-6">
                                 {cart?.items?.map((item: LineItem) => (
-                                    <div key={item.id} className="py-4">
-                                        <div className="flex items-center justify-between gap-4">
-                                            <div className="flex items-center space-x-4">
-                                                <Image
-                                                    src={item.thumbnail || ""}
-                                                    alt={item.title || ""}
-                                                    width={100}
-                                                    height={100}
-                                                    className="object-cover w-12 h-12 rounded"
-                                                />
-                                                <div className="space-y-1">
-                                                    <h4 className="font-medium">
-                                                        {item.product_title}
-                                                    </h4>
-                                                    <p className="text-sm text-gray-500">
-                                                        ${item.unit_price} /
-                                                        {String(item.metadata?.unit)}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <Button
-                                                variant="outline"
-                                                size="icon"
-                                                className="w-8 h-8 text-gray-500 hover:text-red-500"
-                                                onClick={() => removeItem(item.id)}
-                                            >
-                                                <Trash className="w-4 h-4" />
-                                            </Button>
-                                        </div>
-                                        <div className="flex items-center justify-between mt-2">
-                                            <div className="flex items-center space-x-2">
-                                                <Button
-                                                    variant="outline"
-                                                    size="icon"
-                                                    className="w-8 h-8 text-white bg-orange-500 border-none rounded-full hover:bg-orange-600"
-                                                    onClick={() =>
-                                                        updateItem(
-                                                            item.id,
-                                                            item.quantity - 1
-                                                        )
-                                                    }
-                                                >
-                                                    <Minus className="w-4 h-4" />
-                                                </Button>
-                                                <span className="w-12 font-medium text-center">
-                                                    {item.quantity}{" "}
-                                                    {String(item.metadata?.unit)}
-                                                </span>
-                                                <Button
-                                                    variant="outline"
-                                                    size="icon"
-                                                    className="w-8 h-8 text-white bg-orange-500 border-none rounded-full hover:bg-orange-600"
-                                                    onClick={() =>
-                                                        updateItem(
-                                                            item.id,
-                                                            item.quantity + 1
-                                                        )
-                                                    }
-                                                >
-                                                    <Plus className="w-4 h-4" />
-                                                </Button>
-                                            </div>
-                                            <p className="font-medium">
-                                                $
-                                                {(
-                                                    item.unit_price * item.quantity
-                                                ).toLocaleString()}
-                                            </p>
-                                        </div>
-                                        <Separator className="mt-4 bg-gray-200" />
-                                    </div>
+                                    <CartItem key={item.id} item={item} />
                                 ))}
                             </ScrollArea>
                             <div className="pt-4 pb-4 space-y-4">
