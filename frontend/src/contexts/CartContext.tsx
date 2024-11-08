@@ -50,8 +50,18 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
 
     const removeItem = async (itemId: string) => {
         if (!cartId) return;
-        const { cart: updatedCart } = await cartApi.removeItem(cartId, itemId);
-        mutate({ cart: updatedCart }, false);
+        
+        // Keep showing previous state while removing
+        mutate(
+            async (currentData) => {
+                await cartApi.removeItem(cartId, itemId);
+                return currentData;
+            },
+            {
+                revalidate: true,
+                optimisticData: cart
+            }
+        );
     };
 
     const updateItem = async (itemId: string, quantity: number) => {
