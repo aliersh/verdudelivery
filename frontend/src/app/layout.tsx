@@ -8,6 +8,7 @@ import { CartProvider } from '@/contexts/CartContext';
 import Footer from '@/components/layout/footer/Footer';
 import Navbar from '@/components/layout/navigation/Navbar';
 import CartDrawer from '@/components/cart/CartDrawer';
+import { Toaster } from '@/components/ui/toaster';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <CartProvider>
                     <Navbar />
                     {children}
+                    <Toaster />
                     <CartDrawer />
                     <Footer />
                 </CartProvider>
