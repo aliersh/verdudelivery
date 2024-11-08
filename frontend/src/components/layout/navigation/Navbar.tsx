@@ -2,7 +2,7 @@
 
 import { FC } from "react";
 import LoginButton from "@/components/ui/buttons/LoginButton";
-import CartIcon from "@/components/ui/icons/CartIcon";
+import CartIconButton from "@/components/ui/buttons/CartIconButton";
 import Logo from "@/components/shared/Logo";
 import { Card } from "@/components/ui/cards/card";
 import { useCart } from "@/contexts/CartContext";
@@ -16,7 +16,7 @@ const Navbar: FC = () => {
                 <Logo />
 
                 <div className="flex items-center space-x-4">
-                    <CartIcon onClick={openCart} />
+                    <CartIconButton onClick={openCart} />
                     <LoginButton />
                 </div>
             </Card>

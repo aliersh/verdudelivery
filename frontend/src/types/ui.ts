@@ -11,7 +11,7 @@ export interface IconBlockProps {
   ariaLabel?: string;
 }
 
-export interface CartIconProps {
+export interface CartIconButtonProps {
   onClick: () => void;
 }
 
