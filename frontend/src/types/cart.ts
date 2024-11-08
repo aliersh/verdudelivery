@@ -40,4 +40,24 @@ export type AddToCartButtonProps = {
   variantId: string;
   quantity?: number;
   unit?: string;
-}; 
+};
+
+export interface CartItemProps {
+  item: LineItem;
+}
+
+export interface CartItemInfoProps {
+  item: LineItem;
+}
+
+export interface CartItemQuantityProps {
+  item: LineItem;
+}
+
+export interface CartItemRemoveProps {
+  itemId: string;
+}
+
+export interface CartItemPriceProps {
+  item: LineItem;
+}
