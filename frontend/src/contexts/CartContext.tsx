@@ -1,13 +1,18 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
-import useSWR from "swr";
-import { cartApi, StoreCart } from "@/lib/api-client";
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import useSWR from 'swr';
+
+import { cartApi, StoreCart } from '@/lib/api-client';
 
 type CartContextType = {
     cart?: StoreCart;
     refreshCart: () => void;
-    addItem: (variantId: string, quantity?: number, unit?: string) => Promise<void>;
+    addItem: (
+        variantId: string,
+        quantity?: number,
+        unit?: string
+    ) => Promise<void>;
     removeItem: (itemId: string) => Promise<void>;
     updateItem: (itemId: string, quantity: number) => Promise<void>;
     isOpen: boolean;

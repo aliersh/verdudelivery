@@ -1,5 +1,7 @@
 import 'server-only';
+
 import { cache } from 'react';
+
 import { HttpTypes } from '@medusajs/types';
 
 interface CategoryResponse {
@@ -24,9 +26,11 @@ const fetcher = async <T>(
     endpoint: string,
     options: RequestInit = {}
 ): Promise<T> => {
-    const baseUrl = process.env.NEXT_PUBLIC_MEDUSA_API_URL || 'http://localhost:9000';
+    const baseUrl =
+        process.env.NEXT_PUBLIC_MEDUSA_API_URL || "http://localhost:9000";
     const defaultHeaders = {
-        "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string,
+        "x-publishable-api-key": process.env
+            .NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string,
     };
 
     const response = await fetch(`${baseUrl}${endpoint}`, {
@@ -52,7 +56,7 @@ export const productApi = {
             const { product_categories } = await fetcher<CategoryResponse>(
                 `/store/product-categories?handle=${handle}`
             );
-            
+
             const category = product_categories[0];
             if (!category) {
                 throw new Error(`Category not found for handle: ${handle}`);
@@ -80,4 +84,4 @@ export const productApi = {
     preloadCategoryProducts: (handle: string) => {
         void productApi.getCategoryProducts(handle);
     },
-}; 
+};

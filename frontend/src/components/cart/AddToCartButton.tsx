@@ -1,6 +1,7 @@
-import { useCart } from "@/contexts/CartContext";
-import { Button } from "@/components/ui/buttons/button";
-import { useState } from "react";
+import { useState } from 'react';
+
+import { Button } from '@/components/ui/buttons/button';
+import { useCart } from '@/contexts/CartContext';
 
 type AddToCartButtonProps = {
     variantId: string;

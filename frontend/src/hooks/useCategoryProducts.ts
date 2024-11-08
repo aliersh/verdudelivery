@@ -1,7 +1,9 @@
-import { productApi } from '@/lib/api-server';
+import { productApi } from "@/lib/api-server";
 
 const fetchCategoryProducts = async (categories: string[]) => {
-    const promises = categories.map(handle => productApi.getCategoryProducts(handle));
+    const promises = categories.map((handle) =>
+        productApi.getCategoryProducts(handle)
+    );
     return Promise.all(promises);
 };
 

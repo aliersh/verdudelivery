@@ -1,4 +1,3 @@
-// Types and Interfaces
 export interface LineItem {
     id: string;
     variant_id: string;
@@ -21,9 +20,11 @@ const fetcher = async <T>(
     endpoint: string,
     options: RequestInit = {}
 ): Promise<T> => {
-    const baseUrl = process.env.NEXT_PUBLIC_MEDUSA_API_URL || 'http://localhost:9000';
+    const baseUrl =
+        process.env.NEXT_PUBLIC_MEDUSA_API_URL || "http://localhost:9000";
     const defaultHeaders = {
-        "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string,
+        "x-publishable-api-key": process.env
+            .NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string,
     };
 
     const response = await fetch(`${baseUrl}${endpoint}`, {
@@ -44,13 +45,13 @@ const fetcher = async <T>(
 
 // Cart Operations
 export const cartApi = {
-    create: () => 
-        fetcher<{ cart: StoreCart }>('/store/carts', {
+    create: () =>
+        fetcher<{ cart: StoreCart }>("/store/carts", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
         }),
 
-    get: (cartId: string) => 
+    get: (cartId: string) =>
         fetcher<{ cart: StoreCart }>(`/store/carts/${cartId}`),
 
     addItem: (cartId: string, variantId: string, quantity = 1, unit?: string) =>
@@ -65,14 +66,20 @@ export const cartApi = {
         }),
 
     removeItem: (cartId: string, itemId: string) =>
-        fetcher<{ cart: StoreCart }>(`/store/carts/${cartId}/line-items/${itemId}`, {
-            method: "DELETE",
-        }),
+        fetcher<{ cart: StoreCart }>(
+            `/store/carts/${cartId}/line-items/${itemId}`,
+            {
+                method: "DELETE",
+            }
+        ),
 
     updateItem: (cartId: string, itemId: string, quantity: number) =>
-        fetcher<{ cart: StoreCart }>(`/store/carts/${cartId}/line-items/${itemId}`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ quantity }),
-        }),
-}; 
+        fetcher<{ cart: StoreCart }>(
+            `/store/carts/${cartId}/line-items/${itemId}`,
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ quantity }),
+            }
+        ),
+};

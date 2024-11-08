@@ -1,9 +1,10 @@
-import { Minus, Plus } from "lucide-react";
-import Image from "next/image";
-import { Button } from "@/components/ui/buttons/button";
-import { HttpTypes } from "@medusajs/types";
+import { Minus, Plus } from 'lucide-react';
+import Image from 'next/image';
 
-import AddToCartButton from "@/components/cart/AddToCartButton";
+import AddToCartButton from '@/components/cart/AddToCartButton';
+import { Button } from '@/components/ui/buttons/button';
+import { HttpTypes } from '@medusajs/types';
+
 type ProductItemProps = {
     product: HttpTypes.StoreProduct;
     quantity: number;

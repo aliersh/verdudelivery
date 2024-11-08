@@ -1,8 +1,10 @@
 "use client";
-import { useState } from "react";
-import { HttpTypes } from "@medusajs/types";
 
-import ProductItem from "./ProductItem";
+import { useState } from 'react';
+
+import { HttpTypes } from '@medusajs/types';
+
+import ProductItem from './ProductItem';
 
 type Props = {
     handle: string;

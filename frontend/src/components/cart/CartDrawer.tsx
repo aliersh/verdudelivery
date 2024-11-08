@@ -1,18 +1,15 @@
 "use client";
 
-import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-    Sheet,
-    SheetContent,
-    SheetHeader,
-    SheetTitle,
-} from "@/components/ui/sheet";
-import { useCart } from "@/contexts/CartContext";
-import { Button } from "@/components/ui/buttons/button";
-import { Trash, Minus, Plus } from "lucide-react";
-import Image from "next/image";
-import { Separator } from "../ui/separator";
-import { LineItem } from "@/lib/api-client";
+import { Minus, Plus, Trash } from 'lucide-react';
+import Image from 'next/image';
+
+import { Button } from '@/components/ui/buttons/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { useCart } from '@/contexts/CartContext';
+import { LineItem } from '@/lib/api-client';
+
+import { Separator } from '../ui/separator';
 
 //TODO: Add toast notifications
 //TODO: Add empty cart state
@@ -28,7 +25,7 @@ const CartDrawer = () => {
                     </SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col h-full">
-                    <ScrollArea className="flex-1 -mx-6 px-6">
+                    <ScrollArea className="flex-1 px-6 -mx-6">
                         {cart?.items?.map((item: LineItem) => (
                             <div key={item.id} className="py-4">
                                 <div className="flex items-center justify-between gap-4">
@@ -38,7 +35,7 @@ const CartDrawer = () => {
                                             alt={item.title || ""}
                                             width={100}
                                             height={100}
-                                            className="w-12 h-12 object-cover rounded"
+                                            className="object-cover w-12 h-12 rounded"
                                         />
                                         <div className="space-y-1">
                                             <h4 className="font-medium">
@@ -53,7 +50,7 @@ const CartDrawer = () => {
                                     <Button
                                         variant="outline"
                                         size="icon"
-                                        className="h-8 w-8 text-gray-500 hover:text-red-500"
+                                        className="w-8 h-8 text-gray-500 hover:text-red-500"
                                         onClick={() => removeItem(item.id)}
                                     >
                                         <Trash className="w-4 h-4" />
@@ -64,7 +61,7 @@ const CartDrawer = () => {
                                         <Button
                                             variant="outline"
                                             size="icon"
-                                            className="h-8 w-8 rounded-full bg-orange-500 text-white border-none hover:bg-orange-600"
+                                            className="w-8 h-8 text-white bg-orange-500 border-none rounded-full hover:bg-orange-600"
                                             onClick={() =>
                                                 updateItem(
                                                     item.id,
@@ -74,14 +71,14 @@ const CartDrawer = () => {
                                         >
                                             <Minus className="w-4 h-4" />
                                         </Button>
-                                        <span className="w-12 text-center font-medium">
+                                        <span className="w-12 font-medium text-center">
                                             {item.quantity}{" "}
                                             {String(item.metadata?.unit)}
                                         </span>
                                         <Button
                                             variant="outline"
                                             size="icon"
-                                            className="h-8 w-8 rounded-full bg-orange-500 text-white border-none hover:bg-orange-600"
+                                            className="w-8 h-8 text-white bg-orange-500 border-none rounded-full hover:bg-orange-600"
                                             onClick={() =>
                                                 updateItem(
                                                     item.id,
@@ -103,7 +100,7 @@ const CartDrawer = () => {
                             </div>
                         ))}
                     </ScrollArea>
-                    <div className="space-y-4 pt-4 pb-4">
+                    <div className="pt-4 pb-4 space-y-4">
                         <div className="flex items-center justify-between text-lg">
                             <span className="text-gray-500">Total</span>
                             <span className="font-bold text-primary">
@@ -111,7 +108,8 @@ const CartDrawer = () => {
                             </span>
                         </div>
                         <Button
-                            className="w-full bg-primary hover:bg-primary/80 text-white" size="lg"
+                            className="w-full text-white bg-primary hover:bg-primary/80"
+                            size="lg"
                         >
                             Proceder al pago
                         </Button>
