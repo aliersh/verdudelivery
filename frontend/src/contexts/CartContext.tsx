@@ -1,13 +1,11 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
-import { HttpTypes } from "@medusajs/types";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import useSWR from "swr";
+import { cartApi, StoreCart } from "@/lib/api-client";
 
 type CartContextType = {
-    cart?: HttpTypes.StoreCart;
-    setCart: React.Dispatch<
-        React.SetStateAction<HttpTypes.StoreCart | undefined>
-    >;
+    cart?: StoreCart;
     refreshCart: () => void;
     addItem: (variantId: string, quantity?: number, unit?: string) => Promise<void>;
     removeItem: (itemId: string) => Promise<void>;
@@ -19,138 +17,73 @@ type CartContextType = {
 
 const CartContext = createContext<CartContextType | null>(null);
 
-type CartProviderProps = {
-    children: React.ReactNode;
-};
-
-export const CartProvider = ({ children }: CartProviderProps) => {
-    const [cart, setCart] = useState<HttpTypes.StoreCart>();
+export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
+    children,
+}) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [cartId, setCartId] = useState<string | null>(null);
 
     useEffect(() => {
-        if (cart) {
-            return;
-        }
+        const storedCartId = localStorage.getItem("cart_id");
+        if (storedCartId) setCartId(storedCartId);
+    }, []);
 
-        const cartId = localStorage.getItem("cart_id");
-        if (!cartId) {
-            // create a cart
-            fetch(`http://localhost:9000/store/carts`, {
-                method: "POST",
-                credentials: "include",
-                headers: {
-                    "x-publishable-api-key":
-                        process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string,
-                    "Content-Type": "application/json",
-                },
-            })
-                .then((res) => res.json())
-                .then(({ cart: dataCart }) => {
-                    localStorage.setItem("cart_id", dataCart.id);
-                    setCart(dataCart);
-                });
-        } else {
-            // retrieve cart
-            fetch(`http://localhost:9000/store/carts/${cartId}`, {
-                credentials: "include",
-                headers: {
-                    "x-publishable-api-key":
-                        process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string,
-                },
-            })
-                .then((res) => res.json())
-                .then(({ cart: dataCart }) => {
-                    setCart(dataCart);
-                });
-        }
-    }, [cart]);
+    const { data: cart, mutate } = useSWR(
+        cartId ? [`/store/carts/${cartId}`, cartId] : null,
+        () => cartApi.get(cartId as string)
+    );
+
+    const initializeCart = async () => {
+        const { cart: newCart } = await cartApi.create();
+        localStorage.setItem("cart_id", newCart.id);
+        setCartId(newCart.id);
+        mutate({ cart: newCart }, false);
+    };
 
     const refreshCart = () => {
         localStorage.removeItem("cart_id");
-        setCart(undefined);
+        setCartId(null);
+        mutate(undefined, false);
     };
 
-    const addItem = async (variantId: string, quantity: number = 1, unit?: string) => {
-        if (!cart) return;
-
-        const metadata = unit ? { unit } : {};
-
-        const response = await fetch(
-            `${process.env.NEXT_PUBLIC_MEDUSA_API_URL}/store/carts/${cart.id}/line-items`,
-            {
-                credentials: "include",
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string,
-                },
-                body: JSON.stringify({
-                    variant_id: variantId,
-                    quantity,
-                    metadata,
-                }),
-            }
+    const addItem = async (variantId: string, quantity = 1, unit?: string) => {
+        if (!cartId) await initializeCart();
+        const { cart: updatedCart } = await cartApi.addItem(
+            cartId as string,
+            variantId,
+            quantity,
+            unit
         );
-        
-        const { cart: updatedCart } = await response.json();
-        console.log(updatedCart);
-        setCart(updatedCart);
+        mutate({ cart: updatedCart }, false);
     };
 
     const removeItem = async (itemId: string) => {
-        if (!cart) return;
-
-        const response = await fetch(`${process.env.NEXT_PUBLIC_MEDUSA_API_URL}/store/carts/${cart.id}/line-items/${itemId}`, {
-            credentials: "include",
-            method: "DELETE",
-            headers: {
-                "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string,
-            },
-        });
-
-        const { cart: updatedCart } = await response.json();
-        setCart(updatedCart);
+        if (!cartId) return;
+        const { cart: updatedCart } = await cartApi.removeItem(cartId, itemId);
+        mutate({ cart: updatedCart }, false);
     };
 
     const updateItem = async (itemId: string, quantity: number) => {
-        if (!cart) return;
-
-        const response = await fetch(`${process.env.NEXT_PUBLIC_MEDUSA_API_URL}/store/carts/${cart.id}/line-items/${itemId}`, {
-            credentials: "include",
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string,
-            },
-            body: JSON.stringify({
-                quantity,
-            }),
-        });
-
-        const { cart: updatedCart } = await response.json();
-        setCart(updatedCart);
-    };
-
-    const openCart = () => {
-        setIsOpen(true);
-    };
-
-    const closeCart = () => {
-        setIsOpen(false);
+        if (!cartId) return;
+        const { cart: updatedCart } = await cartApi.updateItem(
+            cartId,
+            itemId,
+            quantity
+        );
+        mutate({ cart: updatedCart }, false);
     };
 
     return (
         <CartContext.Provider
             value={{
-                cart,
-                setCart,
+                cart: cart?.cart,
                 refreshCart,
                 addItem,
                 removeItem,
                 updateItem,
                 isOpen,
-                openCart,
-                closeCart,
+                openCart: () => setIsOpen(true),
+                closeCart: () => setIsOpen(false),
             }}
         >
             {children}
@@ -160,10 +93,6 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 
 export const useCart = () => {
     const context = useContext(CartContext);
-
-    if (!context) {
-        throw new Error("useCart must be used within a CartProvider");
-    }
-
+    if (!context) throw new Error("useCart must be used within a CartProvider");
     return context;
 };
