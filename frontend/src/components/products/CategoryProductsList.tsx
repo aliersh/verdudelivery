@@ -2,19 +2,11 @@
 
 import { useState } from 'react';
 
-import { HttpTypes } from '@medusajs/types';
+import { CategoryProps } from '@/types/category';
 
 import ProductItem from './ProductItem';
 
-type Props = {
-    handle: string;
-    initialData: {
-        products: HttpTypes.StoreProduct[];
-        categoryName: string;
-    };
-};
-
-const CategoryProductsList = ({ initialData }: Props) => {
+const CategoryProductsList = ({ initialData }: CategoryProps) => {
     const { products, categoryName } = initialData;
     const [quantities, setQuantities] = useState<Record<string, number>>({});
 

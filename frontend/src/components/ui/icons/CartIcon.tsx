@@ -1,11 +1,8 @@
 import { ShoppingCart } from 'lucide-react';
-import { Button } from '@/components/ui/buttons/button';
-
 import { FC } from 'react';
 
-interface CartIconProps {
-    onClick: () => void;
-}
+import { Button } from '@/components/ui/buttons/button';
+import { CartIconProps } from '@/types/ui';
 
 const CartIcon: FC<CartIconProps> = ({ onClick }) => {
     return (

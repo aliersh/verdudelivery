@@ -1,11 +1,7 @@
 import Link from 'next/link';
 import { FC } from 'react';
 
-interface SocialLinksProps {
-    href: string;
-    icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-    label: string;
-}
+import { SocialLinksProps } from '@/types/ui';
 
 const SocialLinks: FC<SocialLinksProps> = ({ href, icon: Icon, label }) => (
     <Link

@@ -3,15 +3,7 @@ import Image from 'next/image';
 
 import AddToCartButton from '@/components/cart/AddToCartButton';
 import { Button } from '@/components/ui/buttons/button';
-import { HttpTypes } from '@medusajs/types';
-
-type ProductItemProps = {
-    product: HttpTypes.StoreProduct;
-    quantity: number;
-    onIncrement: () => void;
-    onDecrement: () => void;
-    formatPrice: (amount: number) => string;
-};
+import { ProductItemProps } from '@/types/product';
 
 const ProductItem = ({
     product,

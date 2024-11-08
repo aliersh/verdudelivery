@@ -3,22 +3,8 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
-import { cartApi, StoreCart } from '@/lib/api-client';
-
-type CartContextType = {
-    cart?: StoreCart;
-    refreshCart: () => void;
-    addItem: (
-        variantId: string,
-        quantity?: number,
-        unit?: string
-    ) => Promise<void>;
-    removeItem: (itemId: string) => Promise<void>;
-    updateItem: (itemId: string, quantity: number) => Promise<void>;
-    isOpen: boolean;
-    openCart: () => void;
-    closeCart: () => void;
-};
+import { cartApi } from '@/lib/api-client';
+import { CartContextType } from '@/types/cart';
 
 const CartContext = createContext<CartContextType | null>(null);
 

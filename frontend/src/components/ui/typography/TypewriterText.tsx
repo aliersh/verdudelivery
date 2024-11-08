@@ -1,29 +1,20 @@
 "use client";
 
-import { FC } from "react";
+import { FC } from 'react';
 import Typewriter from 'typewriter-effect';
 
-interface TypewriterOptions {
-    strings: string[];
-    autoStart: boolean;
-    loop: boolean;
-}
+import { TypewriterOptions } from '@/types/ui';
 
 const TypewriterText: FC = () => {
     const options: TypewriterOptions = {
-        strings: [
-            "Viña del Mar",
-            "Valparaíso",
-            "Quilpué",
-        ],
+        strings: ["Viña del Mar", "Valparaíso", "Quilpué"],
         autoStart: true,
         loop: true,
     };
 
     return (
         <h1 className="text-4xl font-extrabold tracking-tight scroll-m-20 lg:text-5xl">
-            Verdudelivery en {" "}
-            <Typewriter options={options} />
+            Verdudelivery en <Typewriter options={options} />
         </h1>
     );
 };

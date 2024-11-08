@@ -2,12 +2,7 @@ import { useState } from 'react';
 
 import { Button } from '@/components/ui/buttons/button';
 import { useCart } from '@/contexts/CartContext';
-
-type AddToCartButtonProps = {
-    variantId: string;
-    quantity?: number;
-    unit?: string;
-};
+import { AddToCartButtonProps } from '@/types/cart';
 
 const AddToCartButton = ({
     variantId,

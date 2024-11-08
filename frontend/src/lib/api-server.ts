@@ -2,24 +2,8 @@ import 'server-only';
 
 import { cache } from 'react';
 
-import { HttpTypes } from '@medusajs/types';
-
-interface CategoryResponse {
-    product_categories: Array<{
-        id: string;
-        name: string;
-        handle?: string;
-    }>;
-}
-
-interface ProductsResponse {
-    products: HttpTypes.StoreProduct[];
-}
-
-interface FetchResult {
-    products: HttpTypes.StoreProduct[];
-    categoryName: string;
-}
+import { FetchResult } from '@/types/api';
+import { CategoryResponse, ProductsResponse } from '@/types/category';
 
 // Common fetcher utility
 const fetcher = async <T>(

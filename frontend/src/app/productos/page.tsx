@@ -2,10 +2,7 @@ import { Suspense } from "react";
 import fetchCategoryProducts from "@/hooks/useCategoryProducts";
 import CategoryProductsList from "@/components/products/CategoryProductsList";
 import ProductosLoading from "./loading";
-
-type ProductosProps = {
-    categories?: string[];
-};
+import { ProductosProps } from "@/types/product";
 
 const DEFAULT_CATEGORIES = ["verduras", "frutas", "legumbres", "otros"];
 

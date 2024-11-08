@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/buttons/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { useCart } from '@/contexts/CartContext';
-import { LineItem } from '@/lib/api-client';
+import { LineItem } from '@/types/cart';
 
 import { Separator } from '../ui/separator';
 

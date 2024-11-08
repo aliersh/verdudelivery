@@ -1,19 +1,4 @@
-export interface LineItem {
-    id: string;
-    variant_id: string;
-    quantity: number;
-    metadata?: { unit?: string };
-    thumbnail?: string;
-    title?: string;
-    product_title?: string;
-    unit_price: number;
-}
-
-export interface StoreCart {
-    id: string;
-    items: LineItem[];
-    subtotal: number;
-}
+import { StoreCart } from "@/types/cart";
 
 // Common fetcher utility
 const fetcher = async <T>(

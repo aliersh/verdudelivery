@@ -1,10 +1,6 @@
 import { FC } from 'react';
 
-interface IconBlockProps {
-    icon: React.ReactNode;
-    title: string;
-    description: string;
-}
+import { IconBlockProps } from '@/types/ui';
 
 const IconBlock: FC<IconBlockProps> = ({ icon, title, description }) => {
     return (

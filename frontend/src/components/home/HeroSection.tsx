@@ -1,7 +1,8 @@
 import HeroButtons from "@/components/home/HeroButton";
 import TypewriterText from "@/components/ui/typography/TypewriterText";
+import { FC } from "react"; 
 
-const HeroSection = () => {
+const HeroSection: FC = () => {
     return (
         <section
             className="relative py-24 mx-auto overflow-hidden"
