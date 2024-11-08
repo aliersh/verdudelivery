@@ -8,7 +8,11 @@ type AddToCartButtonProps = {
     unit?: string;
 };
 
-const AddToCartButton = ({ variantId, quantity, unit }: AddToCartButtonProps) => {
+const AddToCartButton = ({
+    variantId,
+    quantity,
+    unit,
+}: AddToCartButtonProps) => {
     const { addItem } = useCart();
     const [loading, setLoading] = useState(false);
 
@@ -20,9 +24,12 @@ const AddToCartButton = ({ variantId, quantity, unit }: AddToCartButtonProps) =>
 
     return (
         <>
-            <Button onClick={handleAddToCart} disabled={loading}>
-                {/*//TODO: Change loading state */}
-                {loading ? "Cargando..." : "Añadir al carrito"}
+            <Button
+                onClick={handleAddToCart}
+                disabled={loading}
+                className="w-40"
+            >
+                {loading ? "Añadiendo..." : "Añadir al carrito"}
             </Button>
         </>
     );

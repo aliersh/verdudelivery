@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/buttons/button";
 import { Trash, Minus, Plus } from "lucide-react";
 import Image from "next/image";
 import { Separator } from "../ui/separator";
+import { LineItem } from "@/lib/api-client";
 
 //TODO: Add toast notifications
 //TODO: Add empty cart state
@@ -28,7 +29,7 @@ const CartDrawer = () => {
                 </SheetHeader>
                 <div className="flex flex-col h-full">
                     <ScrollArea className="flex-1 -mx-6 px-6">
-                        {cart?.items?.map((item) => (
+                        {cart?.items?.map((item: LineItem) => (
                             <div key={item.id} className="py-4">
                                 <div className="flex items-center justify-between gap-4">
                                     <div className="flex items-center space-x-4">
