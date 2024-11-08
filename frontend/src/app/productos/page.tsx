@@ -9,13 +9,11 @@ type ProductosProps = {
 
 const DEFAULT_CATEGORIES = ["verduras", "frutas", "legumbres", "otros"];
 
-const Productos = async ({
-    categories = DEFAULT_CATEGORIES,
-}: ProductosProps) => {
+const Productos = async ({ categories = DEFAULT_CATEGORIES }: ProductosProps) => {
     const categoryData = await fetchCategoryProducts(categories);
 
     return (
-        <div className={`max-w-4xl px-4 mx-auto `}>
+        <div className="max-w-4xl px-4 mx-auto">
             <Suspense fallback={<ProductosLoading />}>
                 {categories.map((handle, index) => (
                     <CategoryProductsList

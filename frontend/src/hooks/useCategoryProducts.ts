@@ -1,8 +1,7 @@
-// frontend/src/app/productos/hooks/useCategoryProducts.ts
-import { getCategoryProducts } from '@/lib/medusa-fetch';
+import { productApi } from '@/lib/api-server';
 
 const fetchCategoryProducts = async (categories: string[]) => {
-    const promises = categories.map(handle => getCategoryProducts(handle));
+    const promises = categories.map(handle => productApi.getCategoryProducts(handle));
     return Promise.all(promises);
 };
 
