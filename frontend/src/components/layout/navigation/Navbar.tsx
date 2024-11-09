@@ -11,8 +11,8 @@ const Navbar: FC = () => {
     const { openCart } = useCart();
 
     return (
-        <nav aria-label="Main navigation">
-            <Card className="container flex items-center justify-between max-w-4xl gap-6 px-4 py-3 mx-auto mt-5 border-0 bg-primary-foreground rounded-2xl">
+        <nav className="sticky top-0 z-50 w-full py-4 bg-background" aria-label="Main navigation">
+            <Card className="container flex items-center justify-between max-w-4xl gap-6 px-4 py-3 mx-auto border-0 bg-primary-foreground rounded-2xl">
                 <Logo />
 
                 <div className="flex items-center space-x-4">
