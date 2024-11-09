@@ -1,8 +1,8 @@
-import { Minus, Plus } from 'lucide-react';
-import Image from 'next/image';
-
 import AddToCartButton from '@/components/cart/AddToCartButton';
-import { Button } from '@/components/ui/buttons/button';
+import ProductImage from '@/components/products/ProductImage';
+import ProductPrice from '@/components/products/ProductPrice';
+import ProductTitle from '@/components/products/ProductTitle';
+import QuantityControl from '@/components/products/QuantityControl';
 import { ProductItemProps } from '@/types/product';
 
 const ProductItem = ({
@@ -18,54 +18,29 @@ const ProductItem = ({
 
     return (
         <li className="flex items-center space-x-4">
-            <div className="w-20 h-20">
-                <Image
-                    src={product.thumbnail ?? "/default-thumbnail.jpg"}
-                    alt={product.title ?? "No title"}
-                    width={80}
-                    height={80}
-                    className="object-cover rounded-md"
+            <ProductImage 
+                src={product.thumbnail ?? ''}
+                alt={product.title}
+            />
+            <div className="flex-1">
+                <ProductTitle
+                    title={product.title}
+                    subtitle={product.subtitle || undefined}
+                />
+                <QuantityControl
+                    quantity={quantity}
+                    unit={unit}
+                    productTitle={product.title}
+                    onIncrement={onIncrement}
+                    onDecrement={onDecrement}
                 />
             </div>
-            <div className="flex-1">
-                <h3 className="text-lg font-semibold">
-                    {product.title}
-                    {product.subtitle && (
-                        <span className="ml-2 text-sm font-normal text-gray-500">
-                            {product.subtitle}
-                        </span>
-                    )}
-                </h3>
-                <div className="flex items-center mt-2 space-x-2">
-                    <Button
-                        onClick={onDecrement}
-                        variant="accent"
-                        size="icon"
-                        aria-label={`Decrease quantity of ${product.title}`}
-                    >
-                        <Minus className="w-4 h-4" />
-                    </Button>
-                    <span className="text-center w-11">
-                        {quantity} {unit}
-                    </span>
-                    <Button
-                        onClick={onIncrement}
-                        variant="accent"
-                        size="icon"
-                        aria-label={`Increase quantity of ${product.title}`}
-                    >
-                        <Plus className="w-4 h-4" />
-                    </Button>
-                </div>
-            </div>
-            <div className="text-right">
-                <p className="text-sm text-muted-foreground">
-                    {formatPrice(unitPrice)} / {unit}
-                </p>
-                <p className="font-semibold">
-                    {formatPrice(unitPrice * quantity)}
-                </p>
-            </div>
+            <ProductPrice
+                unitPrice={unitPrice}
+                quantity={quantity}
+                unit={unit}
+                formatPrice={formatPrice}
+            />
             <div>
                 <AddToCartButton
                     variantId={product.variants?.[0]?.id ?? ""}
