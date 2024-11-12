@@ -36,7 +36,7 @@
   "devDependencies": {
     "@medusajs/test-utils": "latest",
     "@mikro-orm/cli": "5.9.7",
-    "@swc/core": "^1.9.1",
+    "@swc/core": "^1.9.2",
     "@swc/jest": "^0.2.37",
     "@types/jest": "^29.5.13",
     "@types/node": "^20.0.0",
@@ -48,7 +48,7 @@
     "react-dom": "^18.2.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.2",
-    "vite": "^5.2.11"
+    "vite": "^5.4.11"
   },
   "engines": {
     "node": ">=20"
