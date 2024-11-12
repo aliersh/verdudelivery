@@ -16,7 +16,12 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
 
     useEffect(() => {
         const storedCartId = localStorage.getItem("cart_id");
-        if (storedCartId) setCartId(storedCartId);
+        if (storedCartId) {
+            setCartId(storedCartId);
+        } else {
+            initializeCart();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const { data: cart, mutate } = useSWR(
