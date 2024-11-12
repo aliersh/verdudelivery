@@ -1,5 +1,6 @@
 import HeroButtons from "@/components/home/HeroButton";
 import TypewriterText from "@/components/ui/typography/TypewriterText";
+import HeroDescription from "@/components/home/HeroDescription";
 import { FC } from "react"; 
 
 const HeroSection: FC = () => {
@@ -15,14 +16,7 @@ const HeroSection: FC = () => {
                             <TypewriterText />
                         </div>
                         <div className="max-w-3xl mt-5">
-                            <p
-                                className="text-xl text-muted-foreground"
-                                aria-label="Descripción del servicio"
-                            >
-                                Accede a una selección exclusiva de frutas y
-                                verduras frescas, con la comodidad de la compra
-                                online.
-                            </p>
+                            <HeroDescription />
                         </div>
                         <HeroButtons />
                     </div>
