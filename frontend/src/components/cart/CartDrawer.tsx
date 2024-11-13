@@ -5,7 +5,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { useCart } from '@/contexts/CartContext';
 import { LineItem } from '@/types/cart';
-
+import Link from 'next/link';
 import CartItem from './CartItem';
 
 const CartDrawer = () => {
@@ -46,12 +46,14 @@ const CartDrawer = () => {
                                         ${cart?.subtotal.toLocaleString()}
                                     </span>
                                 </div>
-                                <Button
-                                    className="w-full text-white bg-primary hover:bg-primary/80"
-                                    size="lg"
-                                >
-                                    Proceder al pago
-                                </Button>
+                                <Link href="/checkout">
+                                    <Button
+                                        className="w-full text-white bg-primary hover:bg-primary/80"
+                                        size="lg"
+                                    >
+                                        Proceder al pago
+                                    </Button>
+                                </Link>
                             </div>
                         </>
                     )}
