@@ -3,8 +3,9 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
-import { cartApi } from '@/lib/api-client';
-import { CartContextType } from '@/types/cart';
+import { cartApi } from "@/lib/api-client";
+import { CartContextType } from "@/types/cart";
+import { useRegion } from "@/contexts/RegionContext";
 
 const CartContext = createContext<CartContextType | null>(null);
 
@@ -13,8 +14,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [cartId, setCartId] = useState<string | null>(null);
+    const { region } = useRegion();
 
     useEffect(() => {
+        if (!region) return;
+        
         const storedCartId = localStorage.getItem("cart_id");
         if (storedCartId) {
             setCartId(storedCartId);
@@ -22,15 +26,30 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
             initializeCart();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [region]);
 
     const { data: cart, mutate } = useSWR(
-        cartId ? [`/store/carts/${cartId}`, cartId] : null,
-        () => cartApi.get(cartId as string)
+        cartId && region ? [`/store/carts/${cartId}`, cartId] : null,
+        async () => {
+            // First get the cart and calculate taxes
+            await fetch(`${process.env.NEXT_PUBLIC_MEDUSA_API_URL}/store/carts/${cartId}/taxes`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-publishable-api-key': process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string,
+                },
+            });
+
+            // Then get the cart with updated tax lines
+            return cartApi.get(cartId as string);
+        }
     );
 
     const initializeCart = async () => {
-        const { cart: newCart } = await cartApi.create();
+        if (!region) return;
+
+        const { cart: newCart } = await cartApi.create({ region_id: region.id });
         localStorage.setItem("cart_id", newCart.id);
         setCartId(newCart.id);
         mutate({ cart: newCart }, false);

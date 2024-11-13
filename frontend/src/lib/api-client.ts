@@ -28,12 +28,23 @@ const fetcher = async <T>(
     return response.json();
 };
 
+type CreateCartParams = {
+    region_id?: string;
+    country_code?: string;
+    items?: Array<{
+        variant_id: string;
+        quantity: number;
+    }>;
+    context?: Record<string, unknown>;
+};
+
 // Cart Operations
 export const cartApi = {
-    create: () =>
+    create: (params?: CreateCartParams) =>
         fetcher<{ cart: StoreCart }>("/store/carts", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(params),
         }),
 
     get: (cartId: string) =>

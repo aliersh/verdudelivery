@@ -18,6 +18,8 @@ export interface StoreCart {
   id: string;
   items: LineItem[];
   subtotal: number;
+  tax_total: number;
+  total: number;
   region?: {
     id: string;
     name: string;
