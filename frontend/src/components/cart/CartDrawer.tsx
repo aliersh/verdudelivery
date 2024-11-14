@@ -46,7 +46,7 @@ const CartDrawer = () => {
                                         ${cart?.subtotal.toLocaleString()}
                                     </span>
                                 </div>
-                                <Link href="/checkout">
+                                <Link href="/checkout" onClick={closeCart}>
                                     <Button
                                         className="w-full text-white bg-primary hover:bg-primary/80"
                                         size="lg"
