@@ -1,6 +1,6 @@
-import HeroButtons from "@/components/home/HeroButton";
-import TypewriterText from "@/components/ui/typography/TypewriterText";
-import HeroDescription from "@/components/home/HeroDescription";
+import HeroButtons from "@/components/home/hero/HeroButton";
+import TypewriterText from "@/components/common/typography/TypewriterText";
+import HeroDescription from "@/components/home/hero/HeroDescription";
 import { FC } from "react"; 
 
 const HeroSection: FC = () => {

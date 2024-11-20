@@ -1,10 +1,10 @@
 "use client";
 
 import { useCart } from '@/contexts/CartContext';
-import CartItem from '@/components/cart/CartItem';
+import CartItem from '@/components/cart/CartItem/CartItem';
 import { LineItem } from '@/types/cart';
 import { Separator } from '@/components/ui/separator';
-import { Button } from '@/components/ui/buttons/button';
+import { Button } from '@/components/common/buttons/button';
 
 const Checkout = () => {
     const { cart } = useCart();

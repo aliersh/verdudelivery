@@ -1,5 +1,5 @@
 import { Minus, Plus } from 'lucide-react';
-import { Button } from '@/components/ui/buttons/button';
+import { Button } from '@/components/common/buttons/button';
 import { QuantityControlProps } from '@/types/product';
 const QuantityControl = ({
   quantity,

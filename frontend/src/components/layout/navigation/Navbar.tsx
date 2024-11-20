@@ -1,10 +1,10 @@
 "use client";
 
 import { FC } from "react";
-import LoginButton from "@/components/ui/buttons/LoginButton";
-import CartIconButton from "@/components/ui/buttons/CartIconButton";
-import Logo from "@/components/shared/Logo";
-import { Card } from "@/components/ui/cards/card";
+import LoginButton from "@/components/common/buttons/LoginButton";
+import CartIconButton from "@/components/common/buttons/CartIconButton";
+import Logo from "@/components/common/logo/Logo";
+import { Card } from "@/components/ui/card";
 import { useCart } from "@/contexts/CartContext";
 
 const Navbar: FC = () => {

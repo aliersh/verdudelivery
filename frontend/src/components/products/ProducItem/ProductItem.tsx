@@ -1,8 +1,8 @@
 import AddToCartButton from '@/components/cart/AddToCartButton';
-import ProductImage from '@/components/products/ProductImage';
-import ProductPrice from '@/components/products/ProductPrice';
-import ProductTitle from '@/components/products/ProductTitle';
-import QuantityControl from '@/components/products/QuantityControl';
+import ProductImage from '@/components/products/ProducItem/ProductImage';
+import ProductPrice from '@/components/products/ProducItem/ProductPrice';
+import ProductTitle from '@/components/products/ProducItem/ProductTitle';
+import QuantityControl from '@/components/products/ProducItem/QuantityControl';
 import { ProductItemProps } from '@/types/product';
 
 const ProductItem = ({

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Button } from '@/components/ui/buttons/button';
+import { Button } from '@/components/common/buttons/button';
 import { useCart } from '@/contexts/CartContext';
 import { AddToCartButtonProps } from '@/types/cart';
 import { useToast } from '@/hooks/use-toast';

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import Logo from '@/components/shared/Logo';
+import Logo from '@/components/common/logo/Logo';
 
 const ContactInfo: FC = () => (
     <address

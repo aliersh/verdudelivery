@@ -1,6 +1,6 @@
 import { Trash } from 'lucide-react';
 
-import { Button } from '@/components/ui/buttons/button';
+import { Button } from '@/components/common/buttons/button';
 import { useCart } from '@/contexts/CartContext';
 import { CartItemRemoveProps } from '@/types/cart';
 

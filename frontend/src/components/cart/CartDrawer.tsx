@@ -1,12 +1,12 @@
 "use client";
 
-import { Button } from '@/components/ui/buttons/button';
+import { Button } from '@/components/common/buttons/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { useCart } from '@/contexts/CartContext';
 import { LineItem } from '@/types/cart';
 import Link from 'next/link';
-import CartItem from './CartItem';
+import CartItem from './CartItem/CartItem';
 
 const CartDrawer = () => {
     const { cart, isOpen, closeCart } = useCart();
