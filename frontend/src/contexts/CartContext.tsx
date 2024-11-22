@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
-import { cartApi } from "@/lib/api-client";
+import { cartApi } from "@/lib/api/api-client";
 import { CartContextType } from "@/types/cart";
 import { useRegion } from "@/contexts/RegionContext";
 
