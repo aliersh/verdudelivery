@@ -69,13 +69,19 @@ export const cartApi = {
             }
         ),
 
-    updateItem: (cartId: string, itemId: string, quantity: number) =>
-        fetcher<{ cart: StoreCart }>(
+    updateItem: (cartId: string, itemId: string, quantity: number) => {
+        // Prevent negative or zero quantities at the API level
+        if (quantity <= 0) {
+            throw new Error('Quantity must be greater than 0');
+        }
+        
+        return fetcher<{ cart: StoreCart }>(
             `/store/carts/${cartId}/line-items/${itemId}`,
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ quantity }),
             }
-        ),
+        );
+    },
 };
