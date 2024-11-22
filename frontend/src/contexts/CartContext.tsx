@@ -63,13 +63,46 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
 
     const addItem = async (variantId: string, quantity = 1, unit?: string) => {
         if (!cartId) await initializeCart();
-        const { cart: updatedCart } = await cartApi.addItem(
-            cartId as string,
-            variantId,
-            quantity,
-            unit
+        
+        // Early return if still no cartId after initialization
+        if (!cartId) return;
+        
+        mutate(
+            async () => {
+                const { cart: updatedCart } = await cartApi.addItem(
+                    cartId,
+                    variantId,
+                    quantity,
+                    unit
+                );
+                return { cart: updatedCart };
+            },
+            {
+                optimisticData: {
+                    cart: {
+                        id: cart?.cart?.id || cartId, // Using OR operator since we know cartId is string here
+                        items: [
+                            ...(cart?.cart?.items ?? []),
+                            // Only add new item if it doesn't exist
+                            ...(cart?.cart?.items?.find(item => item.variant_id === variantId)
+                                ? []
+                                : [{
+                                    id: `temp_${variantId}`,
+                                    variant_id: variantId,
+                                    quantity: quantity,
+                                    metadata: { unit },
+                                    unit_price: 0, // Will be updated with real price after API call
+                                }])
+                        ],
+                        subtotal: cart?.cart?.subtotal ?? 0,
+                        tax_total: cart?.cart?.tax_total ?? 0,
+                        total: cart?.cart?.total ?? 0,
+                        region: cart?.cart?.region
+                    }
+                },
+                revalidate: true
+            }
         );
-        mutate({ cart: updatedCart }, false);
     };
 
     const removeItem = async (itemId: string) => {
