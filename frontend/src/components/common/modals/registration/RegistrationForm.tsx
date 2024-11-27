@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import axios from "axios";
 import { Mail, Lock, Check } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/common/buttons/button";
@@ -50,9 +51,57 @@ const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
 
     const isFormValid = isValidEmail && isValidPassword && isValidCity;
 
-    const handleFormSubmit = (data: FormValues) => {
-        console.log(data);
-        // Form submission logic here
+    const handleFormSubmit = async (data: FormValues) => {
+        try {
+            const registerResponse = await axios.post(
+                `${process.env.NEXT_PUBLIC_MEDUSA_API_URL}/auth/customer/emailpass/register`,
+                {
+                    email: data.email,
+                    password: data.password,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "x-publishable-api-key":
+                            process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY,
+                    },
+                    withCredentials: true,
+                },
+            );
+            
+            const { token } = registerResponse.data;
+
+            const customerResponse = await axios.post(
+                `${process.env.NEXT_PUBLIC_MEDUSA_API_URL}/store/customers`,
+                {
+                    email: data.email,
+                },
+                {
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                        "x-publishable-api-key":
+                            process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY,
+                    },
+                },
+            );
+
+            const customer = customerResponse.data;
+
+            console.log("Customer created", customer);
+        } catch (error) {
+            if (error instanceof Error) {
+                console.error(
+                    "Error registering customer",
+                    error.message,
+                );
+            } else {
+                console.error(
+                    "Error registering customer",
+                    error,
+                );
+            }
+        }
     };
 
     const handleCityChange = (value: string) => {
