@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Mail, Lock } from "lucide-react";
+import { useForm } from "react-hook-form";
 import { Button } from "@/components/common/buttons/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,25 +18,39 @@ interface RegistrationFormProps {
     onCloseModal: () => void;
 }
 
+type FormValues = {
+    city: string;
+    email: string;
+    password: string;
+};
+
 const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
+    const { 
+        register, 
+        handleSubmit,
+        formState: { errors } 
+    } = useForm<FormValues>({
+        mode: "onBlur"
+    });
+
+    const handleFormSubmit = (data: FormValues) => {
+        console.log(data);
         // Form submission logic here
     };
 
     return (
-        <form className="grid gap-4 py-4" onSubmit={handleSubmit}>
+        <form className="grid gap-4 py-4" onSubmit={handleSubmit(handleFormSubmit)}>
             <div className="grid gap-2">
                 <Label htmlFor="city">Ciudad</Label>
-                <Select>
+                <Select onValueChange={(value) => register("city").onChange({ target: { value } })}>
                     <SelectTrigger id="city">
                         <SelectValue placeholder="Selecciona una ciudad" />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="santiago">Viña del Mar</SelectItem>
+                        <SelectItem value="vina-del-mar">Viña del Mar</SelectItem>
                         <SelectItem value="valparaiso">Valparaíso</SelectItem>
-                        <SelectItem value="concepcion">Quilpué</SelectItem>
-                        <SelectItem value="la-serena">Otra</SelectItem>
+                        <SelectItem value="quilpue">Quilpué</SelectItem>
+                        <SelectItem value="otra">Otra</SelectItem>
                     </SelectContent>
                 </Select>
             </div>
@@ -47,10 +62,21 @@ const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
                         id="email"
                         type="email"
                         placeholder="email@address.com"
-                        className="pl-9"
+                        className={`pl-9 ${errors.email ? 'border-red-500' : ''}`}
                         aria-label="Correo electrónico"
-                        required
+                        {...register("email", {
+                            required: "El email es requerido",
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                message: "Email inválido"
+                            }
+                        })}
                     />
+                    {errors.email && (
+                        <p className="text-sm text-destructive mt-1" role="alert">
+                            {errors.email.message}
+                        </p>
+                    )}
                 </div>
             </div>
             <div className="grid gap-2">
@@ -60,11 +86,25 @@ const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
                     <Input
                         id="password"
                         type="password"
-                        className="pl-9"
+                        className={`pl-9 ${errors.password ? 'border-red-500' : ''}`}
                         aria-label="Contraseña"
-                        required
-                        minLength={6}
+                        {...register("password", {
+                            required: "La contraseña es requerida",
+                            minLength: {
+                                value: 6,
+                                message: "La contraseña debe tener al menos 6 caracteres"
+                            },
+                            pattern: {
+                                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
+                                message: "La contraseña debe contener letras y números"
+                            }
+                        })}
                     />
+                    {errors.password && (
+                        <p className="text-sm text-destructive mt-1" role="alert">
+                            {errors.password.message}
+                        </p>
+                    )}
                 </div>
             </div>
             <Button 
