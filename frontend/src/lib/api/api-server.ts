@@ -1,45 +1,50 @@
 import 'server-only';
 
+import axios, { AxiosError, AxiosInstance } from 'axios';
 import { cache } from 'react';
 
 import { FetchResult } from '@/types/api';
 import { CategoryResponse, ProductsResponse } from '@/types/category';
 
-// Common fetcher utility
-const fetcher = async <T>(
-    endpoint: string,
-    options: RequestInit = {}
-): Promise<T> => {
-    const baseUrl =
+// Create axios instance with default config
+const createApiServer = (): AxiosInstance => {
+    const baseURL =
         process.env.NEXT_PUBLIC_MEDUSA_API_URL || "http://localhost:9000";
-    const defaultHeaders = {
-        "x-publishable-api-key": process.env
-            .NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string,
-    };
 
-    const response = await fetch(`${baseUrl}${endpoint}`, {
-        ...options,
+    const instance = axios.create({
+        baseURL,
         headers: {
-            ...defaultHeaders,
-            ...options.headers,
+            "Content-Type": "application/json",
+            "x-publishable-api-key": process.env
+                .NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string,
         },
-        credentials: "include",
+        withCredentials: true,
     });
 
-    if (!response.ok) {
-        throw new Error(`API Error: ${response.statusText}`);
-    }
+    // Add response interceptor for error handling
+    instance.interceptors.response.use(
+        (response) => response.data,
+        (error: AxiosError) => {
+            if (error.response) {
+                throw new Error(`API Error: ${error.response.statusText}`);
+            }
+            throw error;
+        }
+    );
 
-    return response.json();
+    return instance;
 };
+
+const apiServer = createApiServer();
 
 // Product Operations
 export const productApi = {
     getCategoryProducts: cache(async (handle: string): Promise<FetchResult> => {
         try {
-            const { product_categories } = await fetcher<CategoryResponse>(
-                `/store/product-categories?handle=${handle}`
-            );
+            const { product_categories } = await apiServer.get<
+                never,
+                CategoryResponse
+            >(`/store/product-categories?handle=${handle}`);
 
             const category = product_categories[0];
             if (!category) {
@@ -51,7 +56,7 @@ export const productApi = {
                 fields: "thumbnail,title,subtitle,metadata.unit,*variants.calculated_price",
             });
 
-            const { products } = await fetcher<ProductsResponse>(
+            const { products } = await apiServer.get<never, ProductsResponse>(
                 `/store/products?${searchParams.toString()}`
             );
 

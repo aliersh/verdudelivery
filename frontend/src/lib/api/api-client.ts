@@ -1,87 +1,71 @@
-import { StoreCart } from "@/types/cart";
+import axios, { AxiosError, AxiosInstance } from 'axios';
 
-// Common fetcher utility
-const fetcher = async <T>(
-    endpoint: string,
-    options: RequestInit = {}
-): Promise<T> => {
-    const baseUrl =
+import { CreateCartParams } from '@/types/api';
+import { StoreCart } from '@/types/cart';
+
+// Create axios instance with default config
+const createApiClient = (): AxiosInstance => {
+    const baseURL =
         process.env.NEXT_PUBLIC_MEDUSA_API_URL || "http://localhost:9000";
-    const defaultHeaders = {
-        "x-publishable-api-key": process.env
-            .NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string,
-    };
 
-    const response = await fetch(`${baseUrl}${endpoint}`, {
-        ...options,
+    const instance = axios.create({
+        baseURL,
         headers: {
-            ...defaultHeaders,
-            ...options.headers,
+            "Content-Type": "application/json",
+            "x-publishable-api-key": process.env
+                .NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string,
         },
-        credentials: "include",
+        withCredentials: true,
     });
 
-    if (!response.ok) {
-        throw new Error(`API Error: ${response.statusText}`);
-    }
+    // Add response interceptor for error handling
+    instance.interceptors.response.use(
+        (response) => response.data,
+        (error: AxiosError) => {
+            if (error.response) {
+                throw new Error(`API Error: ${error.response.statusText}`);
+            }
+            throw error;
+        }
+    );
 
-    return response.json();
+    return instance;
 };
 
-type CreateCartParams = {
-    region_id?: string;
-    country_code?: string;
-    items?: Array<{
-        variant_id: string;
-        quantity: number;
-    }>;
-    context?: Record<string, unknown>;
-};
+const apiClient = createApiClient();
 
 // Cart Operations
 export const cartApi = {
     create: (params?: CreateCartParams) =>
-        fetcher<{ cart: StoreCart }>("/store/carts", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(params),
-        }),
+        apiClient.post<never, { cart: StoreCart }>("/store/carts", params),
 
     get: (cartId: string) =>
-        fetcher<{ cart: StoreCart }>(`/store/carts/${cartId}`),
+        apiClient.get<never, { cart: StoreCart }>(`/store/carts/${cartId}`),
 
     addItem: (cartId: string, variantId: string, quantity = 1, unit?: string) =>
-        fetcher<{ cart: StoreCart }>(`/store/carts/${cartId}/line-items`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
+        apiClient.post<never, { cart: StoreCart }>(
+            `/store/carts/${cartId}/line-items`,
+            {
                 variant_id: variantId,
                 quantity,
                 metadata: unit ? { unit } : {},
-            }),
-        }),
+            }
+        ),
 
     removeItem: (cartId: string, itemId: string) =>
-        fetcher<{ cart: StoreCart }>(
-            `/store/carts/${cartId}/line-items/${itemId}`,
-            {
-                method: "DELETE",
-            }
+        apiClient.delete<never, { cart: StoreCart }>(
+            `/store/carts/${cartId}/line-items/${itemId}`
         ),
 
     updateItem: (cartId: string, itemId: string, quantity: number) => {
         // Prevent negative or zero quantities at the API level
         if (quantity <= 0) {
-            throw new Error('Quantity must be greater than 0');
+            throw new Error("Quantity must be greater than 0");
         }
-        
-        return fetcher<{ cart: StoreCart }>(
+
+        return apiClient.post<never, { cart: StoreCart }>(
             `/store/carts/${cartId}/line-items/${itemId}`,
-            {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ quantity }),
-            }
+            { quantity }
         );
     },
 };

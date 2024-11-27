@@ -1,20 +1,16 @@
-import { HttpTypes } from '@medusajs/types';
+import { HttpTypes } from "@medusajs/types";
 
-// export interface ApiResponse<T> {
-//   data: T;
-//   count?: number;
-//   offset?: number;
-//   limit?: number;
-// }
-
-// export interface ErrorResponse {
-//   code: string;
-//   message: string;
-//   type: string;
-//   errors?: Record<string, string[]>;
-// }
+export type CreateCartParams = {
+    region_id?: string;
+    country_code?: string;
+    items?: Array<{
+        variant_id: string;
+        quantity: number;
+    }>;
+    context?: Record<string, unknown>;
+};
 
 export interface FetchResult {
-  products: HttpTypes.StoreProduct[];
-  categoryName: string;
-} 
+    products: HttpTypes.StoreProduct[];
+    categoryName: string;
+}
