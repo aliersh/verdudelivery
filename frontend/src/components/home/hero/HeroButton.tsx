@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Button } from '@/components/common/buttons/button';
-import RegistrationModal from '@/components/common/modals/RegistrationModal';
+import RegistrationModal from '@/components/common/modals/registration/RegistrationModal';
 import Link from "next/link";
 
 const HeroButtons: FC = () => {
