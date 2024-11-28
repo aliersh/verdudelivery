@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { IconBlockProps } from '@/types/ui';
+import { IconBlockProps } from '@/lib/types/ui';
 
 const IconBlock: FC<IconBlockProps> = ({ icon, title, description }) => {
     return (

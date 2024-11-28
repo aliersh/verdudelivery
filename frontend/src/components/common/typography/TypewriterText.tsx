@@ -3,7 +3,7 @@
 import { FC } from 'react';
 import Typewriter from 'typewriter-effect';
 
-import { TypewriterOptions } from '@/types/ui';
+import { TypewriterOptions } from '@/lib/types/ui';
 
 const TypewriterText: FC = () => {
     const options: TypewriterOptions = {

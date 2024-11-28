@@ -4,8 +4,8 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
 import { cartApi } from "@/lib/api/api-client";
-import { CartContextType } from "@/types/cart";
-import { useRegion } from "@/contexts/RegionContext";
+import { CartContextType } from "@/lib/types/cart";
+import { useRegion } from "@/lib/contexts/RegionContext";
 
 const CartContext = createContext<CartContextType | null>(null);
 

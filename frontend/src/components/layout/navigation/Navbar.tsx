@@ -5,7 +5,7 @@ import LoginButton from "@/components/common/buttons/LoginButton";
 import CartIconButton from "@/components/common/buttons/CartIconButton";
 import Logo from "@/components/common/logo/Logo";
 import { Card } from "@/components/ui/card";
-import { useCart } from "@/contexts/CartContext";
+import { useCart } from "@/lib/contexts/CartContext";
 
 const Navbar: FC = () => {
     const { openCart } = useCart();

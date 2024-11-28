@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ProductImageProps } from '@/types/product';
+import { ProductImageProps } from '@/lib/types/product';
 
 const ProductImage = ({ 
   src, 

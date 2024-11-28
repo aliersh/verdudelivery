@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { FC } from 'react';
 
-import { SocialLinksProps } from '@/types/ui';
+import { SocialLinksProps } from '@/lib/types/ui';
 
 const SocialLinks: FC<SocialLinksProps> = ({ href, icon: Icon, label }) => (
     <Link

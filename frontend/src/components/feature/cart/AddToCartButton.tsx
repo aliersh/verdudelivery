@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 import { Button } from '@/components/common/buttons/button';
-import { useCart } from '@/contexts/CartContext';
-import { AddToCartButtonProps } from '@/types/cart';
-import { useToast } from '@/hooks/use-toast';
+import { useCart } from '@/lib/contexts/CartContext';
+import { AddToCartButtonProps } from '@/lib/types/cart';
+import { useToast } from '@/lib/hooks/use-toast';
 
 const AddToCartButton = ({
     variantId,

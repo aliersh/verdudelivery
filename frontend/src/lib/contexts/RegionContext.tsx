@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import { HttpTypes } from "@medusajs/types";
-import { RegionContextType, RegionProviderProps } from "@/types/region";
+import { RegionContextType, RegionProviderProps } from "@/lib/types/region";
 
 const RegionContext = createContext<RegionContextType | null>(null);
 

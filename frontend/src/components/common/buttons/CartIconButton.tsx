@@ -2,8 +2,8 @@ import { ShoppingCart } from 'lucide-react';
 import { FC } from 'react';
 
 import { Button } from '@/components/common/buttons/button';
-import { useCart } from '@/contexts/CartContext';
-import { CartIconButtonProps } from '@/types/ui';
+import { useCart } from '@/lib/contexts/CartContext';
+import { CartIconButtonProps } from '@/lib/types/ui';
 
 const CartIconButton: FC<CartIconButtonProps> = ({ onClick }) => {
     const { cart } = useCart();

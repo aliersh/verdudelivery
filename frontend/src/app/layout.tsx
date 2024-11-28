@@ -8,8 +8,8 @@ import CartDrawer from "@/components/feature/cart/CartDrawer";
 import Footer from "@/components/layout/footer/Footer";
 import Navbar from "@/components/layout/navigation/Navbar";
 import { Toaster } from "@/components/ui/toaster";
-import { CartProvider } from "@/contexts/CartContext";
-import { RegionProvider } from "@/contexts/RegionContext";
+import { CartProvider } from "@/lib/contexts/CartContext";
+import { RegionProvider } from "@/lib/contexts/RegionContext";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (

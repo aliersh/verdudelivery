@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance } from 'axios';
 
-import { CreateCartParams } from '@/types/api';
-import { StoreCart } from '@/types/cart';
+import { CreateCartParams } from '@/lib/types/api';
+import { StoreCart } from '@/lib/types/cart';
 
 // Create axios instance with default config
 const createApiClient = (): AxiosInstance => {

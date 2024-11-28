@@ -1,4 +1,4 @@
-import { ProductPriceProps } from '@/types/product';
+import { ProductPriceProps } from '@/lib/types/product';
 
 const ProductPrice = ({ unitPrice, quantity, unit, formatPrice }: ProductPriceProps) => {
   return (

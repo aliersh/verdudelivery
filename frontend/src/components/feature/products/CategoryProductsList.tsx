@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { CategoryProps } from '@/types/category';
+import { CategoryProps } from '@/lib/types/category';
 
 import ProductItem from '@/components/feature/products/ProducItem/ProductItem';
 

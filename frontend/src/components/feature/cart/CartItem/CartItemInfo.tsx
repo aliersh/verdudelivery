@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { CartItemInfoProps } from '@/types/cart';
+import { CartItemInfoProps } from '@/lib/types/cart';
 
 const CartItemInfo = ({ item }: CartItemInfoProps) => {
     return (

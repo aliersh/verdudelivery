@@ -3,8 +3,8 @@
 import { Button } from '@/components/common/buttons/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { useCart } from '@/contexts/CartContext';
-import { LineItem } from '@/types/cart';
+import { useCart } from '@/lib/contexts/CartContext';
+import { LineItem } from '@/lib/types/cart';
 import Link from 'next/link';
 import CartItem from './CartItem/CartItem';
 

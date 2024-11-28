@@ -3,7 +3,7 @@ import ProductImage from '@/components/feature/products/ProducItem/ProductImage'
 import ProductPrice from '@/components/feature/products/ProducItem/ProductPrice';
 import ProductTitle from '@/components/feature/products/ProducItem/ProductTitle';
 import QuantityControl from '@/components/feature/products/ProducItem/QuantityControl';
-import { ProductItemProps } from '@/types/product';
+import { ProductItemProps } from '@/lib/types/product';
 
 const ProductItem = ({
     product,

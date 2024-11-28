@@ -3,8 +3,8 @@ import 'server-only';
 import axios, { AxiosError, AxiosInstance } from 'axios';
 import { cache } from 'react';
 
-import { FetchResult } from '@/types/api';
-import { CategoryResponse, ProductsResponse } from '@/types/category';
+import { FetchResult } from '@/lib/types/api';
+import { CategoryResponse, ProductsResponse } from '@/lib/types/category';
 
 // Create axios instance with default config
 const createApiServer = (): AxiosInstance => {

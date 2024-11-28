@@ -1,8 +1,8 @@
 import { Trash } from 'lucide-react';
 
 import { Button } from '@/components/common/buttons/button';
-import { useCart } from '@/contexts/CartContext';
-import { CartItemRemoveProps } from '@/types/cart';
+import { useCart } from '@/lib/contexts/CartContext';
+import { CartItemRemoveProps } from '@/lib/types/cart';
 
 const CartItemRemove = ({ itemId }: CartItemRemoveProps) => {
     const { removeItem } = useCart();

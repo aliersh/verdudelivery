@@ -1,4 +1,4 @@
-import { ProductTitleProps } from '@/types/product';
+import { ProductTitleProps } from '@/lib/types/product';
 
 const ProductTitle = ({ title, subtitle }: ProductTitleProps) => {
   return (

@@ -1,5 +1,5 @@
 import { Separator } from '@/components/ui/separator';
-import { CartItemProps } from '@/types/cart';
+import { CartItemProps } from '@/lib/types/cart';
 
 import CartItemInfo from './CartItemInfo';
 import CartItemPrice from './CartItemPrice';
