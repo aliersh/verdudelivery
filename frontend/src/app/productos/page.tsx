@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import fetchCategoryProducts from "@/hooks/useCategoryProducts";
-import CategoryProductsList from "@/components/products/CategoryProductsList";
+import CategoryProductsList from "@/components/feature/products/CategoryProductsList";
 import ProductosLoading from "./loading";
 import { ProductosProps } from "@/types/product";
 

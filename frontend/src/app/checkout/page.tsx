@@ -1,4 +1,4 @@
-import Checkout from '@/components/checkout/Checkout';
+import Checkout from '@/components/feature/checkout/Checkout';
 
 const CheckoutPage = () => {
     return <Checkout />

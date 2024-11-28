@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { CategoryProps } from '@/types/category';
 
-import ProductItem from '@/components/products/ProducItem/ProductItem';
+import ProductItem from '@/components/feature/products/ProducItem/ProductItem';
 
 const CategoryProductsList = ({ initialData }: CategoryProps) => {
     const { products, categoryName } = initialData;

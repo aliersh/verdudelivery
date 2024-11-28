@@ -9,7 +9,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import RegistrationForm from "./RegistrationForm";
+import RegistrationForm from "@/components/feature/auth/RegistrationForm";
 
 const RegistrationModal = () => {
     const [open, setOpen] = useState(false);

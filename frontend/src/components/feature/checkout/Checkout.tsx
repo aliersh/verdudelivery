@@ -1,7 +1,7 @@
 "use client";
 
 import { useCart } from '@/contexts/CartContext';
-import CartItem from '@/components/cart/CartItem/CartItem';
+import CartItem from '@/components/feature/cart/CartItem/CartItem';
 import { LineItem } from '@/types/cart';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/common/buttons/button';

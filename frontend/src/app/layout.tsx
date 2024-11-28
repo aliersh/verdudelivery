@@ -4,7 +4,7 @@ import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import { ReactNode } from "react";
 
-import CartDrawer from "@/components/cart/CartDrawer";
+import CartDrawer from "@/components/feature/cart/CartDrawer";
 import Footer from "@/components/layout/footer/Footer";
 import Navbar from "@/components/layout/navigation/Navbar";
 import { Toaster } from "@/components/ui/toaster";

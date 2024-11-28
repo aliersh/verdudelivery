@@ -1,8 +1,8 @@
-import AddToCartButton from '@/components/cart/AddToCartButton';
-import ProductImage from '@/components/products/ProducItem/ProductImage';
-import ProductPrice from '@/components/products/ProducItem/ProductPrice';
-import ProductTitle from '@/components/products/ProducItem/ProductTitle';
-import QuantityControl from '@/components/products/ProducItem/QuantityControl';
+import AddToCartButton from '@/components/feature/cart/AddToCartButton';
+import ProductImage from '@/components/feature/products/ProducItem/ProductImage';
+import ProductPrice from '@/components/feature/products/ProducItem/ProductPrice';
+import ProductTitle from '@/components/feature/products/ProducItem/ProductTitle';
+import QuantityControl from '@/components/feature/products/ProducItem/QuantityControl';
 import { ProductItemProps } from '@/types/product';
 
 const ProductItem = ({

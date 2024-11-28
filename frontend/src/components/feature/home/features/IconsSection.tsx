@@ -1,7 +1,7 @@
 import { CalendarClock, MapPinCheck, UserRoundCheck } from 'lucide-react';
 import { FC } from 'react';
 
-import IconBlock from '@/components/home/features/IconBlock';
+import IconBlock from '@/components/feature/home/features/IconBlock';
 
 const ICONS_DATA = [
     {
