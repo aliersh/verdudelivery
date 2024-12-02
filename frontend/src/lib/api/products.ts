@@ -2,7 +2,7 @@ import { cache } from 'react';
 
 import { CategoryResponse, ProductsResponse } from '@/lib/types/category';
 
-import { createApiInstance } from '../config/api';
+import { createApiInstance } from '../config/api-config';
 
 const apiInstance = createApiInstance();
 

@@ -1,6 +1,6 @@
 import { HttpTypes } from '@medusajs/types';
 
-import { createApiInstance } from '../config/api';
+import { createApiInstance } from '../config/api-config';
 
 const apiInstance = createApiInstance();
 

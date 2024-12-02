@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 
 import authApi from '@/lib/api/auth';
 import { useToast } from '@/lib/hooks/use-toast';
-import { validateCity, validateEmail, validatePassword } from '@/lib/services/validation';
+import { validateCity } from '@/lib/services/validation';
 import { FormValues } from '@/lib/types/auth';
 
 export const useRegistrationForm = (onCloseModal: () => void) => {
@@ -19,13 +19,8 @@ export const useRegistrationForm = (onCloseModal: () => void) => {
         mode: "onBlur",
     });
 
-    const watchEmail = watch("email");
-    const watchPassword = watch("password");
-
-    const isValidEmail =
-        watchEmail && !errors.email && validateEmail(watchEmail);
-    const isValidPassword =
-        watchPassword && !errors.password && validatePassword(watchPassword);
+    const isValidEmail = watch("email") ? errors.email === undefined : undefined;
+    const isValidPassword = watch("password") ? errors.password === undefined : undefined;
     const isValidCity = validateCity(selectedCity);
     const isFormValid = isValidEmail && isValidPassword && isValidCity;
     const isOtherCity = selectedCity === "otra";

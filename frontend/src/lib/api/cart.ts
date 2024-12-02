@@ -1,7 +1,7 @@
 import { CreateCartParams } from '@/lib/types/api';
 import { StoreCart } from '@/lib/types/cart';
 
-import { createApiInstance } from '../config/api';
+import { createApiInstance } from '../config/api-config';
 
 const apiInstance = createApiInstance();
 

@@ -1,4 +1,4 @@
-import { createApiInstance } from '../config/api';
+import { createApiInstance } from '../config/api-config';
 import { CustomerResponse, RegisterData, RegisterResponse } from '../types/auth';
 
 const apiInstance = createApiInstance();
