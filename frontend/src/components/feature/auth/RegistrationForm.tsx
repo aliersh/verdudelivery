@@ -1,8 +1,6 @@
 "use client";
 
 import { Check, Lock, Mail } from 'lucide-react';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
 
 import { Button } from '@/components/common/buttons/button';
 import { Input } from '@/components/ui/input';
@@ -10,74 +8,22 @@ import { Label } from '@/components/ui/label';
 import {
     Select, SelectContent, SelectItem, SelectTrigger, SelectValue
 } from '@/components/ui/select';
-import authApi from '@/lib/api/auth';
-import { useToast } from '@/lib/hooks/use-toast';
-import { FormValues, RegistrationFormProps } from '@/lib/types/auth';
+import { useRegistrationForm } from '@/lib/hooks/useRegistrationForm';
+import { getEmailValidationRules, getPasswordValidationRules } from '@/lib/services/validation';
+import { RegistrationFormProps } from '@/lib/types/auth';
 
 const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
-    const [selectedCity, setSelectedCity] = useState<string>("");
     const {
         register,
         handleSubmit,
-        watch,
-        formState: { errors },
-    } = useForm<FormValues>({
-        mode: "onBlur",
-    });
-    const { toast } = useToast();
-
-    const watchEmail = watch("email");
-    const watchPassword = watch("password");
-
-    const isValidEmail =
-        watchEmail &&
-        !errors.email &&
-        /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(watchEmail);
-    const isValidPassword =
-        watchPassword &&
-        !errors.password &&
-        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(watchPassword);
-    const isValidCity = selectedCity && selectedCity !== "otra";
-
-    const isFormValid = isValidEmail && isValidPassword && isValidCity;
-
-    const handleFormSubmit = async (data: FormValues) => {
-        try {
-            await authApi.register({
-                email: data.email,
-                password: data.password,
-            });
-
-            toast({
-                variant: "default",
-                title: "Registro exitoso",
-                description: "Tu cuenta ha sido creada correctamente",
-            });
-
-            onCloseModal();
-        } catch (error) {
-            toast({
-                variant: "destructive",
-                title: "Error al registrar",
-                description:
-                    error instanceof Error
-                        ? error.message
-                        : "Ocurrió un error durante el registro",
-            });
-
-            console.error(
-                "Error registering customer:",
-                error instanceof Error ? error.message : error
-            );
-        }
-    };
-
-    const handleCityChange = (value: string) => {
-        setSelectedCity(value);
-        register("city").onChange({ target: { value } });
-    };
-
-    const isOtherCity = selectedCity === "otra";
+        handleFormSubmit,
+        handleCityChange,
+        errors,
+        isValidEmail,
+        isValidPassword,
+        isFormValid,
+        isOtherCity,
+    } = useRegistrationForm(onCloseModal);
 
     return (
         <form
@@ -121,13 +67,7 @@ const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
                         } placeholder:text-muted-foreground/50`}
                         aria-label="Correo electrónico"
                         disabled={isOtherCity}
-                        {...register("email", {
-                            required: "El email es requerido",
-                            pattern: {
-                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                message: "Email inválido",
-                            },
-                        })}
+                        {...register("email", getEmailValidationRules())}
                     />
                     {isValidEmail && (
                         <Check className="absolute w-4 h-4 text-green-500 right-3 top-3" />
@@ -154,19 +94,7 @@ const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
                         }`}
                         aria-label="Contraseña"
                         disabled={isOtherCity}
-                        {...register("password", {
-                            required: "La contraseña es requerida",
-                            minLength: {
-                                value: 6,
-                                message:
-                                    "La contraseña debe tener al menos 6 caracteres",
-                            },
-                            pattern: {
-                                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
-                                message:
-                                    "La contraseña debe contener letras y números",
-                            },
-                        })}
+                        {...register("password", getPasswordValidationRules())}
                     />
                     {isValidPassword && (
                         <Check className="absolute w-4 h-4 text-green-500 right-3 top-3" />
