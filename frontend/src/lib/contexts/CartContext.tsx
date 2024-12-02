@@ -3,9 +3,9 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
-import { cartApi } from "@/lib/api/api-client";
-import { CartContextType } from "@/lib/types/cart";
-import { useRegion } from "@/lib/contexts/RegionContext";
+import cartApi from '@/lib/api/cart';
+import { useRegion } from '@/lib/contexts/RegionContext';
+import { CartContextType } from '@/lib/types/cart';
 
 const CartContext = createContext<CartContextType | null>(null);
 
@@ -18,7 +18,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
 
     useEffect(() => {
         if (!region) return;
-        
+
         const storedCartId = localStorage.getItem("cart_id");
         if (storedCartId) {
             setCartId(storedCartId);
@@ -31,17 +31,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
     const { data: cart, mutate } = useSWR(
         cartId && region ? [`/store/carts/${cartId}`, cartId] : null,
         async () => {
-            // First get the cart and calculate taxes
-            await fetch(`${process.env.NEXT_PUBLIC_MEDUSA_API_URL}/store/carts/${cartId}/taxes`, {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-publishable-api-key': process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string,
-                },
-            });
-
-            // Then get the cart with updated tax lines
+            await cartApi.calculateTaxes(cartId as string);
             return cartApi.get(cartId as string);
         }
     );
@@ -49,7 +39,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
     const initializeCart = async () => {
         if (!region) return;
 
-        const { cart: newCart } = await cartApi.create({ region_id: region.id });
+        const { cart: newCart } = await cartApi.create({
+            region_id: region.id,
+        });
         localStorage.setItem("cart_id", newCart.id);
         setCartId(newCart.id);
         mutate({ cart: newCart }, false);
@@ -63,10 +55,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
 
     const addItem = async (variantId: string, quantity = 1, unit?: string) => {
         if (!cartId) await initializeCart();
-        
+
         // Early return if still no cartId after initialization
         if (!cartId) return;
-        
+
         mutate(
             async () => {
                 const { cart: updatedCart } = await cartApi.addItem(
@@ -84,30 +76,34 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
                         items: [
                             ...(cart?.cart?.items ?? []),
                             // Only add new item if it doesn't exist
-                            ...(cart?.cart?.items?.find(item => item.variant_id === variantId)
+                            ...(cart?.cart?.items?.find(
+                                (item) => item.variant_id === variantId
+                            )
                                 ? []
-                                : [{
-                                    id: `temp_${variantId}`,
-                                    variant_id: variantId,
-                                    quantity: quantity,
-                                    metadata: { unit },
-                                    unit_price: 0, // Will be updated with real price after API call
-                                }])
+                                : [
+                                      {
+                                          id: `temp_${variantId}`,
+                                          variant_id: variantId,
+                                          quantity: quantity,
+                                          metadata: { unit },
+                                          unit_price: 0, // Will be updated with real price after API call
+                                      },
+                                  ]),
                         ],
                         subtotal: cart?.cart?.subtotal ?? 0,
                         tax_total: cart?.cart?.tax_total ?? 0,
                         total: cart?.cart?.total ?? 0,
-                        region: cart?.cart?.region
-                    }
+                        region: cart?.cart?.region,
+                    },
                 },
-                revalidate: true
+                revalidate: true,
             }
         );
     };
 
     const removeItem = async (itemId: string) => {
         if (!cartId) return;
-        
+
         // Keep showing previous state while removing
         mutate(
             async (currentData) => {
@@ -116,7 +112,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
             },
             {
                 revalidate: true,
-                optimisticData: cart
+                optimisticData: cart,
             }
         );
     };
