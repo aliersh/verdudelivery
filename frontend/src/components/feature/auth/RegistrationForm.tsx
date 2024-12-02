@@ -1,16 +1,18 @@
 "use client";
 
-import { Check, Lock, Mail } from 'lucide-react';
+import { Lock, Mail } from "lucide-react";
+import { Button } from "@/components/common/buttons/button";
+import { useRegistrationForm } from "@/lib/hooks/useRegistrationForm";
+import { RegistrationFormProps } from "@/lib/types/auth";
+import FormField from "./FormField";
+import SelectField from "./SelectField";
 
-import { Button } from '@/components/common/buttons/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import {
-    Select, SelectContent, SelectItem, SelectTrigger, SelectValue
-} from '@/components/ui/select';
-import { useRegistrationForm } from '@/lib/hooks/useRegistrationForm';
-import { getEmailValidationRules, getPasswordValidationRules } from '@/lib/services/validation';
-import { RegistrationFormProps } from '@/lib/types/auth';
+const CITY_OPTIONS = [
+    { value: "vina-del-mar", label: "Viña del Mar" },
+    { value: "valparaiso", label: "Valparaíso" },
+    { value: "quilpue", label: "Quilpué" },
+    { value: "otra", label: "Otra" },
+];
 
 const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
     const {
@@ -30,85 +32,42 @@ const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
             className="grid gap-4 py-4"
             onSubmit={handleSubmit(handleFormSubmit)}
         >
-            <div className="grid gap-2">
-                <Label htmlFor="city">Ciudad</Label>
-                <Select onValueChange={handleCityChange}>
-                    <SelectTrigger id="city">
-                        <SelectValue
-                            placeholder="Selecciona una ciudad"
-                            className="text-muted-foreground/50"
-                        />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="vina-del-mar">
-                            Viña del Mar
-                        </SelectItem>
-                        <SelectItem value="valparaiso">Valparaíso</SelectItem>
-                        <SelectItem value="quilpue">Quilpué</SelectItem>
-                        <SelectItem value="otra">Otra</SelectItem>
-                    </SelectContent>
-                </Select>
-                {isOtherCity && (
-                    <p className="mt-1 text-sm text-destructive">
-                        Por el momento, no estamos disponibles en otras ciudades
-                    </p>
-                )}
-            </div>
-            <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-                <div className="relative">
-                    <Mail className="absolute w-4 h-4 left-3 top-3 text-muted-foreground" />
-                    <Input
-                        id="email"
-                        type="email"
-                        placeholder="oscar@acevedo.com"
-                        className={`pl-9 pr-9 ${
-                            errors.email ? "border-red-500" : ""
-                        } placeholder:text-muted-foreground/50`}
-                        aria-label="Correo electrónico"
-                        disabled={isOtherCity}
-                        {...register("email", getEmailValidationRules())}
-                    />
-                    {isValidEmail && (
-                        <Check className="absolute w-4 h-4 text-green-500 right-3 top-3" />
-                    )}
-                    {errors.email && (
-                        <p
-                            className="mt-1 text-sm text-destructive"
-                            role="alert"
-                        >
-                            {errors.email.message}
-                        </p>
-                    )}
-                </div>
-            </div>
-            <div className="grid gap-2">
-                <Label htmlFor="password">Password</Label>
-                <div className="relative">
-                    <Lock className="absolute w-4 h-4 left-3 top-3 text-muted-foreground" />
-                    <Input
-                        id="password"
-                        type="password"
-                        className={`pl-9 pr-9 ${
-                            errors.password ? "border-red-500" : ""
-                        }`}
-                        aria-label="Contraseña"
-                        disabled={isOtherCity}
-                        {...register("password", getPasswordValidationRules())}
-                    />
-                    {isValidPassword && (
-                        <Check className="absolute w-4 h-4 text-green-500 right-3 top-3" />
-                    )}
-                    {errors.password && (
-                        <p
-                            className="mt-1 text-sm text-destructive"
-                            role="alert"
-                        >
-                            {errors.password.message}
-                        </p>
-                    )}
-                </div>
-            </div>
+            <SelectField
+                id="city"
+                label="Ciudad"
+                options={CITY_OPTIONS}
+                placeholder="Selecciona una ciudad"
+                onChange={handleCityChange}
+                error={
+                    isOtherCity
+                        ? "Por el momento, no estamos disponibles en otras ciudades"
+                        : undefined
+                }
+            />
+
+            <FormField
+                id="email"
+                type="email"
+                label="Email"
+                placeholder="oscar@acevedo.com"
+                icon={Mail}
+                isValid={isValidEmail}
+                error={errors.email}
+                disabled={isOtherCity}
+                register={register}
+            />
+
+            <FormField
+                id="password"
+                type="password"
+                label="Password"
+                icon={Lock}
+                isValid={isValidPassword}
+                error={errors.password}
+                disabled={isOtherCity}
+                register={register}
+            />
+
             <Button
                 type="submit"
                 className="w-full"
@@ -117,6 +76,7 @@ const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
             >
                 Registrate
             </Button>
+
             <div className="text-sm text-center">
                 Tienes una cuenta?{" "}
                 <Button
