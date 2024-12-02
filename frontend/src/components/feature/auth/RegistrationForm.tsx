@@ -1,29 +1,18 @@
 "use client";
 
-import { useState } from "react";
-import axios from "axios";
-import { Mail, Lock, Check } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { Button } from "@/components/common/buttons/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Check, Lock, Mail } from 'lucide-react';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+import { Button } from '@/components/common/buttons/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
-
-interface RegistrationFormProps {
-    onCloseModal: () => void;
-}
-
-type FormValues = {
-    city: string;
-    email: string;
-    password: string;
-};
+    Select, SelectContent, SelectItem, SelectTrigger, SelectValue
+} from '@/components/ui/select';
+import authApi from '@/lib/api/auth';
+import { useToast } from '@/lib/hooks/use-toast';
+import { FormValues, RegistrationFormProps } from '@/lib/types/auth';
 
 const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
     const [selectedCity, setSelectedCity] = useState<string>("");
@@ -35,6 +24,7 @@ const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
     } = useForm<FormValues>({
         mode: "onBlur",
     });
+    const { toast } = useToast();
 
     const watchEmail = watch("email");
     const watchPassword = watch("password");
@@ -53,54 +43,32 @@ const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
 
     const handleFormSubmit = async (data: FormValues) => {
         try {
-            const registerResponse = await axios.post(
-                `${process.env.NEXT_PUBLIC_MEDUSA_API_URL}/auth/customer/emailpass/register`,
-                {
-                    email: data.email,
-                    password: data.password,
-                },
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        "x-publishable-api-key":
-                            process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY,
-                    },
-                    withCredentials: true,
-                },
-            );
-            
-            const { token } = registerResponse.data;
+            await authApi.register({
+                email: data.email,
+                password: data.password,
+            });
 
-            const customerResponse = await axios.post(
-                `${process.env.NEXT_PUBLIC_MEDUSA_API_URL}/store/customers`,
-                {
-                    email: data.email,
-                },
-                {
-                    headers: {
-                        "Authorization": `Bearer ${token}`,
-                        "Content-Type": "application/json",
-                        "x-publishable-api-key":
-                            process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY,
-                    },
-                },
-            );
+            toast({
+                variant: "default",
+                title: "Registro exitoso",
+                description: "Tu cuenta ha sido creada correctamente",
+            });
 
-            const customer = customerResponse.data;
-
-            console.log("Customer created", customer);
+            onCloseModal();
         } catch (error) {
-            if (error instanceof Error) {
-                console.error(
-                    "Error registering customer",
-                    error.message,
-                );
-            } else {
-                console.error(
-                    "Error registering customer",
-                    error,
-                );
-            }
+            toast({
+                variant: "destructive",
+                title: "Error al registrar",
+                description:
+                    error instanceof Error
+                        ? error.message
+                        : "Ocurrió un error durante el registro",
+            });
+
+            console.error(
+                "Error registering customer:",
+                error instanceof Error ? error.message : error
+            );
         }
     };
 
@@ -135,7 +103,7 @@ const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
                     </SelectContent>
                 </Select>
                 {isOtherCity && (
-                    <p className="text-sm text-destructive mt-1">
+                    <p className="mt-1 text-sm text-destructive">
                         Por el momento, no estamos disponibles en otras ciudades
                     </p>
                 )}
@@ -143,7 +111,7 @@ const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
             <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <div className="relative">
-                    <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <Mail className="absolute w-4 h-4 left-3 top-3 text-muted-foreground" />
                     <Input
                         id="email"
                         type="email"
@@ -162,11 +130,11 @@ const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
                         })}
                     />
                     {isValidEmail && (
-                        <Check className="absolute right-3 top-3 h-4 w-4 text-green-500" />
+                        <Check className="absolute w-4 h-4 text-green-500 right-3 top-3" />
                     )}
                     {errors.email && (
                         <p
-                            className="text-sm text-destructive mt-1"
+                            className="mt-1 text-sm text-destructive"
                             role="alert"
                         >
                             {errors.email.message}
@@ -177,7 +145,7 @@ const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
             <div className="grid gap-2">
                 <Label htmlFor="password">Password</Label>
                 <div className="relative">
-                    <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <Lock className="absolute w-4 h-4 left-3 top-3 text-muted-foreground" />
                     <Input
                         id="password"
                         type="password"
@@ -201,11 +169,11 @@ const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
                         })}
                     />
                     {isValidPassword && (
-                        <Check className="absolute right-3 top-3 h-4 w-4 text-green-500" />
+                        <Check className="absolute w-4 h-4 text-green-500 right-3 top-3" />
                     )}
                     {errors.password && (
                         <p
-                            className="text-sm text-destructive mt-1"
+                            className="mt-1 text-sm text-destructive"
                             role="alert"
                         >
                             {errors.password.message}
@@ -221,11 +189,11 @@ const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
             >
                 Registrate
             </Button>
-            <div className="text-center text-sm">
+            <div className="text-sm text-center">
                 Tienes una cuenta?{" "}
                 <Button
                     variant="link"
-                    className="p-0 h-auto font-normal"
+                    className="h-auto p-0 font-normal"
                     onClick={onCloseModal}
                     aria-label="Ir a inicio de sesión"
                 >
