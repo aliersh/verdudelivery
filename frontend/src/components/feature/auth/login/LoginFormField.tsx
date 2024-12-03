@@ -1,9 +1,25 @@
 import { Check } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { FieldProps } from "@/lib/types/form";
+import { LoginFormValues } from "@/lib/types/auth";
+import { UseFormRegister } from "react-hook-form";
+import { LucideIcon } from "lucide-react";
 
-const FormField = ({
+interface LoginFieldProps {
+    id: keyof LoginFormValues;
+    label: string;
+    error?: {
+        message?: string;
+    };
+    icon?: LucideIcon;
+    isValid?: boolean;
+    disabled?: boolean;
+    register: UseFormRegister<LoginFormValues>;
+    validation?: Record<string, unknown>;
+    [key: string]: unknown;
+}
+
+const LoginFormField = ({
     id,
     label,
     error,
@@ -12,7 +28,7 @@ const FormField = ({
     disabled,
     register,
     ...props
-}: FieldProps) => {
+}: LoginFieldProps) => {
     return (
         <div className="grid gap-2">
             <Label htmlFor={id}>{label}</Label>
@@ -43,4 +59,4 @@ const FormField = ({
     );
 };
 
-export default FormField;
+export default LoginFormField; 

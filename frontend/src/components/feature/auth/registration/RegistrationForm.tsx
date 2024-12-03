@@ -1,12 +1,14 @@
 "use client";
 
-import { Lock, Mail } from "lucide-react";
-import { Button } from "@/components/common/buttons/button";
-import { useRegistrationForm } from "@/lib/hooks/useRegistrationForm";
-import { RegistrationFormProps } from "@/lib/types/auth";
-import RegistrationFormField from "./RegistrationFormField";
-import SelectField from "./SelectField";
-import { registrationValidation } from "@/lib/validations/registration";
+import { Lock, Mail } from 'lucide-react';
+
+import { Button } from '@/components/common/buttons/button';
+import { useRegistrationForm } from '@/lib/hooks/useRegistrationForm';
+import { RegistrationFormProps } from '@/lib/types/auth';
+import { registrationValidation } from '@/lib/validations/registration';
+
+import RegistrationFormField from './RegistrationFormField';
+import SelectField from './SelectField';
 
 const CITY_OPTIONS = [
     { value: "vina-del-mar", label: "Viña del Mar" },
@@ -24,7 +26,7 @@ const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
         errors,
         isFormValid,
         isOtherCity,
-    } = useRegistrationForm(() => {});
+    } = useRegistrationForm(onCloseModal);
 
     return (
         <form
