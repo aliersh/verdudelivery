@@ -4,8 +4,9 @@ import { Lock, Mail } from "lucide-react";
 import { Button } from "@/components/common/buttons/button";
 import { useRegistrationForm } from "@/lib/hooks/useRegistrationForm";
 import { RegistrationFormProps } from "@/lib/types/auth";
-import FormField from "./FormField";
+import RegistrationFormField from "./RegistrationFormField";
 import SelectField from "./SelectField";
+import { registrationValidation } from "@/lib/validations/registration";
 
 const CITY_OPTIONS = [
     { value: "vina-del-mar", label: "Viña del Mar" },
@@ -21,11 +22,9 @@ const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
         handleFormSubmit,
         handleCityChange,
         errors,
-        isValidEmail,
-        isValidPassword,
         isFormValid,
         isOtherCity,
-    } = useRegistrationForm(onCloseModal);
+    } = useRegistrationForm(() => {});
 
     return (
         <form
@@ -41,31 +40,31 @@ const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
                 error={
                     isOtherCity
                         ? "Por el momento, no estamos disponibles en otras ciudades"
-                        : undefined
+                        : errors.city?.message
                 }
             />
 
-            <FormField
+            <RegistrationFormField
                 id="email"
                 type="email"
                 label="Email"
                 placeholder="oscar@acevedo.com"
                 icon={Mail}
-                isValid={isValidEmail}
                 error={errors.email}
                 disabled={isOtherCity}
                 register={register}
+                validation={registrationValidation.email}
             />
 
-            <FormField
+            <RegistrationFormField
                 id="password"
                 type="password"
                 label="Password"
                 icon={Lock}
-                isValid={isValidPassword}
                 error={errors.password}
                 disabled={isOtherCity}
                 register={register}
+                validation={registrationValidation.password}
             />
 
             <Button
@@ -78,7 +77,7 @@ const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
             </Button>
 
             <div className="text-sm text-center">
-                Tienes una cuenta?{" "}
+                ¿Ya tienes una cuenta?{" "}
                 <Button
                     variant="link"
                     className="h-auto p-0 font-normal"

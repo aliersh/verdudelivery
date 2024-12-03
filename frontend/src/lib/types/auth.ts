@@ -23,4 +23,5 @@ export interface CustomerResponse {
 export interface RegisterData {
     email: string;
     password: string;
+    city: string;
 }

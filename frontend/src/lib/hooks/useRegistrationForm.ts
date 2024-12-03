@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 
 import authApi from '@/lib/api/auth';
 import { useToast } from '@/lib/hooks/use-toast';
-import { validateCity } from '@/lib/services/validation';
+import { validateCity } from '@/lib/validations/registration';
 import { FormValues } from '@/lib/types/auth';
 
 export const useRegistrationForm = (onCloseModal: () => void) => {
@@ -13,23 +13,31 @@ export const useRegistrationForm = (onCloseModal: () => void) => {
     const {
         register,
         handleSubmit,
-        watch,
-        formState: { errors },
+        setValue,
+        formState: { errors, isValid },
     } = useForm<FormValues>({
-        mode: "onBlur",
+        mode: "onChange",
+        defaultValues: {
+            email: "",
+            password: "",
+            city: "",
+        },
     });
 
-    const isValidEmail = watch("email") ? errors.email === undefined : undefined;
-    const isValidPassword = watch("password") ? errors.password === undefined : undefined;
-    const isValidCity = validateCity(selectedCity);
-    const isFormValid = isValidEmail && isValidPassword && isValidCity;
     const isOtherCity = selectedCity === "otra";
+    const isValidCity = validateCity(selectedCity);
+    const isFormValid = isValid && isValidCity && !isOtherCity;
 
     const handleFormSubmit = async (data: FormValues) => {
+        if (!isFormValid) {
+            return;
+        }
+
         try {
             await authApi.register({
                 email: data.email,
                 password: data.password,
+                city: selectedCity,
             });
 
             toast({
@@ -48,17 +56,15 @@ export const useRegistrationForm = (onCloseModal: () => void) => {
                         ? error.message
                         : "Ocurrió un error durante el registro",
             });
-
-            console.error(
-                "Error registering customer:",
-                error instanceof Error ? error.message : error
-            );
         }
     };
 
     const handleCityChange = (value: string) => {
         setSelectedCity(value);
-        register("city").onChange({ target: { value } });
+        setValue("city", value, { 
+            shouldValidate: true,
+            shouldDirty: true 
+        });
     };
 
     return {
@@ -67,9 +73,6 @@ export const useRegistrationForm = (onCloseModal: () => void) => {
         handleFormSubmit,
         handleCityChange,
         errors,
-        selectedCity,
-        isValidEmail,
-        isValidPassword,
         isFormValid,
         isOtherCity,
     };
