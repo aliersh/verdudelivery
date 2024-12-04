@@ -4,7 +4,7 @@ import { FC } from 'react';
 
 import CartIconButton from '@/components/common/buttons/CartIconButton';
 import Logo from '@/components/common/logo/Logo';
-import LoginModal from '@/components/common/modals/LoginModal';
+import AuthModal from '@/components/common/modals/AuthModal';
 import { Card } from '@/components/ui/card';
 import { useCart } from '@/lib/contexts/CartContext';
 
@@ -21,7 +21,11 @@ const Navbar: FC = () => {
 
                 <div className="flex items-center space-x-4">
                     <CartIconButton onClick={openCart} />
-                    <LoginModal />
+                    <AuthModal
+                        initialView="login"
+                        buttonText="Iniciar sesión"
+                        buttonClassName="hidden md:block"
+                    />
                 </div>
             </Card>
         </nav>

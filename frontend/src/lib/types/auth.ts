@@ -39,3 +39,10 @@ export interface LoginData {
     email: string;
     password: string;
 }
+
+export interface AuthModalProps {
+    initialView?: "login" | "signup";
+    buttonText?: string;
+    buttonClassName?: string;
+    buttonSize?: "default" | "sm" | "lg";
+}

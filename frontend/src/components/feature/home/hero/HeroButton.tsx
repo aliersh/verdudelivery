@@ -1,7 +1,8 @@
-import { FC } from "react";
+import Link from 'next/link';
+import { FC } from 'react';
+
 import { Button } from '@/components/common/buttons/button';
-import RegistrationModal from '@/components/common/modals/RegistrationModal';
-import Link from "next/link";
+import AuthModal from '@/components/common/modals/AuthModal';
 
 const HeroButtons: FC = () => {
     return (
@@ -10,7 +11,12 @@ const HeroButtons: FC = () => {
             aria-label="Botones de acceso"
             role="group"
         >
-            <RegistrationModal />
+            <AuthModal
+                initialView="signup"
+                buttonText="Regístrate"
+                buttonClassName="hidden md:block"
+                buttonSize="lg"
+            />
             <Link href="/productos" aria-label="Ver productos">
                 <Button size="lg" variant="accent">
                     Ver productos
