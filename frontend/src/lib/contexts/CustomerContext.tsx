@@ -6,30 +6,42 @@ import { HttpTypes } from '@medusajs/types';
 
 import authApi from '../api/auth';
 import { CustomerContextType, CustomerProviderProps } from '../types/auth';
+import { tokenStorage } from '../utils/token-storage';
 
 const CustomerContext = createContext<CustomerContextType | null>(null);
 
 export const CustomerProvider = ({ children }: CustomerProviderProps) => {
     const [customer, setCustomer] = useState<HttpTypes.StoreCustomer>();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        if (customer) {
-            return;
-        }
+        const initializeCustomer = async () => {
+            const token = tokenStorage.getToken();
+            
+            if (!token) {
+                setIsLoading(false);
+                return;
+            }
 
-        const fetchCustomer = async () => {
-            const customerData = await authApi.getCustomer();
-            setCustomer(customerData);
+            try {
+                const customerData = await authApi.getCustomer();
+                setCustomer(customerData);
+            } catch {
+                tokenStorage.removeToken();
+            } finally {
+                setIsLoading(false);
+            }
         };
 
-        fetchCustomer();
-    }, [customer]);
+        initializeCustomer();
+    }, []);
 
     return (
         <CustomerContext.Provider
             value={{
                 customer,
                 setCustomer,
+                isLoading,
             }}
         >
             {children}

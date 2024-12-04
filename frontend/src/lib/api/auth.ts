@@ -1,5 +1,6 @@
 import { createApiInstance } from '../config/api-config';
 import { CustomerResponse, RegisterData, RegisterResponse, LoginData } from '../types/auth';
+import { tokenStorage } from '../utils/token-storage';
 
 const apiInstance = createApiInstance();
 
@@ -11,14 +12,12 @@ const authApi = {
             data
         );
 
+        // Store token
+        tokenStorage.setToken(token);
+
         // Get customer data using the token
         const customerResponse = await apiInstance.get<never, CustomerResponse>(
-            "/store/customers/me",
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
+            "/store/customers/me"
         );
 
         return {
@@ -55,6 +54,9 @@ const authApi = {
 
     getCustomer: async () => {
         try {
+            const token = tokenStorage.getToken();
+            if (!token) return undefined;
+
             const response = await apiInstance.get<never, CustomerResponse>(
                 '/store/customers/me'
             );

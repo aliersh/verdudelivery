@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosInstance } from 'axios';
+import { tokenStorage } from '../utils/token-storage';
 
 // Base API configuration
 export const API_BASE_URL = process.env.NEXT_PUBLIC_MEDUSA_API_URL || "http://localhost:9000";
@@ -13,6 +14,15 @@ export const createApiInstance = (): AxiosInstance => {
             "x-publishable-api-key": PUBLISHABLE_KEY,
         },
         withCredentials: true,
+    });
+
+    // Add request interceptor to include token
+    instance.interceptors.request.use((config) => {
+        const token = tokenStorage.getToken();
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
     });
 
     // Add response interceptor for error handling
