@@ -1,3 +1,6 @@
+import { HttpTypes } from "@medusajs/types";
+import { Dispatch, ReactNode, SetStateAction } from "react";
+
 export interface RegistrationFormProps {
     onCloseModal: () => void;
 }
@@ -22,11 +25,7 @@ export interface RegisterResponse {
 }
 
 export interface CustomerResponse {
-    customer: {
-        id: string;
-        email: string;
-        // Add other customer fields as needed
-    };
+    customer: HttpTypes.StoreCustomer;
 }
 
 export interface RegisterData {
@@ -46,3 +45,12 @@ export interface AuthModalProps {
     buttonClassName?: string;
     buttonSize?: "default" | "sm" | "lg";
 }
+
+export type CustomerContextType = {
+    customer: HttpTypes.StoreCustomer | undefined;
+    setCustomer: Dispatch<SetStateAction<HttpTypes.StoreCustomer | undefined>>;
+};
+
+export type CustomerProviderProps = {
+    children: ReactNode;
+};

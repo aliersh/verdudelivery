@@ -29,6 +29,17 @@ const authApi = {
             customer: customerResponse.customer,
         };
     },
+
+    getCustomer: async () => {
+        try {
+            const response = await apiInstance.get<never, CustomerResponse>(
+                '/store/customers/me'
+            );
+            return response.customer;
+        } catch {
+            return undefined;
+        }
+    },
 };
 
 export default authApi;
