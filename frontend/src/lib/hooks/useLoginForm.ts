@@ -3,9 +3,14 @@
 import { useForm } from "react-hook-form";
 import { useToast } from "@/lib/hooks/use-toast";
 import { LoginFormValues } from "@/lib/types/auth";
+import authApi from "@/lib/api/auth";
+import { useCustomer } from "@/lib/contexts/CustomerContext";
+import { useState } from "react";
 
-export const useLoginForm = (onCloseModal: () => void) => {
+export const useLoginForm = (onSuccess?: () => void) => {
     const { toast } = useToast();
+    const { setCustomer } = useCustomer();
+    const [loading, setLoading] = useState(false);
 
     const {
         register,
@@ -24,16 +29,21 @@ export const useLoginForm = (onCloseModal: () => void) => {
             return;
         }
 
+        setLoading(true);
+
         try {
-            console.log('Login attempt with:', data);
-            // TODO: Implement login API call
+            const { customer } = await authApi.login(data);
+            setCustomer(customer);
+            
             toast({
                 variant: "default",
                 title: "Inicio de sesión exitoso",
                 description: "Has iniciado sesión correctamente",
             });
 
-            onCloseModal();
+            if (onSuccess) {
+                onSuccess();
+            }
         } catch (error) {
             toast({
                 variant: "destructive",
@@ -43,6 +53,8 @@ export const useLoginForm = (onCloseModal: () => void) => {
                         ? error.message
                         : "Ocurrió un error durante el inicio de sesión",
             });
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -52,5 +64,6 @@ export const useLoginForm = (onCloseModal: () => void) => {
         handleFormSubmit,
         errors,
         isValid,
+        loading,
     };
 }; 

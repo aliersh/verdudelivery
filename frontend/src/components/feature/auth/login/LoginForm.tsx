@@ -7,14 +7,15 @@ import { LoginFormProps } from "@/lib/types/auth";
 import LoginFormField from "./LoginFormField";
 import { loginValidation } from "@/lib/validations/login";
 
-const LoginForm = ({ onCloseModal }: LoginFormProps) => {
+const LoginForm = ({ onCloseModal, onLoginSuccess }: LoginFormProps) => {
     const {
         register,
         handleSubmit,
         handleFormSubmit,
         errors,
         isValid,
-    } = useLoginForm(() => {});
+        loading,
+    } = useLoginForm(onLoginSuccess);
 
     return (
         <form
@@ -30,6 +31,7 @@ const LoginForm = ({ onCloseModal }: LoginFormProps) => {
                 error={errors.email}
                 register={register}
                 validation={loginValidation.email}
+                disabled={loading}
             />
 
             <LoginFormField
@@ -40,26 +42,28 @@ const LoginForm = ({ onCloseModal }: LoginFormProps) => {
                 error={errors.password}
                 register={register}
                 validation={loginValidation.password}
+                disabled={loading}
             />
 
             <Button
                 type="submit"
                 className="w-full"
-                aria-label="Iniciar sesión"
-                disabled={!isValid}
+                aria-label="Login"
+                disabled={!isValid || loading}
             >
-                Iniciar sesión
+                {loading ? "Iniciando sesión..." : "Iniciar sesión"}
             </Button>
 
             <div className="text-sm text-center">
-                ¿No tienes una cuenta?{" "}
+                No tienes una cuenta?{" "}
                 <Button
                     variant="link"
                     className="h-auto p-0 font-normal"
                     onClick={onCloseModal}
                     aria-label="Ir a registro"
+                    disabled={loading}
                 >
-                    Regístrate
+                    Registrate
                 </Button>
             </div>
         </form>

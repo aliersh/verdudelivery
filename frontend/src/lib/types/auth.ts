@@ -7,6 +7,7 @@ export interface RegistrationFormProps {
 
 export interface LoginFormProps {
     onCloseModal: () => void;
+    onLoginSuccess: () => void;
 }
 
 export type FormValues = {

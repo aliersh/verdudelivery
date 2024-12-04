@@ -21,6 +21,7 @@ const AuthModal = ({
     );
 
     const closeModal = () => setActiveModal(null);
+    const switchToSignup = () => setActiveModal("signup");
 
     return (
         <Dialog
@@ -51,7 +52,10 @@ const AuthModal = ({
                     </DialogTitle>
                 </DialogHeader>
                 {activeModal === "login" ? (
-                    <LoginForm onCloseModal={() => setActiveModal("signup")} />
+                    <LoginForm 
+                        onCloseModal={switchToSignup}
+                        onLoginSuccess={closeModal}
+                    />
                 ) : (
                     <RegistrationForm onCloseModal={closeModal} />
                 )}
