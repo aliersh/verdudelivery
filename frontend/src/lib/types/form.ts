@@ -1,24 +1,20 @@
-import type { LucideIcon } from "lucide-react";
-import { UseFormRegister } from "react-hook-form";
-
-export interface FormValues {
-    email: string;
-    password: string;
-    city: string;
-}
+import { LucideIcon } from "lucide-react";
+import { RegisterOptions, UseFormRegister } from "react-hook-form";
+import { FormValues } from "./auth";
 
 export interface FieldProps {
     id: keyof FormValues;
     label: string;
+    type?: string;
+    placeholder?: string;
+    icon?: LucideIcon;
     error?: {
         message?: string;
     };
-    icon?: LucideIcon;
     isValid?: boolean;
     disabled?: boolean;
     register: UseFormRegister<FormValues>;
-    validation?: Record<string, unknown>;
-    [key: string]: unknown;
+    validation?: RegisterOptions;
 }
 
 export interface SelectFieldProps {
