@@ -54,6 +54,8 @@ const LoginForm = ({ onCloseModal, onLoginSuccess }: LoginFormProps) => {
                 {loading ? "Iniciando sesión..." : "Iniciar sesión"}
             </Button>
 
+            {/* //TODO: Add a redirection to profile page or products page */}
+
             <div className="text-sm text-center">
                 No tienes una cuenta?{" "}
                 <Button

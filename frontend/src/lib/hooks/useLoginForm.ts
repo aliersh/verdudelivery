@@ -16,6 +16,7 @@ export const useLoginForm = (onSuccess?: () => void) => {
         register,
         handleSubmit,
         formState: { errors, isValid },
+        setError,
     } = useForm<LoginFormValues>({
         mode: "onChange",
         defaultValues: {
@@ -25,9 +26,7 @@ export const useLoginForm = (onSuccess?: () => void) => {
     });
 
     const handleFormSubmit = async (data: LoginFormValues) => {
-        if (!isValid) {
-            return;
-        }
+        if (!isValid) return;
 
         setLoading(true);
 
@@ -45,13 +44,10 @@ export const useLoginForm = (onSuccess?: () => void) => {
                 onSuccess();
             }
         } catch (error) {
-            toast({
-                variant: "destructive",
-                title: "Error al iniciar sesión",
-                description:
-                    error instanceof Error
-                        ? error.message
-                        : "Ocurrió un error durante el inicio de sesión",
+            // Always set error message under password field
+            setError('password', {
+                type: 'manual',
+                message: 'Email o contraseña incorrectos'
             });
         } finally {
             setLoading(false);
