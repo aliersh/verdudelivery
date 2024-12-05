@@ -38,7 +38,9 @@ const LoginFormField = ({
                 )}
                 <Input
                     id={id}
-                    className={`${Icon ? "pl-9 pr-9" : ""} placeholder:text-muted-foreground/50`}
+                    className={`${Icon ? "pl-9 pr-9" : ""} ${
+                        error ? "border-red-500" : ""
+                    } placeholder:text-muted-foreground/50`}
                     aria-label={label}
                     disabled={disabled}
                     {...register(id, props.validation)}

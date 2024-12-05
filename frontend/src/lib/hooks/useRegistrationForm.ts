@@ -2,11 +2,13 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import authApi from "@/lib/api/auth";
+import { useToast } from "@/lib/hooks/use-toast";
 import { FormValues } from "@/lib/types/auth";
 import { validateCity } from "@/lib/validations/registration";
 
 export const useRegistrationForm = (onCloseModal: () => void) => {
     const [selectedCity, setSelectedCity] = useState<string>("");
+    const { toast } = useToast();
 
     const {
         register,
@@ -35,6 +37,11 @@ export const useRegistrationForm = (onCloseModal: () => void) => {
                 email: data.email,
                 password: data.password,
                 city: selectedCity,
+            });
+            toast({
+                variant: "default",
+                title: "Registro exitoso",
+                description: "Tu cuenta ha sido creada correctamente",
             });
             onCloseModal();
         } catch (error) {
