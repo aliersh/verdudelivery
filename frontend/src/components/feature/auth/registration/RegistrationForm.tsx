@@ -1,14 +1,14 @@
 "use client";
 
-import { Lock, Mail } from 'lucide-react';
+import { Lock, Mail } from "lucide-react";
 
-import { Button } from '@/components/common/buttons/button';
-import { useRegistrationForm } from '@/lib/hooks/useRegistrationForm';
-import { RegistrationFormProps } from '@/lib/types/auth';
-import { registrationValidation } from '@/lib/validations/registration';
+import { Button } from "@/components/common/buttons/button";
+import { useRegistrationForm } from "@/lib/hooks/useRegistrationForm";
+import { RegistrationFormProps } from "@/lib/types/auth";
+import { registrationValidation } from "@/lib/validations/registration";
 
-import RegistrationFormField from './RegistrationFormField';
-import SelectField from './SelectField';
+import RegistrationFormField from "./RegistrationFormField";
+import SelectField from "./SelectField";
 
 const CITY_OPTIONS = [
     { value: "vina-del-mar", label: "Viña del Mar" },
@@ -77,6 +77,8 @@ const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
             >
                 Registrate
             </Button>
+
+            {/* //TODO: Add a redirection to profile or products page */}
 
             <div className="text-sm text-center">
                 ¿Ya tienes una cuenta?{" "}

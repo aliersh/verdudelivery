@@ -1,9 +1,12 @@
-import axios, { AxiosError, AxiosInstance } from 'axios';
-import { tokenStorage } from '../utils/token-storage';
+import axios, { AxiosError, AxiosInstance } from "axios";
+
+import { tokenStorage } from "../utils/token-storage";
 
 // Base API configuration
-export const API_BASE_URL = process.env.NEXT_PUBLIC_MEDUSA_API_URL || "http://localhost:9000";
-export const PUBLISHABLE_KEY = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string;
+export const API_BASE_URL =
+    process.env.NEXT_PUBLIC_MEDUSA_API_URL || "http://localhost:9000";
+export const PUBLISHABLE_KEY = process.env
+    .NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string;
 
 // Create base axios instance
 export const createApiInstance = (): AxiosInstance => {
@@ -25,16 +28,16 @@ export const createApiInstance = (): AxiosInstance => {
         return config;
     });
 
-    // Add response interceptor for error handling
+    // Update error handling to pass through the original message
     instance.interceptors.response.use(
         (response) => response.data,
-        (error: AxiosError) => {
-            if (error.response) {
-                throw new Error(`API Error: ${error.response.statusText}`);
+        (error: AxiosError<{ message: string }>) => {
+            if (error.response?.data) {
+                throw new Error(error.response.data.message);
             }
             throw error;
         }
     );
 
     return instance;
-}; 
+};

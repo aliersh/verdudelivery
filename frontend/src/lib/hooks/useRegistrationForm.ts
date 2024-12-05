@@ -1,19 +1,18 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
-import authApi from '@/lib/api/auth';
-import { useToast } from '@/lib/hooks/use-toast';
-import { validateCity } from '@/lib/validations/registration';
-import { FormValues } from '@/lib/types/auth';
+import authApi from "@/lib/api/auth";
+import { FormValues } from "@/lib/types/auth";
+import { validateCity } from "@/lib/validations/registration";
 
 export const useRegistrationForm = (onCloseModal: () => void) => {
     const [selectedCity, setSelectedCity] = useState<string>("");
-    const { toast } = useToast();
 
     const {
         register,
         handleSubmit,
         setValue,
+        setError,
         formState: { errors, isValid },
     } = useForm<FormValues>({
         mode: "onChange",
@@ -29,9 +28,7 @@ export const useRegistrationForm = (onCloseModal: () => void) => {
     const isFormValid = isValid && isValidCity && !isOtherCity;
 
     const handleFormSubmit = async (data: FormValues) => {
-        if (!isFormValid) {
-            return;
-        }
+        if (!isFormValid) return;
 
         try {
             await authApi.register({
@@ -39,31 +36,25 @@ export const useRegistrationForm = (onCloseModal: () => void) => {
                 password: data.password,
                 city: selectedCity,
             });
-
-            toast({
-                variant: "default",
-                title: "Registro exitoso",
-                description: "Tu cuenta ha sido creada correctamente",
-            });
-
             onCloseModal();
         } catch (error) {
-            toast({
-                variant: "destructive",
-                title: "Error al registrar",
-                description:
-                    error instanceof Error
-                        ? error.message
-                        : "Ocurrió un error durante el registro",
-            });
+            if (
+                error instanceof Error &&
+                error.message === "Identity with email already exists"
+            ) {
+                setError("email", {
+                    type: "manual",
+                    message: "Este email ya está registrado",
+                });
+            }
         }
     };
 
     const handleCityChange = (value: string) => {
         setSelectedCity(value);
-        setValue("city", value, { 
+        setValue("city", value, {
             shouldValidate: true,
-            shouldDirty: true 
+            shouldDirty: true,
         });
     };
 
