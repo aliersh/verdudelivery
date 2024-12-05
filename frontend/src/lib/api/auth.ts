@@ -65,6 +65,10 @@ const authApi = {
             return undefined;
         }
     },
+
+    logout: () => {
+        tokenStorage.removeToken();
+    },
 };
 
 export default authApi;

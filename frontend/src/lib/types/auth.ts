@@ -49,8 +49,9 @@ export interface AuthModalProps {
 
 export type CustomerContextType = {
     customer: HttpTypes.StoreCustomer | undefined;
-    setCustomer: Dispatch<SetStateAction<HttpTypes.StoreCustomer | undefined>>;
+    setCustomer: (customer: HttpTypes.StoreCustomer | undefined) => void;
     isLoading: boolean;
+    logout: () => void;
 };
 
 export type CustomerProviderProps = {

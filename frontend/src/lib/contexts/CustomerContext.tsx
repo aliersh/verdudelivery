@@ -14,6 +14,11 @@ export const CustomerProvider = ({ children }: CustomerProviderProps) => {
     const [customer, setCustomer] = useState<HttpTypes.StoreCustomer>();
     const [isLoading, setIsLoading] = useState(true);
 
+    const handleLogout = () => {
+        authApi.logout();
+        setCustomer(undefined);
+    };
+
     useEffect(() => {
         const initializeCustomer = async () => {
             const token = tokenStorage.getToken();
@@ -42,6 +47,7 @@ export const CustomerProvider = ({ children }: CustomerProviderProps) => {
                 customer,
                 setCustomer,
                 isLoading,
+                logout: handleLogout,
             }}
         >
             {children}

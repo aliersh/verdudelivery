@@ -7,9 +7,16 @@ import Logo from '@/components/common/logo/Logo';
 import AuthModal from '@/components/common/modals/AuthModal';
 import { Card } from '@/components/ui/card';
 import { useCart } from '@/lib/contexts/CartContext';
+import { useCustomer } from '@/lib/contexts/CustomerContext';
+import { Button } from '@/components/common/buttons/button';
 
 const Navbar: FC = () => {
     const { openCart } = useCart();
+    const { customer, logout } = useCustomer();
+
+    const handleLogout = () => {
+        logout();
+    };
 
     return (
         <nav
@@ -21,11 +28,22 @@ const Navbar: FC = () => {
 
                 <div className="flex items-center space-x-4">
                     <CartIconButton onClick={openCart} />
-                    <AuthModal
-                        initialView="login"
-                        buttonText="Iniciar sesión"
-                        buttonClassName="hidden md:block"
-                    />
+                    {customer ? (
+                        <Button
+                            variant="accent"
+                            onClick={handleLogout}
+                            className="hidden md:block"
+                            aria-label="Cerrar sesión"
+                        >
+                            Cerrar sesión
+                        </Button>
+                    ) : (
+                        <AuthModal
+                            initialView="login"
+                            buttonText="Iniciar sesión"
+                            buttonClassName="hidden md:block"
+                        />
+                    )}
                 </div>
             </Card>
         </nav>
