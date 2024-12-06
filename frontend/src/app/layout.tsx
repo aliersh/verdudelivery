@@ -1,8 +1,11 @@
+'use client';
+
 import './globals.css';
 
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 import { ReactNode } from 'react';
+import { usePathname } from 'next/navigation';
 
 import CartDrawer from '@/components/feature/cart/CartDrawer';
 import Footer from '@/components/layout/footer/Footer';
@@ -12,7 +15,10 @@ import { CartProvider } from '@/lib/contexts/CartContext';
 import { CustomerProvider } from '@/lib/contexts/CustomerContext';
 import { RegionProvider } from '@/lib/contexts/RegionContext';
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+const RootLayout = ({ children }: { children: ReactNode }) => {
+    const pathname = usePathname();
+    const isAuthPage = pathname?.startsWith('/auth');
+
     return (
         <html
             lang="en"
@@ -22,15 +28,17 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <RegionProvider>
                     <CustomerProvider>
                         <CartProvider>
-                            <Navbar />
+                            {!isAuthPage && <Navbar />}
                             {children}
                             <Toaster />
                             <CartDrawer />
-                            <Footer />
+                            {!isAuthPage && <Footer />}
                         </CartProvider>
                     </CustomerProvider>
                 </RegionProvider>
             </body>
         </html>
     );
-}
+};
+
+export default RootLayout;
