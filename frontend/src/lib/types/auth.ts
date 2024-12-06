@@ -1,5 +1,5 @@
 import { HttpTypes } from "@medusajs/types";
-import { Dispatch, ReactNode, SetStateAction } from "react";
+import { ReactNode } from "react";
 
 export interface RegistrationFormProps {
     onCloseModal: () => void;
