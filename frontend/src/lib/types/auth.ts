@@ -1,5 +1,6 @@
-import { HttpTypes } from "@medusajs/types";
 import { ReactNode } from "react";
+
+import { HttpTypes } from "@medusajs/types";
 
 export interface RegistrationFormProps {
     onCloseModal: () => void;
@@ -7,6 +8,7 @@ export interface RegistrationFormProps {
 
 export interface LoginFormProps {
     onCloseModal: () => void;
+    onSwitchToSignup: () => void;
     onLoginSuccess: () => void;
 }
 
@@ -56,4 +58,8 @@ export type CustomerContextType = {
 
 export type CustomerProviderProps = {
     children: ReactNode;
+};
+
+export type PasswordResetFormData = {
+    email: string;
 };

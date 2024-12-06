@@ -1,14 +1,14 @@
 "use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-import { Button } from '@/components/common/buttons/button';
-import LoginForm from '@/components/feature/auth/login/LoginForm';
-import RegistrationForm from '@/components/feature/auth/registration/RegistrationForm';
+import { Button } from "@/components/common/buttons/button";
+import LoginForm from "@/components/feature/auth/login/LoginForm";
+import RegistrationForm from "@/components/feature/auth/registration/RegistrationForm";
 import {
     Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger
-} from '@/components/ui/dialog';
-import { AuthModalProps } from '@/lib/types/auth';
+} from "@/components/ui/dialog";
+import { AuthModalProps } from "@/lib/types/auth";
 
 const AuthModal = ({
     initialView = "login",
@@ -46,15 +46,16 @@ const AuthModal = ({
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle className="text-2xl text-center font-bold">
+                    <DialogTitle className="text-2xl font-bold text-center">
                         {activeModal === "login"
                             ? "Iniciar sesión"
                             : "Regístrate"}
                     </DialogTitle>
                 </DialogHeader>
                 {activeModal === "login" ? (
-                    <LoginForm 
-                        onCloseModal={switchToSignup}
+                    <LoginForm
+                        onCloseModal={closeModal}
+                        onSwitchToSignup={switchToSignup}
                         onLoginSuccess={closeModal}
                     />
                 ) : (
