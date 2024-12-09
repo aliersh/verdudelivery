@@ -3,6 +3,7 @@
 import { Button } from "@/components/common/buttons/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import ProfileFormField from "./ProfileFormField";
+import ProfileReadOnlyField from "./ProfileReadOnlyField";
 import { useState } from "react";
 
 // Type for user profile data
@@ -63,32 +64,51 @@ const ProfileForm = () => {
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div className="grid gap-4 sm:grid-cols-2">
-                            <ProfileFormField
-                                id="firstName"
-                                label="Nombre"
-                                placeholder="Oscar"
-                                value={userData.firstName}
-                                readOnly={!isEditingPersonal}
-                                onChange={(value) => handleInputChange('firstName', value)}
-                            />
-                            <ProfileFormField
-                                id="lastName"
-                                label="Apellido"
-                                placeholder="Acevedo"
-                                value={userData.lastName}
-                                readOnly={!isEditingPersonal}
-                                onChange={(value) => handleInputChange('lastName', value)}
-                            />
+                            {isEditingPersonal ? (
+                                <>
+                                    <ProfileFormField
+                                        id="firstName"
+                                        label="Nombre"
+                                        placeholder="Oscar"
+                                        value={userData.firstName}
+                                        onChange={(value) => handleInputChange('firstName', value)}
+                                    />
+                                    <ProfileFormField
+                                        id="lastName"
+                                        label="Apellido"
+                                        placeholder="Acevedo"
+                                        value={userData.lastName}
+                                        onChange={(value) => handleInputChange('lastName', value)}
+                                    />
+                                </>
+                            ) : (
+                                <>
+                                    <ProfileReadOnlyField
+                                        label="Nombre"
+                                        value={userData.firstName}
+                                    />
+                                    <ProfileReadOnlyField
+                                        label="Apellido"
+                                        value={userData.lastName}
+                                    />
+                                </>
+                            )}
                         </div>
-                        <ProfileFormField
-                            id="phone"
-                            label="Teléfono"
-                            placeholder="+56 9 1234 5678"
-                            type="tel"
-                            value={userData.phone}
-                            readOnly={!isEditingPersonal}
-                            onChange={(value) => handleInputChange('phone', value)}
-                        />
+                        {isEditingPersonal ? (
+                            <ProfileFormField
+                                id="phone"
+                                label="Teléfono"
+                                placeholder="+56 9 1234 5678"
+                                type="tel"
+                                value={userData.phone}
+                                onChange={(value) => handleInputChange('phone', value)}
+                            />
+                        ) : (
+                            <ProfileReadOnlyField
+                                label="Teléfono"
+                                value={userData.phone}
+                            />
+                        )}
                     </CardContent>
                 </Card>
 
@@ -107,31 +127,50 @@ const ProfileForm = () => {
                         </Button>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                        <ProfileFormField
-                            id="address"
-                            label="Dirección"
-                            placeholder="Av. Principal 123"
-                            value={userData.address}
-                            readOnly={!isEditingAddress}
-                            onChange={(value) => handleInputChange('address', value)}
-                        />
+                        {isEditingAddress ? (
+                            <ProfileFormField
+                                id="address"
+                                label="Dirección"
+                                placeholder="Av. Principal 123"
+                                value={userData.address}
+                                onChange={(value) => handleInputChange('address', value)}
+                            />
+                        ) : (
+                            <ProfileReadOnlyField
+                                label="Dirección"
+                                value={userData.address}
+                            />
+                        )}
                         <div className="grid gap-4 sm:grid-cols-2">
-                            <ProfileFormField
-                                id="city"
-                                label="Ciudad"
-                                placeholder="Viña del Mar"
-                                value={userData.city}
-                                readOnly={!isEditingAddress}
-                                onChange={(value) => handleInputChange('city', value)}
-                            />
-                            <ProfileFormField
-                                id="region"
-                                label="Región"
-                                placeholder="Valparaíso"
-                                value={userData.region}
-                                readOnly={!isEditingAddress}
-                                onChange={(value) => handleInputChange('region', value)}
-                            />
+                            {isEditingAddress ? (
+                                <>
+                                    <ProfileFormField
+                                        id="city"
+                                        label="Ciudad"
+                                        placeholder="Viña del Mar"
+                                        value={userData.city}
+                                        onChange={(value) => handleInputChange('city', value)}
+                                    />
+                                    <ProfileFormField
+                                        id="region"
+                                        label="Región"
+                                        placeholder="Valparaíso"
+                                        value={userData.region}
+                                        onChange={(value) => handleInputChange('region', value)}
+                                    />
+                                </>
+                            ) : (
+                                <>
+                                    <ProfileReadOnlyField
+                                        label="Ciudad"
+                                        value={userData.city}
+                                    />
+                                    <ProfileReadOnlyField
+                                        label="Región"
+                                        value={userData.region}
+                                    />
+                                </>
+                            )}
                         </div>
                     </CardContent>
                 </Card>
