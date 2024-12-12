@@ -6,7 +6,7 @@ import { CategoryProps } from '@/lib/types/category';
 
 import ProductItem from '@/components/feature/products/ProducItem/ProductItem';
 
-const CategoryProductsList = ({ initialData }: CategoryProps) => {
+const CategoryProductsList = ({ initialData, handle }: CategoryProps) => {
     const { products, categoryName } = initialData;
     const [quantities, setQuantities] = useState<Record<string, number>>({});
 
@@ -31,7 +31,7 @@ const CategoryProductsList = ({ initialData }: CategoryProps) => {
         }).format(amount);
 
     return (
-        <div className="py-6 first:pt-2">
+        <div id={handle} className="py-6 first:pt-2 scroll-mt-20">
             <h2 className="mb-4 text-xl font-medium text-gray-900">
                 {categoryName}
             </h2>
