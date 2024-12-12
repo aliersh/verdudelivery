@@ -31,9 +31,11 @@ const CategoryProductsList = ({ initialData }: CategoryProps) => {
         }).format(amount);
 
     return (
-        <div className="mt-4 mb-8">
-            <h1 className="mb-4 text-2xl font-bold">{categoryName}</h1>
-            <ul className="space-y-4">
+        <div className="py-6 first:pt-2">
+            <h2 className="mb-4 text-xl font-medium text-gray-900">
+                {categoryName}
+            </h2>
+            <ul className="divide-y divide-gray-100">
                 {products.map((product) => (
                     <ProductItem
                         key={product.id}

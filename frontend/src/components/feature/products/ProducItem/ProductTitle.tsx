@@ -1,16 +1,18 @@
 import { ProductTitleProps } from '@/lib/types/product';
 
 const ProductTitle = ({ title, subtitle }: ProductTitleProps) => {
-  return (
-    <h3 className="text-lg font-semibold">
-      {title}
-      {subtitle && (
-        <span className="ml-2 text-sm font-normal text-gray-500">
-          {subtitle}
-        </span>
-      )}
-    </h3>
-  );
+    return (
+        <div className="mb-1">
+            <h3 className="text-base font-medium text-gray-900 truncate">
+                {title}
+            </h3>
+            {subtitle && (
+                <p className="text-sm text-gray-500 truncate">
+                    {subtitle}
+                </p>
+            )}
+        </div>
+    );
 };
 
 export default ProductTitle; 
