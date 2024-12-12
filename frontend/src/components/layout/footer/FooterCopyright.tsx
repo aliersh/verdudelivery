@@ -1,16 +1,12 @@
-import { FC } from 'react';
+import { FC } from "react";
 
 const FooterCopyright: FC = () => {
     const currentYear = new Date().getFullYear();
 
     return (
-        <small
-            className="flex items-center justify-end text-sm text-muted-foreground"
-            role="contentinfo"
-            aria-label="Copyright"
-        >
+        <div className="flex items-center justify-center text-sm text-muted-foreground md:justify-end">
             &copy; {currentYear} Verdudelivery. Todos los derechos reservados.
-        </small>
+        </div>
     );
 };
 

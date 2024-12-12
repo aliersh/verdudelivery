@@ -1,31 +1,29 @@
-import { FC } from 'react';
+import { Mail, Phone } from "lucide-react";
+import { FC } from "react";
 
-import Logo from '@/components/common/logo/Logo';
+import Logo from "@/components/common/logo/Logo";
+import { Button } from "@/components/ui/button";
 
 const ContactInfo: FC = () => (
-    <address
-        className="flex flex-col items-start gap-4"
-        aria-label="Información de contacto"
-    >
+    <address className="flex flex-col items-center gap-6 not-italic md:items-start">
         <Logo />
-        <span className="sr-only">Verdudelivery</span>
-        <div
-            className="grid gap-1 text-muted-foreground"
-            aria-label="Contacto"
-            role="group"
-        >
-            <button
-                className="text-left hover:underline focus:underline"
+        <div className="flex flex-col gap-3" aria-label="Contacto">
+            <Button
+                variant="link"
+                className="flex items-center h-auto gap-2 p-0 text-muted-foreground hover:text-primary"
                 aria-label="Correo electrónico a info@verdudelivery.cl"
             >
+                <Mail className="w-4 h-4" />
                 info@verdudelivery.cl
-            </button>
-            <button
-                className="text-left hover:underline focus:underline"
+            </Button>
+            <Button
+                variant="link"
+                className="flex items-center h-auto gap-2 p-0 text-muted-foreground hover:text-primary"
                 aria-label="Teléfono a +56 9 9078 5716"
             >
+                <Phone className="w-4 h-4" />
                 +56 9 9078 5716
-            </button>
+            </Button>
         </div>
     </address>
 );
