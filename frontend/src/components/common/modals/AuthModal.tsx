@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 
-import { Button } from "@/components/common/buttons/button";
 import LoginForm from "@/components/feature/auth/login/LoginForm";
 import RegistrationForm from "@/components/feature/auth/registration/RegistrationForm";
+import { Button } from "@/components/ui/button";
 import {
     Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger
 } from "@/components/ui/dialog";

@@ -2,7 +2,7 @@
 
 import { Lock, Mail } from "lucide-react";
 
-import { Button } from "@/components/common/buttons/button";
+import { Button } from "@/components/ui/button";
 import { useRegistrationForm } from "@/lib/hooks/useRegistrationForm";
 import { RegistrationFormProps } from "@/lib/types/auth";
 import { registrationValidation } from "@/lib/validations/registration";

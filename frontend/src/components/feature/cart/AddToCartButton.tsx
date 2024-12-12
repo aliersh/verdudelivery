@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import { Button } from '@/components/common/buttons/button';
-import { useCart } from '@/lib/contexts/CartContext';
-import { AddToCartButtonProps } from '@/lib/types/cart';
-import { useToast } from '@/lib/hooks/use-toast';
+import { Button } from "@/components/ui/button";
+import { useCart } from "@/lib/contexts/CartContext";
+import { useToast } from "@/lib/hooks/use-toast";
+import { AddToCartButtonProps } from "@/lib/types/cart";
 
 const AddToCartButton = ({
     variantId,
@@ -27,7 +27,10 @@ const AddToCartButton = ({
         } catch (error) {
             toast({
                 title: "Error",
-                description: error instanceof Error ? error.message : "Could not add item to cart",
+                description:
+                    error instanceof Error
+                        ? error.message
+                        : "Could not add item to cart",
                 variant: "destructive",
                 duration: 2000,
             });
@@ -37,11 +40,7 @@ const AddToCartButton = ({
     };
 
     return (
-        <Button
-            onClick={handleAddToCart}
-            disabled={loading}
-            className="w-40"
-        >
+        <Button onClick={handleAddToCart} disabled={loading} className="w-40">
             {loading ? "Añadiendo..." : "Añadir al carrito"}
         </Button>
     );

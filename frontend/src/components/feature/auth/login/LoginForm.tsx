@@ -3,7 +3,7 @@
 import { Lock, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-import { Button } from "@/components/common/buttons/button";
+import { Button } from "@/components/ui/button";
 import { useLoginForm } from "@/lib/hooks/useLoginForm";
 import { LoginFormProps } from "@/lib/types/auth";
 import { loginValidation } from "@/lib/validations/login";

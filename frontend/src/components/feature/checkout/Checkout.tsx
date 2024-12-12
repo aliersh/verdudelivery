@@ -1,44 +1,58 @@
 "use client";
 
-import { useCart } from '@/lib/contexts/CartContext';
-import CartItem from '@/components/feature/cart/CartItem/CartItem';
-import { LineItem } from '@/lib/types/cart';
-import { Separator } from '@/components/ui/separator';
-import { Button } from '@/components/common/buttons/button';
+import CartItem from "@/components/feature/cart/CartItem/CartItem";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { useCart } from "@/lib/contexts/CartContext";
+import { LineItem } from "@/lib/types/cart";
 
 const Checkout = () => {
     const { cart } = useCart();
     console.log(cart);
 
     return (
-        <div className="container mx-auto p-4 max-w-6xl">
-            <h1 className="text-3xl font-bold mb-8">Checkout</h1>
-            <div className="grid lg:grid-cols-5 gap-8">
+        <div className="container max-w-6xl p-4 mx-auto">
+            <h1 className="mb-8 text-3xl font-bold">Checkout</h1>
+            <div className="grid gap-8 lg:grid-cols-5">
                 <div className="lg:col-span-3">
-                    <h2 className="text-2xl font-semibold mb-4">Tu Carrito</h2>
+                    <h2 className="mb-4 text-2xl font-semibold">Tu Carrito</h2>
                     <div className="space-y-4">
                         {cart?.items?.map((item: LineItem) => (
-                            <CartItem key={item.id} item={item}  />
+                            <CartItem key={item.id} item={item} />
                         ))}
                     </div>
                 </div>
                 <div className="lg:col-span-2">
                     <div className="sticky top-24">
-                        <div className="bg-gray-50 p-6 rounded-lg">
-                            <h2 className="text-2xl font-semibold mb-4">Resumen de compra</h2>
+                        <div className="p-6 rounded-lg bg-gray-50">
+                            <h2 className="mb-4 text-2xl font-semibold">
+                                Resumen de compra
+                            </h2>
                             <div className="space-y-2">
                                 <div className="flex justify-between">
                                     <span>Subtotal</span>
-                                    <span>${cart?.subtotal.toLocaleString()}</span>
+                                    <span>
+                                        ${cart?.subtotal.toLocaleString()}
+                                    </span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span>IVA (19%)</span>
-                                    <span>${Math.round(cart?.tax_total || 0).toLocaleString()}</span>
+                                    <span>
+                                        $
+                                        {Math.round(
+                                            cart?.tax_total || 0
+                                        ).toLocaleString()}
+                                    </span>
                                 </div>
                                 <Separator className="my-2" />
-                                <div className="flex justify-between font-semibold text-lg">
+                                <div className="flex justify-between text-lg font-semibold">
                                     <span>Total</span>
-                                    <span>${Math.round(cart?.total || 0).toLocaleString()}</span>
+                                    <span>
+                                        $
+                                        {Math.round(
+                                            cart?.total || 0
+                                        ).toLocaleString()}
+                                    </span>
                                 </div>
                             </div>
                             <Button className="w-full mt-6" size="lg">
@@ -49,7 +63,7 @@ const Checkout = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Checkout;

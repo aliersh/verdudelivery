@@ -1,8 +1,8 @@
-import { Minus, Plus } from 'lucide-react';
+import { Minus, Plus } from "lucide-react";
 
-import { Button } from '@/components/common/buttons/button';
-import { useCart } from '@/lib/contexts/CartContext';
-import { CartItemQuantityProps } from '@/lib/types/cart';
+import { Button } from "@/components/ui/button";
+import { useCart } from "@/lib/contexts/CartContext";
+import { CartItemQuantityProps } from "@/lib/types/cart";
 
 const CartItemQuantity = ({ item }: CartItemQuantityProps) => {
     const { updateItem } = useCart();

@@ -1,11 +1,11 @@
 "use client";
 
-import Link from 'next/link';
-import { FC } from 'react';
+import Link from "next/link";
+import { FC } from "react";
 
-import { Button } from '@/components/common/buttons/button';
-import AuthModal from '@/components/common/modals/AuthModal';
-import { useCustomer } from '@/lib/contexts/CustomerContext';
+import AuthModal from "@/components/common/modals/AuthModal";
+import { Button } from "@/components/ui/button";
+import { useCustomer } from "@/lib/contexts/CustomerContext";
 
 const HeroButtons: FC = () => {
     const { customer } = useCustomer();
