@@ -11,10 +11,6 @@ export interface IconBlockProps {
   ariaLabel?: string;
 }
 
-export interface CartIconButtonProps {
-  onClick: () => void;
-}
-
 export interface SocialLinksProps {
   href: string;
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;

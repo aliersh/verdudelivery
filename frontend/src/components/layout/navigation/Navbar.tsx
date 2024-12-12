@@ -1,51 +1,48 @@
 "use client";
 
-import { FC } from 'react';
+import { FC } from "react";
 
-import CartIconButton from '@/components/common/buttons/CartIconButton';
-import Logo from '@/components/common/logo/Logo';
-import AuthModal from '@/components/common/modals/AuthModal';
-import { Card } from '@/components/ui/card';
-import { useCart } from '@/lib/contexts/CartContext';
-import { useCustomer } from '@/lib/contexts/CustomerContext';
-import { Button } from '@/components/common/buttons/button';
+import CartIconButton from "@/components/common/buttons/CartIconButton";
+import Logo from "@/components/common/logo/Logo";
+import AuthModal from "@/components/common/modals/AuthModal";
+import UserMenu from "@/components/common/navigation/UserMenu";
+import { useCart } from "@/lib/contexts/CartContext";
+import { useCustomer } from "@/lib/contexts/CustomerContext";
 
 const Navbar: FC = () => {
-    const { openCart } = useCart();
+    const { openCart, cart } = useCart();
     const { customer, logout } = useCustomer();
+
+    // Get the number of unique items in cart
+    const itemCount = cart?.items?.length ?? 0;
 
     const handleLogout = () => {
         logout();
     };
 
     return (
-        <nav
-            className="sticky top-0 z-50 w-full py-4 bg-background"
-            aria-label="Main navigation"
-        >
-            <Card className="container flex items-center justify-between max-w-4xl gap-6 px-4 py-3 mx-auto border-0 bg-primary-foreground rounded-2xl">
+        <nav className="sticky top-0 z-50 w-full bg-white border-b">
+            <div className="container flex items-center justify-between h-16 px-4 mx-auto">
                 <Logo />
 
-                <div className="flex items-center space-x-4">
-                    <CartIconButton onClick={openCart} />
+                <div className="flex items-center gap-4">
+                    <CartIconButton
+                        onClick={openCart}
+                        itemCount={itemCount}
+                        className="relative p-0 rounded-lg h-9 w-9 hover:bg-accent/10"
+                    />
                     {customer ? (
-                        <Button
-                            variant="accent"
-                            onClick={handleLogout}
-                            className="hidden md:block"
-                            aria-label="Cerrar sesión"
-                        >
-                            Cerrar sesión
-                        </Button>
+                        <UserMenu onLogout={handleLogout} />
                     ) : (
                         <AuthModal
                             initialView="login"
                             buttonText="Iniciar sesión"
-                            buttonClassName="hidden md:block"
+                            buttonClassName="hidden h-9 md:inline-flex"
+                            buttonVariant="ghost"
                         />
                     )}
                 </div>
-            </Card>
+            </div>
         </nav>
     );
 };

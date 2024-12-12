@@ -38,11 +38,9 @@ export interface CartContextType {
   closeCart: () => void;
 }
 
-export type AddToCartButtonProps = {
-  variantId: string;
-  quantity?: number;
-  unit?: string;
-};
+export interface CartIconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  itemCount?: number;
+}
 
 export interface CartItemProps {
   item: LineItem;
@@ -62,4 +60,10 @@ export interface CartItemRemoveProps {
 
 export interface CartItemPriceProps {
   item: LineItem;
+}
+
+export interface AddToCartButtonProps {
+  variantId: string;
+  quantity?: number;
+  unit?: string;
 }

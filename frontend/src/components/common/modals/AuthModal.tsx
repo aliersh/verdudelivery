@@ -15,6 +15,7 @@ const AuthModal = ({
     buttonText = "Iniciar sesión",
     buttonClassName = "",
     buttonSize = "default",
+    buttonVariant = "default",
 }: AuthModalProps) => {
     const [activeModal, setActiveModal] = useState<"login" | "signup" | null>(
         null
@@ -31,7 +32,7 @@ const AuthModal = ({
         >
             <DialogTrigger asChild>
                 <Button
-                    variant="default"
+                    variant={buttonVariant}
                     size={buttonSize}
                     className={buttonClassName}
                     aria-label={`Abrir formulario de ${

@@ -1,38 +1,32 @@
-import { ShoppingCart } from 'lucide-react';
-import { FC } from 'react';
+import { ShoppingCart } from "lucide-react";
 
-import { Button } from '@/components/common/buttons/button';
-import { useCart } from '@/lib/contexts/CartContext';
-import { CartIconButtonProps } from '@/lib/types/ui';
+import { cn } from "@/lib/utils";
+import { CartIconButtonProps } from '@/lib/types/cart';
 
-const CartIconButton: FC<CartIconButtonProps> = ({ onClick }) => {
-    const { cart } = useCart();
-
-    // Get the number of unique items in cart
-    const itemCount = cart?.items?.length ?? 0;
-
+const CartIconButton = ({
+    className,
+    itemCount = 0,
+    ...props
+}: CartIconButtonProps) => {
     return (
-        <div className="relative">
-            <Button
-                variant="accent"
-                onClick={onClick}
-                className="p-2"
-                aria-label={`Carrito de compras, ${itemCount} ${
-                    itemCount === 1 ? "producto" : "productos"
-                } diferentes`}
-                role="button"
-            >
-                <ShoppingCart />
-            </Button>
+        <button
+            className={cn(
+                "relative inline-flex h-9 w-9 items-center justify-center rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+                className
+            )}
+            aria-label={`Carrito de compras, ${itemCount} ${
+                itemCount === 1 ? "producto" : "productos"
+            } diferentes`}
+            {...props}
+        >
+            <ShoppingCart className="w-5 h-5" />
             {itemCount > 0 && (
-                <span className="absolute flex items-center justify-center w-5 h-5 text-xs font-bold text-white rounded-full bg-primary -top-2 -right-2">
+                <span className="absolute -top-1.5 -right-1.5 h-4 w-4 rounded-full bg-primary text-xs font-bold text-accent-foreground flex items-center justify-center">
                     {itemCount > 99 ? "99+" : itemCount}
                 </span>
             )}
-        </div>
+        </button>
     );
 };
-
-CartIconButton.displayName = "CartIconButton";
 
 export default CartIconButton;

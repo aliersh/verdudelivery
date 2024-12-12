@@ -47,6 +47,7 @@ export interface AuthModalProps {
     buttonText?: string;
     buttonClassName?: string;
     buttonSize?: "default" | "sm" | "lg";
+    buttonVariant?: "default" | "destructive" | "outline" | "ghost" | "link" | "accent";
 }
 
 export type CustomerContextType = {
