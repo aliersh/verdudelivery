@@ -1,6 +1,7 @@
 "use client";
 
 import { Menu } from "lucide-react";
+import { Link, Events, scrollSpy } from "react-scroll";
 import { useEffect, useState } from "react";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -10,60 +11,41 @@ interface CategoryNavProps {
 }
 
 const CategoryNav = ({ categories }: CategoryNavProps) => {
-    const [activeCategory, setActiveCategory] = useState<string>("");
     const [isOpen, setIsOpen] = useState(false);
 
-    const handleCategoryClick = (category: string) => {
-        const element = document.getElementById(category);
-        if (element) {
-            const offset = 80; // Adjust based on your header height
-            const elementPosition = element.getBoundingClientRect().top;
-            const offsetPosition =
-                elementPosition + window.scrollY - offset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: "smooth",
-            });
-        }
-        setIsOpen(false);
-    };
-
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        setActiveCategory(entry.target.id);
-                    }
-                });
-            },
-            { threshold: 0.5 }
-        );
+        // Initialize scrollspy
+        Events.scrollEvent.register('begin', () => {});
+        Events.scrollEvent.register('end', () => {});
+        scrollSpy.update();
 
-        categories.forEach((category) => {
-            const element = document.getElementById(category);
-            if (element) observer.observe(element);
-        });
-
-        return () => observer.disconnect();
-    }, [categories]);
+        return () => {
+            // Cleanup scroll events
+            Events.scrollEvent.remove('begin');
+            Events.scrollEvent.remove('end');
+        };
+    }, []);
 
     const CategoryList = () => (
         <nav className="space-y-1">
             {categories.map((category) => (
-                <button
+                <Link
                     key={category}
-                    onClick={() => handleCategoryClick(category)}
-                    className={`w-full px-4 py-2 text-sm font-medium text-left rounded-lg transition-colors
-                        ${
-                            activeCategory === category
-                                ? "bg-primary text-primary-foreground"
-                                : "text-gray-700 hover:bg-gray-100"
-                        }`}
+                    to={category}
+                    spy={true}
+                    isDynamic={true}
+                    smooth={true}
+                    offset={-80}
+                    duration={300}
+                    tabIndex={0}
+                    role="button"
+                    aria-label={`Ver productos de ${category}`}
+                    className="block w-full px-4 py-2 text-sm font-medium text-left rounded-lg transition-colors cursor-pointer text-gray-700 hover:bg-gray-100"
+                    activeClass="bg-primary text-primary-foreground hover:bg-primary"
+                    onClick={() => setIsOpen(false)}
                 >
                     {category.charAt(0).toUpperCase() + category.slice(1)}
-                </button>
+                </Link>
             ))}
         </nav>
     );

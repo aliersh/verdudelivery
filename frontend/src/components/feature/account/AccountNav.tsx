@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Link, Events, scrollSpy } from "react-scroll";
+import { useEffect } from "react";
 
 interface AccountNavProps {
     sections: Array<{
@@ -10,41 +11,18 @@ interface AccountNavProps {
 }
 
 const AccountNav = ({ sections }: AccountNavProps) => {
-    const [activeSection, setActiveSection] = useState<string>("personal");
-
-    const handleSectionClick = (sectionId: string) => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-            const offset = 80;
-            const elementPosition = element.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.scrollY - offset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: "smooth",
-            });
-        }
-    };
-
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        setActiveSection(entry.target.id);
-                    }
-                });
-            },
-            { threshold: 0.5 }
-        );
+        // Initialize scrollspy
+        Events.scrollEvent.register('begin', () => {});
+        Events.scrollEvent.register('end', () => {});
+        scrollSpy.update();
 
-        sections.forEach(({ id }) => {
-            const element = document.getElementById(id);
-            if (element) observer.observe(element);
-        });
-
-        return () => observer.disconnect();
-    }, [sections]);
+        return () => {
+            // Cleanup scroll events
+            Events.scrollEvent.remove('begin');
+            Events.scrollEvent.remove('end');
+        };
+    }, []);
 
     return (
         <div className="hidden w-64 lg:block shrink-0">
@@ -52,18 +30,22 @@ const AccountNav = ({ sections }: AccountNavProps) => {
                 <h2 className="mb-2 text-lg font-semibold">Mi cuenta</h2>
                 <nav className="space-y-1">
                     {sections.map(({ id, title }) => (
-                        <button
+                        <Link
                             key={id}
-                            onClick={() => handleSectionClick(id)}
-                            className={`w-full px-4 py-2 text-sm font-medium text-left rounded-lg transition-colors
-                                ${
-                                    activeSection === id
-                                        ? "bg-primary text-primary-foreground"
-                                        : "text-gray-700 hover:bg-gray-100"
-                                }`}
+                            to={id}
+                            spy={true}
+                            isDynamic={true}
+                            smooth={true}
+                            offset={-80}
+                            duration={300}
+                            tabIndex={0}
+                            role="button"
+                            aria-label={`Navegar a ${title}`}
+                            className="block w-full px-4 py-2 text-sm font-medium text-left rounded-lg transition-colors cursor-pointer text-gray-700 hover:bg-gray-100"
+                            activeClass="bg-primary text-primary-foreground hover:bg-primary"
                         >
                             {title}
-                        </button>
+                        </Link>
                     ))}
                 </nav>
             </div>
