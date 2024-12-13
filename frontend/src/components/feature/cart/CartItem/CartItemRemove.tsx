@@ -1,4 +1,4 @@
-import { Trash } from "lucide-react";
+import { Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/contexts/CartContext";
@@ -9,13 +9,13 @@ const CartItemRemove = ({ itemId }: CartItemRemoveProps) => {
 
     return (
         <Button
-            variant="outline"
+            variant="ghost"
             size="icon"
-            className="w-8 h-8 text-gray-500 bg-background hover:text-red-500 hover:bg-background/80"
+            className="h-8 w-8 rounded-lg text-muted-foreground hover:bg-destructive hover:text-destructive-foreground"
             onClick={() => removeItem(itemId)}
             aria-label="Remove item"
         >
-            <Trash className="w-4 h-4" />
+            <Trash2 className="h-4 w-4" />
         </Button>
     );
 };

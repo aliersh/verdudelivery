@@ -8,37 +8,32 @@ const CartItemQuantity = ({ item }: CartItemQuantityProps) => {
     const { updateItem } = useCart();
 
     const handleQuantityUpdate = (newQuantity: number) => {
-        // Prevent negative or zero quantities
-        if (newQuantity <= 0) {
-            return;
-        }
+        if (newQuantity <= 0) return;
         updateItem(item.id, newQuantity);
     };
 
     return (
-        <div className="flex items-center space-x-2">
-            <Button
-                variant="outline"
-                size="icon"
-                className="w-8 h-8 text-white bg-orange-500 border-none rounded-full hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed"
+        <div className="flex items-center h-9 rounded-lg border border-gray-200 bg-white">
+            <button
                 onClick={() => handleQuantityUpdate(item.quantity - 1)}
+                className="flex items-center justify-center w-9 h-full text-gray-500 transition-colors hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 rounded-l-lg"
                 disabled={item.quantity <= 1}
                 aria-label="Decrease quantity"
             >
-                <Minus className="w-4 h-4" />
-            </Button>
-            <span className="w-12 font-medium text-center">
+                <Minus className="w-3.5 h-3.5" />
+            </button>
+            
+            <div className="flex items-center justify-center min-w-[3rem] h-full px-1 text-sm font-medium text-gray-900 border-x border-gray-200">
                 {item.quantity} {String(item.metadata?.unit)}
-            </span>
-            <Button
-                variant="outline"
-                size="icon"
-                className="w-8 h-8 text-white bg-orange-500 border-none rounded-full hover:bg-orange-600"
+            </div>
+            
+            <button
                 onClick={() => handleQuantityUpdate(item.quantity + 1)}
+                className="flex items-center justify-center w-9 h-full text-gray-500 transition-colors hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 rounded-r-lg"
                 aria-label="Increase quantity"
             >
-                <Plus className="w-4 h-4" />
-            </Button>
+                <Plus className="w-3.5 h-3.5" />
+            </button>
         </div>
     );
 };
