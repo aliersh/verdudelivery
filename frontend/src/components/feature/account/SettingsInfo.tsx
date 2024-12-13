@@ -54,14 +54,6 @@ const SettingsInfo = () => {
                     </div>
                     <Button className="mt-2">Cambiar contraseña</Button>
                 </div>
-                <div className="pt-6 border-t">
-                    <Button
-                        variant="destructive"
-                        className="text-white hover:bg-destructive/90"
-                    >
-                        Eliminar cuenta
-                    </Button>
-                </div>
             </CardContent>
         </Card>
     );
