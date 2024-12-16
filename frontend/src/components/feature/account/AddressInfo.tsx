@@ -6,6 +6,8 @@ import {
     Select, SelectContent, SelectItem, SelectTrigger, SelectValue
 } from "@/components/ui/select";
 
+// TODO: Add address api call and management
+
 const AddressInfo = () => {
     return (
         <Card>
@@ -20,23 +22,21 @@ const AddressInfo = () => {
                 <div className="grid gap-4 md:grid-cols-2">
                     <div className="space-y-2">
                         <Label htmlFor="city">Ciudad</Label>
-                        <Input id="city" placeholder="Ej: Santiago" />
-                    </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="region">Región</Label>
                         <Select>
-                            <SelectTrigger id="region">
-                                <SelectValue placeholder="Selecciona una región" />
+                            <SelectTrigger id="city">
+                                <SelectValue placeholder="Selecciona una ciudad" />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="metropolitana">
-                                    Metropolitana
+                                <SelectItem value="" disabled>
+                                    Selecciona una ciudad
                                 </SelectItem>
                                 <SelectItem value="valparaiso">
                                     Valparaíso
                                 </SelectItem>
-                                <SelectItem value="biobio">Bío Bío</SelectItem>
-                                {/* Add other regions as needed */}
+                                <SelectItem value="vina-del-mar">
+                                    Viña del Mar
+                                </SelectItem>
+                                <SelectItem value="quilpue">Quilpue</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
