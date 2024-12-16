@@ -1,6 +1,8 @@
-import { createApiInstance } from '../config/api-config';
-import { CustomerResponse, RegisterData, RegisterResponse, LoginData } from '../types/auth';
-import { tokenStorage } from '../utils/token-storage';
+import { HttpTypes } from "@medusajs/types";
+
+import { createApiInstance } from "../config/api-config";
+import { CustomerResponse, LoginData, RegisterData, RegisterResponse } from "../types/auth";
+import { tokenStorage } from "../utils/token-storage";
 
 const apiInstance = createApiInstance();
 
@@ -58,7 +60,7 @@ const authApi = {
             if (!token) return undefined;
 
             const response = await apiInstance.get<never, CustomerResponse>(
-                '/store/customers/me'
+                "/store/customers/me"
             );
             return response.customer;
         } catch {
@@ -68,6 +70,18 @@ const authApi = {
 
     logout: () => {
         tokenStorage.removeToken();
+    },
+
+    updateCustomer: async (data: {
+        first_name?: string;
+        last_name?: string;
+        phone?: string;
+    }) => {
+        const response = await apiInstance.post<
+            never,
+            { customer: HttpTypes.StoreCustomer }
+        >("/store/customers/me", data);
+        return response.customer;
     },
 };
 
