@@ -22,10 +22,11 @@ const HeroButtons: FC = () => {
                     buttonText="Regístrate"
                     buttonClassName="hidden md:block"
                     buttonSize="lg"
+                    buttonVariant="accent"
                 />
             )}
             <Link href="/productos" aria-label="Ver productos">
-                <Button size="lg" variant="accent">
+                <Button size="lg" variant="default">
                     Ver productos
                 </Button>
             </Link>

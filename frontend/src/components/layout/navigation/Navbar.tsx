@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { FC } from "react";
 
 import CartIconButton from "@/components/common/buttons/CartIconButton";
@@ -10,6 +11,7 @@ import { useCart } from "@/lib/contexts/CartContext";
 import { useCustomer } from "@/lib/contexts/CustomerContext";
 
 const Navbar: FC = () => {
+    const router = useRouter();
     const { openCart, cart } = useCart();
     const { customer, logout } = useCustomer();
 
@@ -18,6 +20,7 @@ const Navbar: FC = () => {
 
     const handleLogout = () => {
         logout();
+        router.push("/");
     };
 
     return (
@@ -38,7 +41,7 @@ const Navbar: FC = () => {
                             initialView="login"
                             buttonText="Iniciar sesión"
                             buttonClassName="hidden h-9 md:inline-flex"
-                            buttonVariant="ghost"
+                            buttonVariant="accent"
                         />
                     )}
                 </div>
