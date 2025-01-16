@@ -1,6 +1,8 @@
-import { Button } from '@/components/common/buttons/button';
+import { FC } from "react";
 
-const LoginButton = () => {
+import { Button } from "@/components/ui/button";
+
+const LoginButton: FC = () => {
     return (
         <Button
             variant="default"

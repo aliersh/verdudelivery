@@ -3,10 +3,10 @@
 import { useRouter } from "next/navigation";
 import { FC } from "react";
 
-import CartIconButton from "@/components/common/buttons/CartIconButton";
 import Logo from "@/components/common/logo/Logo";
 import AuthModal from "@/components/common/modals/AuthModal";
 import UserMenu from "@/components/common/navigation/UserMenu";
+import CartIconButton from "@/components/feature/cart/CartIconButton";
 import { useCart } from "@/lib/contexts/CartContext";
 import { useCustomer } from "@/lib/contexts/CustomerContext";
 

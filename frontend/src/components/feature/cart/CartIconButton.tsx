@@ -1,13 +1,16 @@
 import { ShoppingCart } from "lucide-react";
+import { FC } from "react";
 
+import { CartIconButtonProps } from "@/lib/types/cart";
 import { cn } from "@/lib/utils";
-import { CartIconButtonProps } from '@/lib/types/cart';
 
-const CartIconButton = ({
+import CartBadge from "./CartBadge";
+
+const CartIconButton: FC<CartIconButtonProps> = ({
     className,
     itemCount = 0,
     ...props
-}: CartIconButtonProps) => {
+}) => {
     return (
         <button
             className={cn(
@@ -20,11 +23,7 @@ const CartIconButton = ({
             {...props}
         >
             <ShoppingCart className="w-5 h-5" />
-            {itemCount > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 h-4 w-4 rounded-full bg-primary text-xs font-bold text-accent-foreground flex items-center justify-center">
-                    {itemCount > 99 ? "99+" : itemCount}
-                </span>
-            )}
+            <CartBadge count={itemCount} />
         </button>
     );
 };

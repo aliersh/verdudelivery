@@ -40,6 +40,7 @@ export interface CartContextType {
 
 export interface CartIconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   itemCount?: number;
+  count?: number;
 }
 
 export interface CartItemProps {
