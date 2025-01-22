@@ -3,7 +3,7 @@
 import AccountInfo from "@/components/feature/account/AccountInfo/AccountInfo";
 import AccountNav from "@/components/feature/account/AccountNav";
 import AddressInfo from "@/components/feature/account/AddressInfo";
-import SettingsInfo from "@/components/feature/account/SettingsInfo";
+import SettingsInfo from "@/components/feature/account/SettingsInfo/SettingsInfo";
 
 const SECTIONS = [
     {
