@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import {
     Select, SelectContent, SelectItem, SelectTrigger, SelectValue
 } from "@/components/ui/select";
+import { cities } from "@/lib/data/cities";
 
 // TODO: Add address api call and management
 
@@ -27,16 +28,14 @@ const AddressInfo = () => {
                                 <SelectValue placeholder="Selecciona una ciudad" />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="" disabled>
+                                <SelectItem value="placeholder" disabled>
                                     Selecciona una ciudad
                                 </SelectItem>
-                                <SelectItem value="valparaiso">
-                                    Valparaíso
-                                </SelectItem>
-                                <SelectItem value="vina-del-mar">
-                                    Viña del Mar
-                                </SelectItem>
-                                <SelectItem value="quilpue">Quilpue</SelectItem>
+                                {cities.map((city) => (
+                                    <SelectItem key={city.id} value={city.value}>
+                                        {city.name}
+                                    </SelectItem>
+                                ))}
                             </SelectContent>
                         </Select>
                     </div>

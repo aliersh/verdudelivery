@@ -1,9 +1,14 @@
+import { FC } from "react";
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AccountFormFieldsProps } from "@/lib/types/form";
 import { accountValidation } from "@/lib/validations/account";
 
-const AccountFormFields = ({ register, errors }: AccountFormFieldsProps) => (
+const AccountFormFields: FC<AccountFormFieldsProps> = ({
+    register,
+    errors,
+}) => (
     <>
         <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">

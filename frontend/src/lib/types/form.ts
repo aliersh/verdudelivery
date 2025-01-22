@@ -39,3 +39,9 @@ export interface AccountFormFieldsProps {
     register: UseFormRegister<AccountFormData>;
     errors: FieldErrors<AccountFormData>;
 }
+
+export interface City {
+    id: string;
+    name: string;
+    value: string;
+}

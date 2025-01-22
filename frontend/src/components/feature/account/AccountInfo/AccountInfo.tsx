@@ -1,6 +1,7 @@
 "use client";
 
 import { Loader2 } from "lucide-react";
+import { FC } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,7 +11,7 @@ import useAccountUpdate from "@/lib/hooks/useAccountInfoUpdate";
 
 import AccountFormFields from "./AccountInfoFormFields";
 
-const AccountInfo = () => {
+const AccountInfo: FC = () => {
     const { customer } = useCustomer();
     const form = useAccountForm(customer);
     const { isLoading, updateAccount } = useAccountUpdate();
