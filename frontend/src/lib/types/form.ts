@@ -1,5 +1,5 @@
 import { LucideIcon } from "lucide-react";
-import { RegisterOptions, UseFormRegister } from "react-hook-form";
+import { FieldErrors, RegisterOptions, UseFormRegister } from "react-hook-form";
 import { FormValues } from "./auth";
 
 export interface FieldProps {
@@ -27,4 +27,15 @@ export interface SelectFieldProps {
     placeholder: string;
     onChange: (value: string) => void;
     error?: string;
+}
+
+export interface AccountFormData {
+    firstName: string;
+    lastName: string;
+    phone: string;
+}
+
+export interface AccountFormFieldsProps {
+    register: UseFormRegister<AccountFormData>;
+    errors: FieldErrors<AccountFormData>;
 }

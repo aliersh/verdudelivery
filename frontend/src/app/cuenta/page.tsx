@@ -1,6 +1,6 @@
 "use client";
 
-import AccountInfo from "@/components/feature/account/AccountInfo";
+import AccountInfo from "@/components/feature/account/AccountInfo/AccountInfo";
 import AccountNav from "@/components/feature/account/AccountNav";
 import AddressInfo from "@/components/feature/account/AddressInfo";
 import SettingsInfo from "@/components/feature/account/SettingsInfo";
