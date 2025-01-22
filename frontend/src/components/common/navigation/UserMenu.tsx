@@ -2,14 +2,26 @@
 
 import { User } from "lucide-react";
 import Link from "next/link";
+import { FC } from "react";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
     DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { UserMenuProps } from "@/lib/types/navigation";
+import { MenuItem, UserMenuProps } from "@/lib/types/navigation";
 
-const UserMenu = ({ onLogout }: UserMenuProps) => {
+const menuItems: MenuItem[] = [
+    {
+        label: "Cuenta",
+        href: "/cuenta",
+    },
+    {
+        label: "Órdenes anteriores",
+        href: "/ordenes",
+    },
+];
+
+const UserMenu: FC<UserMenuProps> = ({ onLogout }) => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className="relative inline-flex items-center justify-center p-0 transition-colors rounded-lg h-9 w-9 hover:bg-accent/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
@@ -20,12 +32,11 @@ const UserMenu = ({ onLogout }: UserMenuProps) => {
                 </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuItem asChild>
-                    <Link href="/cuenta">Cuenta</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                    <Link href="/ordenes">Órdenes anteriores</Link>
-                </DropdownMenuItem>
+                {menuItems.map((item) => (
+                    <DropdownMenuItem asChild key={item.href}>
+                        <Link href={item.href}>{item.label}</Link>
+                    </DropdownMenuItem>
+                ))}
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
                     onClick={onLogout}
