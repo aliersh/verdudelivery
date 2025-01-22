@@ -1,3 +1,5 @@
+import { FC } from "react";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -9,7 +11,7 @@ import { cities } from "@/lib/data/cities";
 
 // TODO: Add address api call and management
 
-const AddressInfo = () => {
+const AddressInfo: FC = () => {
     return (
         <Card>
             <CardHeader>
@@ -32,7 +34,10 @@ const AddressInfo = () => {
                                     Selecciona una ciudad
                                 </SelectItem>
                                 {cities.map((city) => (
-                                    <SelectItem key={city.id} value={city.value}>
+                                    <SelectItem
+                                        key={city.id}
+                                        value={city.value}
+                                    >
                                         {city.name}
                                     </SelectItem>
                                 ))}

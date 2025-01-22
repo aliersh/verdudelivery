@@ -1,28 +1,13 @@
 "use client";
 
-import { Link, Events, scrollSpy } from "react-scroll";
-import { useEffect } from "react";
+import { FC } from "react";
+import { Link } from "react-scroll";
 
-interface AccountNavProps {
-    sections: Array<{
-        id: string;
-        title: string;
-    }>;
-}
+import useScrollSpy from "@/lib/hooks/useScrollSpy";
+import { AccountNavProps } from "@/lib/types/ui";
 
-const AccountNav = ({ sections }: AccountNavProps) => {
-    useEffect(() => {
-        // Initialize scrollspy
-        Events.scrollEvent.register('begin', () => {});
-        Events.scrollEvent.register('end', () => {});
-        scrollSpy.update();
-
-        return () => {
-            // Cleanup scroll events
-            Events.scrollEvent.remove('begin');
-            Events.scrollEvent.remove('end');
-        };
-    }, []);
+const AccountNav: FC<AccountNavProps> = ({ sections }) => {
+    useScrollSpy();
 
     return (
         <div className="hidden w-64 lg:block shrink-0">
@@ -41,7 +26,7 @@ const AccountNav = ({ sections }: AccountNavProps) => {
                             tabIndex={0}
                             role="button"
                             aria-label={`Navegar a ${title}`}
-                            className="block w-full px-4 py-2 text-sm font-medium text-left rounded-lg transition-colors cursor-pointer text-gray-700 hover:bg-gray-100"
+                            className="block w-full px-4 py-2 text-sm font-medium text-left text-gray-700 transition-colors rounded-lg cursor-pointer hover:bg-gray-100"
                             activeClass="bg-primary text-primary-foreground hover:bg-primary"
                         >
                             {title}

@@ -15,4 +15,11 @@ export interface SocialLinksProps {
   href: string;
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   label: string;
-} 
+}
+
+export interface AccountNavProps {
+    sections: Array<{
+        id: string;
+        title: string;
+    }>;
+}
