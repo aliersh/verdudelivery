@@ -50,6 +50,8 @@ export interface AuthModalProps {
     buttonVariant?: "default" | "destructive" | "outline" | "ghost" | "link" | "accent";
 }
 
+export type AuthModalView = "login" | "signup";
+
 export type CustomerContextType = {
     customer: HttpTypes.StoreCustomer | undefined;
     setCustomer: (customer: HttpTypes.StoreCustomer | undefined) => void;

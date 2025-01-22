@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { FC, useState } from "react";
 
 import LoginForm from "@/components/feature/auth/login/LoginForm";
 import RegistrationForm from "@/components/feature/auth/registration/RegistrationForm";
@@ -10,20 +10,19 @@ import {
 } from "@/components/ui/dialog";
 import { AuthModalProps } from "@/lib/types/auth";
 
-const AuthModal = ({
+type ActiveModal = "login" | "signup" | null;
+
+const AuthModal: FC<AuthModalProps> = ({
     initialView = "login",
     buttonText = "Iniciar sesión",
     buttonClassName = "",
     buttonSize = "default",
     buttonVariant = "default",
-}: AuthModalProps) => {
-    const [activeModal, setActiveModal] = useState<"login" | "signup" | null>(
-        null
-    );
+}) => {
+    const [activeModal, setActiveModal] = useState<ActiveModal>(null);
 
     const closeModal = () => setActiveModal(null);
-    const switchToSignup = () => setActiveModal("signup");
-    const switchToLogin = () => setActiveModal("login");
+    const openModal = (view: ActiveModal) => setActiveModal(view);
 
     return (
         <Dialog
@@ -40,7 +39,7 @@ const AuthModal = ({
                             ? "inicio de sesión"
                             : "registro"
                     }`}
-                    onClick={() => setActiveModal(initialView)}
+                    onClick={() => openModal(initialView)}
                 >
                     {buttonText}
                 </Button>
@@ -56,11 +55,11 @@ const AuthModal = ({
                 {activeModal === "login" ? (
                     <LoginForm
                         onCloseModal={closeModal}
-                        onSwitchToSignup={switchToSignup}
+                        onSwitchToSignup={() => openModal("signup")}
                         onLoginSuccess={closeModal}
                     />
                 ) : (
-                    <RegistrationForm onCloseModal={switchToLogin} />
+                    <RegistrationForm onCloseModal={() => openModal("login")} />
                 )}
             </DialogContent>
         </Dialog>
