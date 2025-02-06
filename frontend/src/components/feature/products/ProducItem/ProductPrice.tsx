@@ -1,6 +1,11 @@
-import { ProductPriceProps } from '@/lib/types/product';
+import { ProductPriceProps } from "@/lib/types/product";
 
-const ProductPrice = ({ unitPrice, quantity, unit, formatPrice }: ProductPriceProps) => {
+const ProductPrice = ({
+    unitPrice,
+    quantity,
+    unit,
+    formatPrice,
+}: ProductPriceProps) => {
     return (
         <div className="mt-1">
             <p className="text-sm font-medium text-gray-900">
@@ -13,4 +18,4 @@ const ProductPrice = ({ unitPrice, quantity, unit, formatPrice }: ProductPricePr
     );
 };
 
-export default ProductPrice; 
+export default ProductPrice;

@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-import { CategoryProps } from '@/lib/types/category';
-
-import ProductItem from '@/components/feature/products/ProducItem/ProductItem';
+import ProductItem from "@/components/feature/products/ProducItem/ProductItem";
+import { CategoryProps } from "@/lib/types/category";
 
 const CategoryProductsList = ({ initialData, handle }: CategoryProps) => {
     const { products, categoryName } = initialData;

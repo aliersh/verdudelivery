@@ -1,4 +1,4 @@
-import { CartItemPriceProps } from '@/lib/types/cart';
+import { CartItemPriceProps } from "@/lib/types/cart";
 
 const CartItemPrice = ({ item }: CartItemPriceProps) => {
     return (

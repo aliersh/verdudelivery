@@ -1,4 +1,3 @@
-// frontend/src/components/home/HeroDescription.tsx
 import { FC } from "react";
 
 const HeroDescription: FC = () => {

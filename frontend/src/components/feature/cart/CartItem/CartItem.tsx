@@ -1,9 +1,9 @@
-import { CartItemProps } from '@/lib/types/cart';
+import { CartItemProps } from "@/lib/types/cart";
 
-import CartItemInfo from './CartItemInfo';
-import CartItemPrice from './CartItemPrice';
-import CartItemQuantity from './CartItemQuantity';
-import CartItemRemove from './CartItemRemove';
+import CartItemInfo from "./CartItemInfo";
+import CartItemPrice from "./CartItemPrice";
+import CartItemQuantity from "./CartItemQuantity";
+import CartItemRemove from "./CartItemRemove";
 
 const CartItem = ({ item }: CartItemProps) => {
     return (

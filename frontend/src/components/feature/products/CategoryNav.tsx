@@ -1,8 +1,8 @@
 "use client";
 
 import { Menu } from "lucide-react";
-import { Link, Events, scrollSpy } from "react-scroll";
 import { useEffect, useState } from "react";
+import { Events, Link, scrollSpy } from "react-scroll";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
@@ -15,14 +15,14 @@ const CategoryNav = ({ categories }: CategoryNavProps) => {
 
     useEffect(() => {
         // Initialize scrollspy
-        Events.scrollEvent.register('begin', () => {});
-        Events.scrollEvent.register('end', () => {});
+        Events.scrollEvent.register("begin", () => {});
+        Events.scrollEvent.register("end", () => {});
         scrollSpy.update();
 
         return () => {
             // Cleanup scroll events
-            Events.scrollEvent.remove('begin');
-            Events.scrollEvent.remove('end');
+            Events.scrollEvent.remove("begin");
+            Events.scrollEvent.remove("end");
         };
     }, []);
 
@@ -40,7 +40,7 @@ const CategoryNav = ({ categories }: CategoryNavProps) => {
                     tabIndex={0}
                     role="button"
                     aria-label={`Ver productos de ${category}`}
-                    className="block w-full px-4 py-2 text-sm font-medium text-left rounded-lg transition-colors cursor-pointer text-gray-700 hover:bg-gray-100"
+                    className="block w-full px-4 py-2 text-sm font-medium text-left text-gray-700 transition-colors rounded-lg cursor-pointer hover:bg-gray-100"
                     activeClass="bg-primary text-primary-foreground hover:bg-primary"
                     onClick={() => setIsOpen(false)}
                 >

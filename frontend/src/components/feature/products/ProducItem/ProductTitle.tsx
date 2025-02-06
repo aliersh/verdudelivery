@@ -1,4 +1,4 @@
-import { ProductTitleProps } from '@/lib/types/product';
+import { ProductTitleProps } from "@/lib/types/product";
 
 const ProductTitle = ({ title, subtitle }: ProductTitleProps) => {
     return (
@@ -7,12 +7,10 @@ const ProductTitle = ({ title, subtitle }: ProductTitleProps) => {
                 {title}
             </h3>
             {subtitle && (
-                <p className="text-sm text-gray-500 truncate">
-                    {subtitle}
-                </p>
+                <p className="text-sm text-gray-500 truncate">{subtitle}</p>
             )}
         </div>
     );
 };
 
-export default ProductTitle; 
+export default ProductTitle;

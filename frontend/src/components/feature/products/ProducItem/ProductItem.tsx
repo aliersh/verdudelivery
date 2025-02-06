@@ -1,9 +1,9 @@
-import AddToCartButton from '@/components/feature/cart/AddToCartButton';
-import ProductImage from '@/components/feature/products/ProducItem/ProductImage';
-import ProductPrice from '@/components/feature/products/ProducItem/ProductPrice';
-import ProductTitle from '@/components/feature/products/ProducItem/ProductTitle';
-import QuantityControl from '@/components/feature/products/ProducItem/QuantityControl';
-import { ProductItemProps } from '@/lib/types/product';
+import AddToCartButton from "@/components/feature/cart/AddToCartButton";
+import ProductImage from "@/components/feature/products/ProducItem/ProductImage";
+import ProductPrice from "@/components/feature/products/ProducItem/ProductPrice";
+import ProductTitle from "@/components/feature/products/ProducItem/ProductTitle";
+import QuantityControl from "@/components/feature/products/ProducItem/QuantityControl";
+import { ProductItemProps } from "@/lib/types/product";
 
 const ProductItem = ({
     product,
@@ -18,11 +18,8 @@ const ProductItem = ({
 
     return (
         <li className="flex items-center gap-6 p-4 transition-colors rounded-lg hover:bg-gray-50">
-            <ProductImage 
-                src={product.thumbnail ?? ''}
-                alt={product.title}
-            />
-            <div className="flex flex-1 items-center justify-between gap-6">
+            <ProductImage src={product.thumbnail ?? ""} alt={product.title} />
+            <div className="flex items-center justify-between flex-1 gap-6">
                 <div className="flex-1 min-w-0">
                     <ProductTitle
                         title={product.title}
