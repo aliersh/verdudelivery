@@ -4,7 +4,7 @@ import { Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
-import { Button } from "@/components/common/buttons/button";
+import { Button } from "@/components/ui/button";
 
 import PasswordResetFormField from "./PasswordResetFormField";
 import { PasswordResetFormData } from "@/lib/types/auth";

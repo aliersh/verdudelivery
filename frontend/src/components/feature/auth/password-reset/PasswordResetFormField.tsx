@@ -1,27 +1,11 @@
-import { LucideIcon } from "lucide-react";
-import { FieldError, RegisterOptions, UseFormRegister } from "react-hook-form";
+import { FC } from "react";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { PasswordResetFormFieldProps } from "@/lib/types/auth";
 import { cn } from "@/lib/utils";
 
-type PasswordResetFormData = {
-    email: string;
-};
-
-interface PasswordResetFormFieldProps {
-    id: keyof PasswordResetFormData;
-    label: string;
-    type?: string;
-    placeholder?: string;
-    icon?: LucideIcon;
-    disabled?: boolean;
-    register: UseFormRegister<PasswordResetFormData>;
-    error?: FieldError;
-    validation?: RegisterOptions<PasswordResetFormData, "email">;
-}
-
-const PasswordResetFormField = ({
+const PasswordResetFormField: FC<PasswordResetFormFieldProps> = ({
     id,
     label,
     type = "text",
@@ -54,7 +38,10 @@ const PasswordResetFormField = ({
                     id={id}
                     type={type}
                     placeholder={placeholder}
-                    className={cn(Icon && "pl-10", "placeholder:text-muted-foreground/50")}
+                    className={cn(
+                        Icon && "pl-10",
+                        "placeholder:text-muted-foreground/50"
+                    )}
                     aria-label={label}
                     disabled={disabled}
                     {...register(id, validation)}

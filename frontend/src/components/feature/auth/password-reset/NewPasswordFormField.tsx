@@ -1,27 +1,11 @@
-import { LucideIcon } from "lucide-react";
-import { FieldError, RegisterOptions, UseFormRegister } from "react-hook-form";
+import { FC } from "react";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { NewPasswordFormFieldProps } from "@/lib/types/auth";
 import { cn } from "@/lib/utils";
 
-type NewPasswordFormData = {
-    password: string;
-    confirmPassword: string;
-};
-
-interface NewPasswordFormFieldProps {
-    id: keyof NewPasswordFormData;
-    label: string;
-    type?: string;
-    icon?: LucideIcon;
-    disabled?: boolean;
-    register: UseFormRegister<NewPasswordFormData>;
-    error?: FieldError;
-    validation?: RegisterOptions<NewPasswordFormData>;
-}
-
-const NewPasswordFormField = ({
+const NewPasswordFormField: FC<NewPasswordFormFieldProps> = ({
     id,
     label,
     type = "text",
@@ -65,4 +49,4 @@ const NewPasswordFormField = ({
     );
 };
 
-export default NewPasswordFormField; 
+export default NewPasswordFormField;

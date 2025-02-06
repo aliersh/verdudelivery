@@ -2,17 +2,15 @@
 
 import { Lock } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { FC } from "react";
 import { useForm } from "react-hook-form";
 
-import { Button } from "@/components/common/buttons/button";
+import { Button } from "@/components/ui/button";
+import { NewPasswordFormData, NewPasswordFormProps } from "@/lib/types/auth";
+
 import NewPasswordFormField from "./NewPasswordFormField";
 
-type NewPasswordFormData = {
-    password: string;
-    confirmPassword: string;
-};
-
-const NewPasswordForm = () => {
+const NewPasswordForm: FC<NewPasswordFormProps> = ({}) => {
     const router = useRouter();
     const {
         register,
@@ -61,7 +59,8 @@ const NewPasswordForm = () => {
                         required: "La contraseña es requerida",
                         minLength: {
                             value: 8,
-                            message: "La contraseña debe tener al menos 8 caracteres",
+                            message:
+                                "La contraseña debe tener al menos 8 caracteres",
                         },
                     }}
                 />
@@ -77,7 +76,8 @@ const NewPasswordForm = () => {
                     validation={{
                         required: "La confirmación de contraseña es requerida",
                         validate: (value: string) =>
-                            value === password || "Las contraseñas no coinciden",
+                            value === password ||
+                            "Las contraseñas no coinciden",
                     }}
                 />
 
@@ -106,4 +106,4 @@ const NewPasswordForm = () => {
     );
 };
 
-export default NewPasswordForm; 
+export default NewPasswordForm;
