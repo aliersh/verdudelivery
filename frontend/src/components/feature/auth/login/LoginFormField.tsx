@@ -1,25 +1,11 @@
 import { Check } from "lucide-react";
+import { FC } from "react";
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { LoginFormValues } from "@/lib/types/auth";
-import { UseFormRegister } from "react-hook-form";
-import { LucideIcon } from "lucide-react";
+import { LoginFieldProps } from "@/lib/types/auth";
 
-interface LoginFieldProps {
-    id: keyof LoginFormValues;
-    label: string;
-    error?: {
-        message?: string;
-    };
-    icon?: LucideIcon;
-    isValid?: boolean;
-    disabled?: boolean;
-    register: UseFormRegister<LoginFormValues>;
-    validation?: Record<string, unknown>;
-    [key: string]: unknown;
-}
-
-const LoginFormField = ({
+const LoginFormField: FC<LoginFieldProps> = ({
     id,
     label,
     error,
@@ -59,4 +45,4 @@ const LoginFormField = ({
     );
 };
 
-export default LoginFormField; 
+export default LoginFormField;

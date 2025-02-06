@@ -2,7 +2,9 @@
 
 import { Lock, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { FC } from "react";
 
+import ModalButton from "@/components/common/buttons/ModalButton";
 import { Button } from "@/components/ui/button";
 import { useLoginForm } from "@/lib/hooks/useLoginForm";
 import { LoginFormProps } from "@/lib/types/auth";
@@ -10,7 +12,7 @@ import { loginValidation } from "@/lib/validations/login";
 
 import LoginFormField from "./LoginFormField";
 
-const LoginForm = ({
+const LoginForm: FC<LoginFormProps> = ({
     onCloseModal,
     onSwitchToSignup,
     onLoginSuccess,
@@ -72,28 +74,22 @@ const LoginForm = ({
 
             <div className="text-sm text-center">
                 ¿No tienes una cuenta?{" "}
-                <Button
-                    variant="link"
-                    className="h-auto p-0 font-normal"
+                <ModalButton
+                    label="Registrate"
                     onClick={onSwitchToSignup}
                     aria-label="Ir a registro"
                     disabled={loading}
-                >
-                    Registrate
-                </Button>
+                />
             </div>
 
             <div className="text-sm text-center">
                 ¿Olvidaste tu contraseña?{" "}
-                <Button
-                    variant="link"
-                    className="h-auto p-0 font-normal"
+                <ModalButton
+                    label="Haz click aquí"
                     onClick={handlePasswordReset}
                     aria-label="Recuperar contraseña"
                     disabled={loading}
-                >
-                    Haz click aquí
-                </Button>
+                />
             </div>
         </form>
     );

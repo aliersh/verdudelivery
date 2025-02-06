@@ -1,6 +1,8 @@
 import { ReactNode } from "react";
 
 import { HttpTypes } from "@medusajs/types";
+import { UseFormRegister } from "react-hook-form";
+import { LucideIcon } from "lucide-react";
 
 export interface RegistrationFormProps {
     onCloseModal: () => void;
@@ -11,6 +13,21 @@ export interface LoginFormProps {
     onSwitchToSignup: () => void;
     onLoginSuccess: () => void;
 }
+
+export interface LoginFieldProps {
+    id: keyof LoginFormValues;
+    label: string;
+    error?: {
+        message?: string;
+    };
+    icon?: LucideIcon;
+    isValid?: boolean;
+    disabled?: boolean;
+    register: UseFormRegister<LoginFormValues>;
+    validation?: Record<string, unknown>;
+    [key: string]: unknown;
+}
+
 
 export type FormValues = {
     city: string;
