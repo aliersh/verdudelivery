@@ -2,19 +2,25 @@ import { LucideIcon } from "lucide-react";
 import { FieldErrors, RegisterOptions, UseFormRegister } from "react-hook-form";
 import { FormValues } from "./auth";
 
+export type FormFields = {
+    email: string;
+    password: string;
+    city: string;
+};
+
 export interface FieldProps {
-    id: keyof FormValues;
+    id: keyof FormFields;
     label: string;
-    type?: string;
-    placeholder?: string;
-    icon?: LucideIcon;
-    error?: {
-        message?: string;
+    error?: { 
+        message?: string  // Make message optional
     };
+    icon?: React.ElementType;
     isValid?: boolean;
     disabled?: boolean;
-    register: UseFormRegister<FormValues>;
-    validation?: RegisterOptions;
+    register: UseFormRegister<FormFields>;
+    type?: string;
+    validation?: any; // You can make this more specific if needed
+    [key: string]: any;
 }
 
 export interface SelectFieldProps {

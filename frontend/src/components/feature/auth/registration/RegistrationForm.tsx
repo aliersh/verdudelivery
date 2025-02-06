@@ -1,6 +1,7 @@
 "use client";
 
 import { Lock, Mail } from "lucide-react";
+import { FC } from "react";
 
 import { Button } from "@/components/ui/button";
 import { useRegistrationForm } from "@/lib/hooks/useRegistrationForm";
@@ -17,7 +18,7 @@ const CITY_OPTIONS = [
     { value: "otra", label: "Otra" },
 ];
 
-const RegistrationForm = ({ onCloseModal }: RegistrationFormProps) => {
+const RegistrationForm: FC<RegistrationFormProps> = ({ onCloseModal }) => {
     const {
         register,
         handleSubmit,

@@ -1,10 +1,11 @@
 import { Check, Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
+import { FC, useState } from "react";
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { FieldProps } from "@/lib/types/form";
 
-const RegistrationFormField = ({
+const RegistrationFormField: FC<FieldProps> = ({
     id,
     label,
     error,
@@ -28,7 +29,11 @@ const RegistrationFormField = ({
     };
 
     const isPasswordField = type === "password";
-    const inputType = isPasswordField ? (showPassword ? "text" : "password") : type;
+    const inputType = isPasswordField
+        ? showPassword
+            ? "text"
+            : "password"
+        : type;
 
     return (
         <div className="grid gap-2">
@@ -55,7 +60,9 @@ const RegistrationFormField = ({
                         onKeyDown={handleKeyDown}
                         className="absolute right-3 top-3 text-muted-foreground hover:text-foreground focus:outline-none"
                         tabIndex={0}
-                        aria-label={showPassword ? "Hide password" : "Show password"}
+                        aria-label={
+                            showPassword ? "Hide password" : "Show password"
+                        }
                     >
                         {showPassword ? (
                             <EyeOff className="w-4 h-4" />

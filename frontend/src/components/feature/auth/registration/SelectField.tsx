@@ -1,14 +1,12 @@
+import { FC } from "react";
+
 import { Label } from "@/components/ui/label";
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+    Select, SelectContent, SelectItem, SelectTrigger, SelectValue
 } from "@/components/ui/select";
 import { SelectFieldProps } from "@/lib/types/form";
 
-const SelectField = ({
+const SelectField: FC<SelectFieldProps> = ({
     id,
     label,
     options,
